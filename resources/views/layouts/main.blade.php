@@ -20,14 +20,15 @@
     <header class="navbar-menu">
         <nav class="navbar navbar-expand-lg navbar-dark bg-raspberry py-2">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">Jobtrack</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+              <a class="navbar-brand" href="{{ url('/') }}">Jobtrack</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              @guest
                 <div class="collapse navbar-collapse" id="navbars">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item pr-3">
-                            <a class="nav-link" href="#">Masuk</a>
+                            <a class="nav-link" href="{{ route('login') }}">Masuk</a>
                         </li>
                         <li class="nav-item pr-3">
                             <a class="nav-link" href="#">Daftar</a>
@@ -37,61 +38,59 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <header class="navbar-menu">
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">Jobtrack</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbars">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-bookmark"></i>
+                @else
+                  <div class="collapse navbar-collapse" id="navbars">
+                      <ul class="navbar-nav ml-auto">
+                          <li class="nav-item">
+                              <a class="nav-link" href="#">
+                                  <i class="fa fa-bookmark"></i>
+                              </a>
+                          </li>
+                          <li class="nav-item dropdown">
+                            <a  class="nav-link dropleft" href="#" id="mess" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell"></i>
                             </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                          <a  class="nav-link dropleft" href="#" id="mess" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="fa fa-bell"></i>
-                          </a>
-                          <div class="dropdown-menu ml-notification" aria-labelledby="mess" style="width: 250px !important">
-                            <div class="card m-n3">
-                              <div class="card-header bg-c-blue text-center text-white">
-                                Notifications
-                              </div>
-                              <div class="card-body">
-                                <div class="text-center">
-                                  <img src="{{ asset('img/notify.png') }}"
-                                  class="img-fluid" alt="Empty notification">
-                                  <small>
-                                    You don't have any notifications
-                                  </small>
+                            <div class="dropdown-menu ml-notification" aria-labelledby="mess" style="width: 250px !important">
+                              <div class="card m-n3">
+                                <div class="card-header bg-c-blue text-center text-white">
+                                  Notifications
+                                </div>
+                                <div class="card-body">
+                                  <div class="text-center">
+                                    <img src="{{ asset('img/notify.png') }}"
+                                    class="img-fluid" alt="Empty notification">
+                                    <small>
+                                      You don't have any notifications
+                                    </small>
+                                  </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                  <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">
+                                    Selengkapnya
+                                    <i class="fa fa-chevron-right mt-n3 "></i>
+                                  </a>
                                 </div>
                               </div>
-                              <div class="card-footer text-center">
-                                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">
-                                  Selengkapnya
-                                  <i class="fa fa-chevron-right mt-n3 "></i>
-                                </a>
+                            </div>
+                          </li>
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kamaludin</a>
+                              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                  <a class="dropdown-item" href="{{ url('user/dashboard') }}">Profil</a>
+                                  <a class="dropdown-item" href="#">Pengaturan Akun</a>
+                                  <hr>
+                                  <a class="dropdown-item" href="#"
+                                  href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Logout</a>
+                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                               </div>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kamaludin</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                <a class="dropdown-item" href="{{ url('user/dashboard') }}">Profil</a>
-                                <a class="dropdown-item" href="#">Pengaturan Akun</a>
-                                <hr>
-                                <a class="dropdown-item" href="#">Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                          </li>
+                      </ul>
+                  </div>
+                @endguest
             </div>
         </nav>
     </header>
@@ -222,6 +221,7 @@
     <script src="{{ asset('js/bootstrap.js') }}" charset="utf-8"></script>
     {{-- Active script --}}
     <script src="{{ asset('js/activate.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('js/tools.js') }}" charset="utf-8"></script>
 
 </body>
 

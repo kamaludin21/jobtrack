@@ -80,3 +80,7 @@ Route::get('employer/candidate', function () {
 Route::get('employer/form', function () {
   return view('employer.form');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
