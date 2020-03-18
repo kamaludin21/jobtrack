@@ -6,24 +6,18 @@
     <div class="row">
         <div class="col-md-6">
             <div class="pt-6">
-                <h2>
-                    Get track your applications now, search for free
+                <h2 class="text-white">
+                    Search now, and track it
                 </h2>
-                <p>
-                    Keep search for your passion
-                </p>
+                <p>Search now for free</p>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="input-group">
                             <input type="search" class="form-control search-input" id="search-church" placeholder="Your position">
                             <span class="input-group-btn pl-2">
-                                <a class="btn btn-outline-dark button-search " href="{{ asset('lowongan') }}">Search</a>
+                                <a class="btn btn-outline-light button-search " href="{{ asset('lowongan') }}">Search</a>
                             </span>
                         </div>
-                        {{-- <div class="searchbar">
-                          <input class="search_input" type="text" name="" placeholder="Search...">
-                          <a href="#" class="search_icon" placeholder=""><i class="fa fa-search"></i></a>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -32,7 +26,7 @@
         </div>
         <div class="col-md-5">
             <div class="align-center p-4">
-                <img class="img-fluid" src="{{ asset('img/work.png') }}" alt="">
+                <img class="img-fluid" src="{{ asset('img/sitting.png') }}" alt="">
             </div>
         </div>
     </div>

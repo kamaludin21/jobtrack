@@ -11,20 +11,25 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    {{-- login --}}
+    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('auth/css/bootstrap-min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('auth/css/form-elements.css') }}">
+    <link rel="stylesheet" href="{{ asset('auth/css/style.css') }}">
 
     {{-- Icon CDN --}}
     <script src="https://use.fontawesome.com/1d5fe44475.js"></script>
 </head>
 
-<body class="bg-grey"  role="main">
+<body class="bg-grey" role="main">
     <header class="navbar-menu">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-raspberry py-2">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-raspberry py-3">
             <div class="container">
-              <a class="navbar-brand" href="{{ url('/') }}">Jobtrack</a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-              @guest
+                <a class="navbar-brand font-weight-bold" href="{{ url('/') }}">JOBTRACK</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @guest
                 <div class="collapse navbar-collapse" id="navbars">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item pr-3">
@@ -39,141 +44,131 @@
                     </ul>
                 </div>
                 @else
-                  <div class="collapse navbar-collapse" id="navbars">
-                      <ul class="navbar-nav ml-auto">
-                          <li class="nav-item">
-                              <a class="nav-link" href="#">
-                                  <i class="fa fa-bookmark"></i>
-                              </a>
-                          </li>
-                          <li class="nav-item dropdown">
-                            <a  class="nav-link dropleft" href="#" id="mess" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                            </a>
-                            <div class="dropdown-menu ml-notification" aria-labelledby="mess" style="width: 250px !important">
-                              <div class="card m-n3">
-                                <div class="card-header bg-c-blue text-center text-white">
-                                  Notifications
-                                </div>
-                                <div class="card-body">
-                                  <div class="text-center">
-                                    <img src="{{ asset('img/notify.png') }}"
-                                    class="img-fluid" alt="Empty notification">
-                                    <small>
-                                      You don't have any notifications
-                                    </small>
-                                  </div>
-                                </div>
-                                <div class="card-footer text-center">
-                                  <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">
-                                    Selengkapnya
-                                    <i class="fa fa-chevron-right mt-n3 "></i>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                          <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kamaludin</a>
-                              <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                  <a class="dropdown-item" href="{{ url('user/dashboard') }}">Profil</a>
-                                  <a class="dropdown-item" href="#">Pengaturan Akun</a>
-                                  <hr>
-                                  <a class="dropdown-item" href="#"
-                                  href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">Logout</a>
-                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                              </div>
-                          </li>
-                      </ul>
-                  </div>
-                @endguest
-            </div>
-        </nav>
-    </header>
-    <header class="navbar-menu">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="#">Jobtrack</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ url('employer/home') }}">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('employer/lowongan') }}">Lowongan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('employer/candidate') }}">Cari kandidat</a>
-                        </li>
-                    </ul>
+                @if(Auth::user()->level == 1)
                     <div class="collapse navbar-collapse" id="navbars">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a  class="nav-link dropleft" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-bell"></i>
-                                    <span class="dot" style="margin-left: -5px; margin-top: 2px;"></span>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="fa fa-bookmark"></i>
                                 </a>
-                                <div class="dropdown-menu ml-notification" aria-labelledby="dropdown02" style="width: 250px !important">
-                                  <div class="card m-n3">
-                                    <div class="card-header bg-c-blue text-center text-white">
-                                      Notifications
-                                      <br>
-                                      <small class="mt-n5">
-                                        You have 21 unread messages
-                                      </small>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropleft" href="#" id="mess" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-bell"></i>
+                                </a>
+                                <div class="dropdown-menu ml-notification" aria-labelledby="mess" style="width: 250px !important">
+                                    <div class="card m-n3">
+                                        <div class="card-header bg-c-blue text-center text-white">
+                                            Notifications
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <img src="{{ asset('img/notify.png') }}" class="img-fluid" alt="Empty notification">
+                                                <small>
+                                                    You don't have any notifications
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-center">
+                                            <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">
+                                                Selengkapnya
+                                                <i class="fa fa-chevron-right mt-n3 "></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="card-body notification">
-
-                                      <div class="notification-item">
-                                        <a href="#" class="text-decoration-none notification-list no-style text-dark">
-                                          <p class="mb-2">Lamaran anda id=DS987, telah penuh, segera aaa review kandidat anda</p>
-                                          <p class="text-monospace text-dark mb-2 text-right">
-                                            2 min ago
-                                          </p>
-                                        </a>
-                                      </div>
-                                      <div class="notification-item">
-                                        <a href="#" class="text-decoration-none notification-list no-style text-dark">
-                                          <p class="mb-2">Lamaran anda id=DS987, telah penuh, segera aaa review kandidat anda</p>
-                                          <p class="text-monospace text-dark mb-2 text-right">
-                                            2 min ago
-                                          </p>
-                                        </a>
-                                      </div>
-                                    </div>
-                                    <div class="card-footer text-center">
-                                      <a href="#" class="btn btn-sm btn-outline-info rounded-pill">
-                                        Selengkapnya
-                                        <i class="fa fa-chevron-right mt-n3 "></i>
-                                      </a>
-                                    </div>
-                                  </div>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Perusahaan</a>
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kamaludin</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                    <a class="dropdown-item" href="{{ url('employer/profil') }}">Profil</a>
+                                    <a class="dropdown-item" href="{{ url('user/dashboard') }}">Profil</a>
                                     <a class="dropdown-item" href="#">Pengaturan Akun</a>
                                     <hr>
-                                    <a class="dropdown-item" href="#">Logout</a>
+                                    <a class="dropdown-item" href="#" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                       document.getElementById('logout-form').submit();">Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                </div>
+                    @endif
+                    @if(Auth::user()->level == 2)
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ url('employer/home') }}">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('employer/lowongan') }}">Lowongan</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('employer/candidate') }}">Cari kandidat</a>
+                                </li>
+                            </ul>
+                            <div class="collapse navbar-collapse" id="navbars">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropleft" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-bell"></i>
+                                            <span class="dot" style="margin-left: -5px; margin-top: 2px;"></span>
+                                        </a>
+                                        <div class="dropdown-menu ml-notification" aria-labelledby="dropdown02" style="width: 250px !important">
+                                            <div class="card m-n3">
+                                                <div class="card-header bg-c-blue text-center text-white">
+                                                    Notifications
+                                                    <br>
+                                                    <small class="mt-n5">
+                                                        You have 21 unread messages
+                                                    </small>
+                                                </div>
+                                                <div class="card-body notification">
+
+                                                    <div class="notification-item">
+                                                        <a href="#" class="text-decoration-none notification-list no-style text-dark">
+                                                            <p class="mb-2">Lamaran anda id=DS987, telah penuh, segera aaa review kandidat anda</p>
+                                                            <p class="text-monospace text-dark mb-2 text-right">
+                                                                2 min ago
+                                                            </p>
+                                                        </a>
+                                                    </div>
+                                                    <div class="notification-item">
+                                                        <a href="#" class="text-decoration-none notification-list no-style text-dark">
+                                                            <p class="mb-2">Lamaran anda id=DS987, telah penuh, segera aaa review kandidat anda</p>
+                                                            <p class="text-monospace text-dark mb-2 text-right">
+                                                                2 min ago
+                                                            </p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer text-center">
+                                                    <a href="#" class="btn btn-sm btn-outline-info rounded-pill">
+                                                        Selengkapnya
+                                                        <i class="fa fa-chevron-right mt-n3 "></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Perusahaan</a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                            <a class="dropdown-item" href="{{ url('employer/profil') }}">Profil</a>
+                                            <a class="dropdown-item" href="#">Pengaturan Akun</a>
+                                            <hr>
+                                            <a class="dropdown-item" href="#">Logout</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+                        @endguest
             </div>
         </nav>
     </header>
-    <main role="main">
+    <main role="main" style="background-image: url('{{ asset('img/wave.svg') }}'); background-repeat: no-repeat;">
         @yield('content')
     </main>
     <footer class="container pt-4 my-md-5 pt-md-5 border-top">
