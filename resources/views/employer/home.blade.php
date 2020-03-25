@@ -1,6 +1,5 @@
 @extends('layouts.main')
 
-
 @section('content')
 <div class="container pt-5">
     <div class="row mb-2">

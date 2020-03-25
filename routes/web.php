@@ -11,11 +11,8 @@
 |
 */
 
-
-
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
-
 
 // Recruiter
 Route::prefix('recruiter')->group(function () {
