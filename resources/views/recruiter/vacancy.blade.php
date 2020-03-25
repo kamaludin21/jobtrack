@@ -19,7 +19,7 @@
                             <i class="fa fa-chevron-right"></i>
                         </a>
                     </div>
-                    <h5>Lowongan</h5>
+                    <h5>Lowongan perusahaan anda</h5>
                     <hr>
                 </div>
                 <div class="pr-4 pl-4 pt-3">
@@ -33,7 +33,7 @@
                 <div class="card-body">
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            @if(!empty($vacancies))
+                            @if(count($vacancies) > 0)
                               @foreach ($vacancies as $vacancy)
                               <div class="row">
                                   <div class="col-md-12">
@@ -68,9 +68,9 @@
                                                   {{ Str::limit($vacancy->created_at, 10, '') }}</button>
                                                   <button type="button" class="btn btn-outline-secondary">Closed {{ $vacancy->expired }}</button>
                                               </div>
-                                              <a href="{{ url('lowongan-detail') }}" class="btn btn-sm btn-primary">
-                                                  <i class="fa fa-pencil"></i>
-                                                  Kelola
+                                              <a href="{{ url('recruiter/vacancy/manage') }}" class="btn btn-sm btn-primary">
+                                                  <i class="fa fa-pencil pr-1"></i>
+                                                  Manage
                                               </a>
                                           </div>
                                       </div>

@@ -14,20 +14,23 @@
                     </div>
                     <hr>
                     <h4 class="font-weight-bold">{{ Auth::user()->name }}</h4>
-                    <p class="text-justify">
+                    @if(empty($company))
+                        <small class="text-danger">Lengkapi profil anda, tekan tombol dibawah!</small>
+                    @else
+                    <div class="text-justify">
+                      {!! $company->description !!}
+                    </div>
+                    <p>
+                        <strong>Alamat : </strong>{{ $company->alamat }}
+                    </p>
+                    <p>
+                        <strong>Website : </strong>{{ $company->website }}
+                    </p>
 
-                    </p>
-                    <p>
-                        <strong>Alamat : </strong>Jl. Jend. Ahmad Yani No.3, Tanah Datar, Kec. Sukajadi, Kota Pekanbaru, Riau 28128
-                    </p>
-                    <p>
-                        <strong>Jam Buka : </strong> 08.00 - 16.00 WIB &bull; Senin - Sabtu
-                    </p>
-                    <p>
-                        <strong>Telepon : </strong> (021) 40000995
-                    </p>
-                    <a href="#" class="btn btn-sm btn-outline-primary btn-block"><i class="fa fa-cog"></i>
-                        Sunting Profil</a>
+                    @endif
+                    <a href="{{ url('recruiter/edit/profil') }}" class="btn btn-sm btn-outline-primary btn-block"><i class="fa fa-cog"></i>
+                    Sunting Profil
+                    </a>
                 </div>
             </div>
         </div>

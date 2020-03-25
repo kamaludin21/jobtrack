@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Perusahaan;
 use App\Vacancy;
 use Auth;
 
@@ -20,8 +21,17 @@ class RecruitersController extends Controller
 
     public function index()
     {
-        
-      	return view('recruiter.index');
+        // $flight = App\Flight::where('number', 'FR 900')->first();
+        $idUser = Auth::user()->id;
+        $company = Perusahaan::where('idProfil', $idUser)->first();
+      	return view('recruiter.index', ['company' => $company]);
+    }
+
+    public function profil()
+    {
+        $idUser = Auth::user()->id;
+        $company = Perusahaan::where('idProfil', $idUser)->first();
+        return view('recruiter.form-profil', ['company' => $company]);
     }
 
     public function vacancy()
@@ -29,6 +39,35 @@ class RecruitersController extends Controller
       $idPerusahaan = Auth::user()->id;
       $vacancy = Vacancy::where('idPerusahaan', $idPerusahaan)->get();
       return view('recruiter.vacancy', ['vacancies' => $vacancy]);
+    }
+
+    public function StoreProfil(Request $request)
+    {
+        $idProfil = Auth::user()->id;
+        // $status = 'verifyd/unverify';
+        $status = 'verify';
+        $company = Perusahaan::create([
+          'idProfil' => $idProfil,
+          'name' => $request->name,
+          'status' => $status,
+          'alamat' => $request->alamat,
+          'website' => $request->website,
+          'profil' => $request->profil,
+          'sampul' => $request->sampul,
+          'description' => $request->description
+        ]);
+
+        if($company->wasRecentlyCreated) {
+          return redirect('recruiter/')->with('success', 'Lowongan berhasil ditambah');
+        } else {
+          return redirect('recruiter/')->with('warning', 'Upps, Tampaknya ada yang salah, ulangi sekali lagi');
+        }
+
+    }
+
+    public function manage()
+    {
+      return view('recruiter.manage-vacancies');
     }
 
     public function candidate()

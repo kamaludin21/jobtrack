@@ -5,7 +5,7 @@
 <section class="py-5">
     <div class="row">
         <div class="col-md-6">
-            <div class="pt-6 text-center">
+            <div class="pl-5 pt-6 text-center">
                 <h2 class="font-weight-center text-white pb-2">
                     Search now, and track it
                 </h2>

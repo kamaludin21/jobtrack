@@ -19,7 +19,10 @@ Route::prefix('recruiter')->group(function () {
     Route::get('', 'RecruitersController@index');
     Route::get('vacancy', 'RecruitersController@vacancy');
     Route::get('vacancy/form', 'RecruitersController@create');
+    Route::get('vacancy/manage', 'RecruitersController@manage');
     Route::get('candidate', 'RecruitersController@candidate');
+    Route::get('edit/profil', 'RecruitersController@profil');
+    Route::post('profil/store', 'RecruitersController@StoreProfil');
 });
 
 // Vacancy
