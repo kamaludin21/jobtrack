@@ -13,8 +13,10 @@
                         <img src="https://www.mobihealthnews.com/sites/default/files/merger.jpg" class="img-fluid rounded" alt="">
                     </div>
                     <hr>
-                    <p class="text-justify">mHealthBank is a Digital Health apps connecting Users to healthcare service providers (doctors, pharmacies, laboratories) seamlessly for holistic healthcare in an eco-system. It transforms healthcare from
-                        reactive to proactive by empowering Users with own health data, health risk profiling, health tips advising on symptoms and medication symptoms.</p>
+                    <h4 class="font-weight-bold">{{ Auth::user()->name }}</h4>
+                    <p class="text-justify">
+
+                    </p>
                     <p>
                         <strong>Alamat : </strong>Jl. Jend. Ahmad Yani No.3, Tanah Datar, Kec. Sukajadi, Kota Pekanbaru, Riau 28128
                     </p>

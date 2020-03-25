@@ -20,7 +20,8 @@ class RecruitersController extends Controller
 
     public function index()
     {
-    	return view('recruiter.index');
+        
+      	return view('recruiter.index');
     }
 
     public function vacancy()

@@ -26,9 +26,9 @@ class HomeController extends Controller
     {
       if(Auth::user()->level == 1)
       {
-          return view('home');
+        return view('home');
       } else {
-        return view('employer.home');
+        return view('recruiter.index');
       }
     }
 }
