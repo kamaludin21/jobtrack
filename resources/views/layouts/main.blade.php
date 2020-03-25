@@ -11,11 +11,6 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    {{-- login --}}
-    <link rel="stylesheet" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('auth/css/bootstrap-min.css') }}"> --}}
-    <link rel="stylesheet" href="{{ asset('auth/css/form-elements.css') }}">
-    <link rel="stylesheet" href="{{ asset('auth/css/style.css') }}">
 
     {{-- Icon CDN --}}
     <script src="https://use.fontawesome.com/1d5fe44475.js"></script>
@@ -39,13 +34,21 @@
                             <a class="nav-link" href="#">Daftar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-sm btn-dark" href="{{ url('employer/home') }}">Perusahaan</a>
+                            <a class="nav-link btn btn-sm btn-outline-link" href="{{ url('employer/home') }}">Perusahaan</a>
                         </li>
                     </ul>
                 </div>
                 @else
                 @if(Auth::user()->level == 1)
                     <div class="collapse navbar-collapse" id="navbars">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ url('home') }}">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('lowongan') }}">Lowongan</a>
+                            </li>
+                        </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
@@ -97,14 +100,14 @@
                     @if(Auth::user()->level == 2)
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{{ url('employer/home') }}">Home <span class="sr-only">(current)</span></a>
+                                <li class="nav-item @yield('status-home')">
+                                    <a class="nav-link" href="{{ url('recruiter/') }}">Home</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('employer/lowongan') }}">Lowongan</a>
+                                <li class="nav-item @yield('status-vacancy')">
+                                    <a class="nav-link" href="{{ url('recruiter/vacancy') }}">Lowongan</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('employer/candidate') }}">Cari kandidat</a>
+                                <li class="nav-item @yield('status-candidate')">
+                                    <a class="nav-link" href="{{ url('recruiter/candidate') }}">Cari kandidat</a>
                                 </li>
                             </ul>
                             <div class="collapse navbar-collapse" id="navbars">
@@ -157,7 +160,11 @@
                                             <a class="dropdown-item" href="{{ url('employer/profil') }}">Profil</a>
                                             <a class="dropdown-item" href="#">Pengaturan Akun</a>
                                             <hr>
-                                            <a class="dropdown-item" href="#">Logout</a>
+                                            <a class="dropdown-item" href="#" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                               document.getElementById('logout-form').submit();">Logout</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
                                         </div>
                                     </li>
                                 </ul>

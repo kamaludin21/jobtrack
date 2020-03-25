@@ -5,11 +5,10 @@
 <section class="py-5">
     <div class="row">
         <div class="col-md-6">
-            <div class="pt-6">
-                <h2 class="text-white">
+            <div class="pt-6 text-center">
+                <h2 class="font-weight-center text-white pb-2">
                     Search now, and track it
                 </h2>
-                <p>Search now for free</p>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="input-group">

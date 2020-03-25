@@ -1,6 +1,9 @@
 
 body {
-	background: #333;
+	background: #00B4DB;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #0083B0, #00B4DB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
     font-weight: 300;
@@ -36,7 +39,6 @@ img { max-width: 100%; }
 
 ::-moz-selection { background: #42c5ea; color: #fff; text-shadow: none; }
 ::selection { background: #42c5ea; color: #fff; text-shadow: none; }
-
 
 .btn-link-1 {
 	display: inline-block;
@@ -94,6 +96,10 @@ img { max-width: 100%; }
 
 .social-login { margin-top: 35px; color: #fff; }
 .social-login-buttons { margin-top: 20px; }
+
+.text-red {
+	color: ff1100;
+}
 
 
 /***** Footer *****/

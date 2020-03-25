@@ -11,9 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-  return view('home');
+
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+// Recruiter
+Route::prefix('recruiter')->group(function () {
+    Route::get('', 'RecruitersController@index');
+    Route::get('vacancy', 'RecruitersController@vacancy');
+    Route::get('vacancy/form', 'RecruitersController@create');
+    Route::get('candidate', 'RecruitersController@candidate');
 });
+
+// Vacancy
+Route::post('vacancy/store', 'VacanciesController@store');
+
 
 Route::get('lowongan', function() {
   return view('pages.lowongan');
@@ -82,5 +96,3 @@ Route::get('employer/form', function () {
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
