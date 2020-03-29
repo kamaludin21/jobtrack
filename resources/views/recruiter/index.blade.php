@@ -26,7 +26,6 @@
                     <p>
                         <strong>Website : </strong>{{ $company->website }}
                     </p>
-
                     @endif
                     <a href="{{ url('recruiter/edit/profil') }}" class="btn btn-sm btn-outline-primary btn-block"><i class="fa fa-cog"></i>
                     Sunting Profil
@@ -46,7 +45,7 @@
                       <div class="card p-3">
                         <small>Applications</small>
                         <p>
-                          5
+                          0
                         </p>
                       </div>
                     </div>
@@ -54,7 +53,7 @@
                       <div class="card p-3">
                         <small>Approve </small>
                         <p>
-                          5
+                          0
                         </p>
                       </div>
                     </div>
@@ -62,7 +61,7 @@
                       <div class="card p-3">
                         <small>Rejected Candidate </small>
                         <p>
-                          5
+                          0
                         </p>
                       </div>
                     </div>

@@ -7,7 +7,7 @@
 <div class="container pt-4">
     @include('layouts.alert')
     <div class="row">
-        <div class="col-12">
+        <div class="col-9">
             <div class="card">
                 <div class="pr-4 pt-4 pl-4">
                     <h5>Kelola lowongan</h5>
@@ -17,15 +17,15 @@
                   <p class="font-weight-bold">Deskripsi</p>
                     <div class="row">
                         <div class="col">
-                            <p>ID Lowongan : {tiket}</p>
+                            <p>ID Lowongan : {{ $vacancy->ticket }}</p>
                             <p>
-                                Jabatan : {posisi}
+                                Jabatan : {{ $vacancy->title }}
                             </p>
                         </div>
                         <div class="col">
-                            <p>Lokasi Penempatan : {tiket}</p>
+                            <p>Lokasi Penempatan : {{ $vacancy->daerah }}</p>
                             <p>
-                                Expired : {posisi}
+                                Expired : {{ $vacancy->expired }}
                             </p>
                         </div>
                     </div>
@@ -51,6 +51,37 @@
                     </table>
                 </div>
             </div>
+        </div>
+        <div class="col-3 ">
+          <div class="card">
+              <div class="p-4">
+                  <h5>Statistik</h5>
+                  <hr>
+                  <div class="pt-3">
+                      <p class="p-1 pl-2 border">
+                          <i class="fa fa-info-circle pr-1"></i> Belum proses
+                          <span class="badge badge-pill badge-primary ml-1">0</span>
+                      </p>
+                      <p class="p-1 pl-2 border">
+                          <i class="fa fa-file pr-1"></i> Administrasi
+                          <span class="badge badge-pill badge-primary ml-1">0</span>
+                      </p>
+                      <p class="p-1 pl-2 border">
+                          <i class="fa fa-black-tie pr-1"></i> Interview
+                          <span class="badge badge-pill badge-primary ml-1">0</span>
+                      </p>
+                      <p class="p-1 pl-2 border">
+                          <i class="fa fa-times pr-1"></i> Tolak
+                          <span class="badge badge-pill badge-primary ml-1">0</span>
+                      </p>
+                      <p class="p-1 pl-2 border">
+                          <i class="fa fa-check-square pr-1"></i> Diterima
+                          <span class="badge badge-pill badge-primary ml-1">0</span>
+                      </p>
+                  </div>
+              </div>
+
+          </div>
         </div>
     </div>
 </div>

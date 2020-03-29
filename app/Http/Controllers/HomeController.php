@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Perusahaan;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,9 @@ class HomeController extends Controller
       {
         return view('home');
       } else {
-        return view('recruiter.index');
+        $idUser = Auth::user()->id;
+        $company = Perusahaan::where('idProfil', $idUser)->first();
+        return view('recruiter.index', ['company' => $company]);
       }
     }
 }

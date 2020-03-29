@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('user-profil')
+nav-user-active
+@endsection
+
 @section('content')
 <div class="container pt-5">
     <div class="row mb-2">
@@ -7,68 +11,62 @@
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="row card no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
-                          <div class="card-header bg-c-donker">
-                              <div class="lead">
-                                Profil
-                              </div>
-                          </div>
+                            <div class="card-header bg-c-donker">
+                                <div class="lead">
+                                    Profil
+                                </div>
+                            </div>
                             <div class="mt-2">
+                                @include('layouts.alert')
                                 <div class="">
                                     <p class="lead">
                                         <strong>Data Diri</strong>
-                                        <button class="btn btn-sm btn-outline-primary float-right">
-                                            <i class="fa fa-pencil"></i>
-                                            Sunting</button>
+                                        <a href="{{ url('user/profil/form') }}" class="btn btn-sm btn-outline-primary float-right"><i class="fa fa-pencil"></i>
+                                        Sunting</a>
                                     </p>
                                 </div>
                                 <hr>
+                                @if(empty($profil))
+                                <p class="text-danger">Silahkan lengkapi profil anda</p>
+                                @else
                                 <dl class="row mt-2">
-                                    <dt class="col-sm-3">Nama</dt>
-                                    <dd class="col-sm-9">Kamaludin</dd>
+                                    <dt class="col-sm-3">Tentang saya</dt>
+                                    <dd class="col-sm-9">{{ $profil->description }}</dd>
 
                                     <dt class="col-sm-3">Ttl</dt>
-                                    <dd class="col-sm-9">Selatpanjang, 21 Juni 2019</dd>
+                                    <dd class="col-sm-9">{{ $profil->Ttl }}</dd>
 
                                     <dt class="col-sm-3">Jenis Kelamin</dt>
-                                    <dd class="col-sm-9">Laki-laki</dd>
+                                    <dd class="col-sm-9">{{ $profil->kelamin }}</dd>
 
                                     <dt class="col-sm-3">Alamat</dt>
-                                    <dd class="col-sm-9">Selatpanjang, Kab. Kepulauan Meranti</dd>
+                                    <dd class="col-sm-9">{{ $profil->alamat }}</dd>
 
                                     <dt class="col-sm-3">Agama</dt>
-                                    <dd class="col-sm-9">Islam</dd>
-
-                                    <dt class="col-sm-3">Warga Negara</dt>
-                                    <dd class="col-sm-9">Indonesia</dd>
-
+                                    <dd class="col-sm-9">{{ $profil->Agama }}</dd>
                                 </dl>
 
                                 <p class="lead">
                                     <strong>Kontak</strong>
-                                    <button class="btn btn-sm btn-outline-primary float-right">
-                                        <i class="fa fa-pencil"></i>
-                                        Sunting</button>
                                 </p>
                                 <hr>
                                 <dl class="row mt-2">
                                     <dt class="col-sm-3">Email</dt>
-                                    <dd class="col-sm-9">kamal.zyel@gmail.com</dd>
+                                    <dd class="col-sm-9">{{ $profil->email }}</dd>
                                     <dt class="col-sm-3">No. HP</dt>
-                                    <dd class="col-sm-9">085220217759</dd>
+                                    <dd class="col-sm-9">{{ $profil->telp }}</dd>
                                     <dt class="col-sm-3">Facebook</dt>
                                     <dd class="col-sm-9">
-                                        <a href="#">https://facebook.com/kamaludin21</a>
+                                        <a href="#">{{ $profil->social1 }}</a>
                                     </dd>
                                     <dt class="col-sm-3">Linkedin</dt>
                                     <dd class="col-sm-9">
-                                        <a href="#">
-                                            https://linkedin.com/kamaludin21
-                                        </a>
+                                        <a href="#">{{ $profil->social2 }}</a>
                                     </dd>
                                 </dl>
-
+                                @endif
                                 <p class="lead">
                                     <strong>Riwayat Pendidikan</strong>
                                     <button class="btn btn-sm btn-outline-primary float-right">
@@ -115,14 +113,14 @@
                                     <dd class="col-sm-8">
                                         <div class="">
                                             <h4>Programmer
-                                              <div class="float-right">
-                                                <a class="btn btn-sm btn-outline-link text-primary">
-                                                    <i class="fa fa-pencil"></i>
-                                                    Sunting</a>
-                                                <a class="btn btn-sm btn-outline-link text-danger">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                              </div>
+                                                <div class="float-right">
+                                                    <a class="btn btn-sm btn-outline-link text-primary">
+                                                        <i class="fa fa-pencil"></i>
+                                                        Sunting</a>
+                                                    <a class="btn btn-sm btn-outline-link text-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </div>
                                             </h4>
                                             <h6>PT. BNI 46 | Riau, Indonesia</h6>
                                             <hr>
@@ -155,12 +153,12 @@
                                         <div class="">
                                             <h4>Programmer
                                                 <div class="float-right">
-                                                  <a class="btn btn-sm btn-outline-link text-primary">
-                                                      <i class="fa fa-pencil"></i>
-                                                      Sunting</a>
-                                                  <a class="btn btn-sm btn-outline-link text-danger">
-                                                      <i class="fa fa-trash"></i>
-                                                  </a>
+                                                    <a class="btn btn-sm btn-outline-link text-primary">
+                                                        <i class="fa fa-pencil"></i>
+                                                        Sunting</a>
+                                                    <a class="btn btn-sm btn-outline-link text-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
                                                 </div>
                                             </h4>
                                             <h6>PT. BNI 46 | Riau, Indonesia</h6>
@@ -177,6 +175,52 @@
                                                 <dd class="col-sm-8"> Pegawai (non-manajemen & non-supervisor)</dd>
                                                 <dt class="col-sm-4">Gaji bulanan</dt>
                                                 <dd class="col-sm-8"> IDR 4,000,000</dd>
+                                            </dl>
+                                        </div>
+                                    </dd>
+                                </dl>
+
+                                <p class="lead">
+                                    <strong>Sertifikat penunjang</strong>
+                                    <button class="btn btn-sm btn-outline-primary float-right">
+                                        <i class="fa fa-plus"></i>
+                                        Tambah</button>
+                                </p>
+                                <hr>
+                                <dl class="row mt-2">
+                                    <dt class="col-sm-4">
+                                        2020 Januari - 2021 Desember
+                                        <br>
+                                        <div class="text-muted">
+                                            3 years
+                                        </div>
+
+                                    </dt>
+                                    <dd class="col-sm-8">
+                                        <div class="">
+                                            <h4>Programmer
+                                                <div class="float-right">
+                                                    <a class="btn btn-sm btn-outline-link text-primary">
+                                                        <i class="fa fa-pencil"></i>
+                                                        Sunting</a>
+                                                    <a class="btn btn-sm btn-outline-link text-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </h4>
+                                            <h6>Sertifikasi BNPS</h6>
+                                            <hr>
+                                            <dl class="row">
+                                                <dt class="col-sm-2">Desc</dt>
+                                                <dd class="col-sm-10">
+                                                  <small> Komputer / Teknik Informatika (Perangkat Lunak)</small>
+                                                </dd>
+                                                <dt class="col-sm-6">
+                                                  <img src="{{ asset('img/avatar-girl.png') }}" class="img-fluid" alt="">
+                                                </dt>
+                                                <dd class="col-sm-6">
+                                                  <img src="{{ asset('img/avatar-hat.png') }}" class="img-fluid" alt="">
+                                                </dd>
                                             </dl>
                                         </div>
                                     </dd>

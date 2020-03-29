@@ -1,5 +1,8 @@
 @extends('layouts.main')
 
+@section('user-dashboard')
+nav-user-active
+@endsection
 @section('content')
 <div class="container pt-5">
     <div class="row mb-2">
@@ -7,7 +10,7 @@
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="card row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
                             <div class="card-header bg-c-donker">
                                 <div class="lead">
@@ -59,7 +62,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="card row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
                             <div class="card-header">
                                 <h4>Your activity now</h4>

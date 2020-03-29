@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('user-lamaran')
+nav-user-active
+@endsection
+
 @section('content')
 <div class="container pt-5">
     <div class="row mb-2">

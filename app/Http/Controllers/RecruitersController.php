@@ -62,12 +62,12 @@ class RecruitersController extends Controller
         } else {
           return redirect('recruiter/')->with('warning', 'Upps, Tampaknya ada yang salah, ulangi sekali lagi');
         }
-
     }
 
-    public function manage()
+    public function manage($id)
     {
-      return view('recruiter.manage-vacancies');
+        $vacancy = Vacancy::findOrFail($id);
+        return view('recruiter.manage-vacancies', ['vacancy' => $vacancy]);
     }
 
     public function candidate()

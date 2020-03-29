@@ -68,7 +68,7 @@
                                                   {{ Str::limit($vacancy->created_at, 10, '') }}</button>
                                                   <button type="button" class="btn btn-outline-secondary">Closed {{ $vacancy->expired }}</button>
                                               </div>
-                                              <a href="{{ url('recruiter/vacancy/manage') }}" class="btn btn-sm btn-primary">
+                                              <a href="{{ url('recruiter/vacancy/manage', [$vacancy->id]) }}" class="btn btn-sm btn-warning">
                                                   <i class="fa fa-pencil pr-1"></i>
                                                   Manage
                                               </a>
@@ -149,7 +149,7 @@
                             <span class="badge badge-pill badge-primary ml-1">0</span>
                         </p>
                         <p class="p-1 pl-2 border">
-                            <i class="fa fa-bookmark pr-1"></i> Pelamar Diterima
+                            <i class="fa fa-check-square pr-1"></i> Pelamar Diterima
                             <span class="badge badge-pill badge-primary ml-1">0</span>
                         </p>
                         <p class="p-1 pl-2 text-white border" style="background: linear-gradient(110deg, #407cc9 50%, #f27cad 50%);">

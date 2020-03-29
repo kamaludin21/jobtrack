@@ -34,6 +34,13 @@
                     </span>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label class="sr-only" for="level">Level</label>
+                    <select class="form-control" name="level">
+                      <option value="1">Searcher</option>
+                      <option value="2">Recruiter</option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label class="sr-only" for="password">Password</label>

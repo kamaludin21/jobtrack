@@ -19,6 +19,12 @@ class VacanciesController extends Controller
         $this->middleware('auth');
     }
 
+    public function lowongan()
+    {
+      $lowongan = Vacancy::all();
+      return view('vacancies.index', ['lowongan' => $lowongan]);
+    }
+
     public function store(Request $request)
     {
       // id perusahaan
