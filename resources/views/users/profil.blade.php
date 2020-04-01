@@ -9,6 +9,7 @@ nav-user-active
     <div class="row mb-2">
         @include('layouts.users-nav')
         <div class="col-md-9">
+@include('layouts.alert')
             <div class="row">
                 <div class="col-md-12">
                     <div class="row card no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -19,10 +20,9 @@ nav-user-active
                                 </div>
                             </div>
                             <div class="mt-2">
-                                @include('layouts.alert')
-                                <div class="">
+                                <div class="mt-2">
                                     <p class="lead">
-                                        <strong>Data Diri</strong>
+                                        <span class="font-weight-bold">Data Diri</span>
                                         <a href="{{ url('user/profil/form') }}" class="btn btn-sm btn-outline-primary float-right"><i class="fa fa-pencil"></i>
                                         Sunting</a>
                                     </p>
@@ -35,8 +35,14 @@ nav-user-active
                                     <dt class="col-sm-3">Tentang saya</dt>
                                     <dd class="col-sm-9">{{ $profil->description }}</dd>
 
+                                    <dt class="col-sm-3">Status</dt>
+                                    <dd class="col-sm-9">{{ $profil->status }}</dd>
+
+                                    <dt class="col-sm-3">Gaji yang diharapkan</dt>
+                                    <dd class="col-sm-9">Rp. {{ number_format($profil->gaji) }}</dd>
+
                                     <dt class="col-sm-3">Ttl</dt>
-                                    <dd class="col-sm-9">{{ $profil->Ttl }}</dd>
+                                    <dd class="col-sm-9">{{ $profil->ttl }}</dd>
 
                                     <dt class="col-sm-3">Jenis Kelamin</dt>
                                     <dd class="col-sm-9">{{ $profil->kelamin }}</dd>
@@ -45,11 +51,11 @@ nav-user-active
                                     <dd class="col-sm-9">{{ $profil->alamat }}</dd>
 
                                     <dt class="col-sm-3">Agama</dt>
-                                    <dd class="col-sm-9">{{ $profil->Agama }}</dd>
+                                    <dd class="col-sm-9">{{ $profil->agama }}</dd>
                                 </dl>
 
                                 <p class="lead">
-                                    <strong>Kontak</strong>
+                                    <span  class="font-weight-bold">Kontak</span>
                                 </p>
                                 <hr>
                                 <dl class="row mt-2">
@@ -68,163 +74,154 @@ nav-user-active
                                 </dl>
                                 @endif
                                 <p class="lead">
-                                    <strong>Riwayat Pendidikan</strong>
-                                    <button class="btn btn-sm btn-outline-primary float-right">
-                                        <i class="fa fa-pencil"></i>
-                                        Sunting</button>
-                                </p>
+                                  <span class="font-weight-bold">Riwayat Pendidikan</span>
+                                    <a href="{{ url('user/pendidikan/form') }}" class="btn btn-sm btn-outline-primary float-right">
+                                      <i class="fa fa-plus"></i>
+                                      Tambah</a>
                                 <hr>
                                 <dl class="row mt-2">
-                                    <dt class="col-sm-3">SMA</dt>
-                                    <dd class="col-sm-9">MAN Selatpanjang</dd>
-                                    <dt class="col-sm-3">S1</dt>
-                                    <dd class="col-sm-9">TIF UIN SUSKA RIAU (Ongoing)</dd>
+                                  @if(count($pendidikan) == 0)
+                                    <p class="text-danger ml-3">Belum ada data pendidikan</p>
+                                  @else
+                                    @foreach ($pendidikan as $pendidikan)
+                                      <dt class="col-sm-3">{{ $pendidikan->instansi }}</dt>
+                                      <dd class="col-sm-9">{{ $pendidikan->pendidikan }} &bull; {{ $pendidikan->angkatan }}
+                                          <span class="mt-n5">
+                                            <a class="btn btn-sm btn-outline-link text-warning">
+                                                <small><i class="fa fa-pencil"></i></small>
+                                            </a>
+                                            <a class="btn btn-sm btn-outline-link text-danger">
+                                                <small><i class="fa fa-trash"></i></small>
+                                            </a>
+                                          </span>
+                                      </dd>
+                                    @endforeach
+                                  @endif
                                 </dl>
 
                                 <p class="lead">
-                                    <strong>Skill</strong>
-                                    <button class="btn btn-sm btn-outline-primary float-right">
-                                        <i class="fa fa-pencil"></i>
-                                        Sunting</button>
+                                    <span class="font-weight-bold">Skill</span >
+                                    <a href="{{ url('user/skill/form') }}" class="btn btn-sm btn-outline-primary float-right">
+                                      <i class="fa fa-plus"></i>
+                                      Tambah</a>
                                 </p>
                                 <hr>
+                                @if(count($skill) == 0)
+                                  <p class="text-danger">
+                                    Skill anda masih kosong
+                                  </p>
+                                @else
                                 <ul>
-                                    <li>HTML</li>
-                                    <li>CSS</li>
-                                    <li>Javascript</li>
+                                    @foreach ($skill as $skill)
+                                      <li>{{ $skill->skill }} <small>{{ $skill->level }}</small> </li>
+                                    @endforeach
                                 </ul>
+                                @endif
 
                                 <p class="lead">
-                                    <strong>Pengalaman</strong>
-                                    <button class="btn btn-sm btn-outline-primary float-right">
+                                    <span class="font-weight-bold">Pengalaman</span >
+                                    <a href="{{ url('user/pengalaman/form') }}" class="btn btn-sm btn-outline-primary float-right">
                                         <i class="fa fa-plus"></i>
-                                        Tambah</button>
+                                        Tambah</a>
                                 </p>
                                 <hr>
-                                <dl class="row mt-2">
-                                    <dt class="col-sm-4">
-                                        2020 Januari - 2021 Desember
-                                        <br>
-                                        <div class="text-muted">
-                                            2 years 1 month
-                                        </div>
-
-                                    </dt>
-                                    <dd class="col-sm-8">
-                                        <div class="">
-                                            <h4>Programmer
-                                                <div class="float-right">
-                                                    <a class="btn btn-sm btn-outline-link text-primary">
-                                                        <i class="fa fa-pencil"></i>
-                                                        Sunting</a>
-                                                    <a class="btn btn-sm btn-outline-link text-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-                                                </div>
-                                            </h4>
-                                            <h6>PT. BNI 46 | Riau, Indonesia</h6>
-                                            <hr>
-                                            <dl class="row">
-                                                <dt class="col-sm-4">Industri</dt>
-                                                <dd class="col-sm-8"> Komputer / Teknik Informatika (Perangkat Lunak)</dd>
-                                                <dt class="col-sm-4">
-                                                    Spesialisasi</dt>
-                                                <dd class="col-sm-8"> IT/Komputer - Perangkat Lunak (Perangkat Lunak)</dd>
-                                                <dt class="col-sm-4">Bidang pekerjaan</dt>
-                                                <dd class="col-sm-8"> Teknisi/Programer Perangkat Lunak</dd>
-                                                <dt class="col-sm-4">Jabatan</dt>
-                                                <dd class="col-sm-8"> Pegawai (non-manajemen & non-supervisor)</dd>
-                                                <dt class="col-sm-4">Gaji bulanan</dt>
-                                                <dd class="col-sm-8"> IDR 8,000,000</dd>
-                                            </dl>
-                                        </div>
-                                    </dd>
-                                </dl>
-                                <dl class="row mt-2">
-                                    <dt class="col-sm-4">
-                                        2020 Januari - 2021 Desember
-                                        <br>
-                                        <div class="text-muted">
-                                            2 years 1 month
-                                        </div>
-
-                                    </dt>
-                                    <dd class="col-sm-8">
-                                        <div class="">
-                                            <h4>Programmer
-                                                <div class="float-right">
-                                                    <a class="btn btn-sm btn-outline-link text-primary">
-                                                        <i class="fa fa-pencil"></i>
-                                                        Sunting</a>
-                                                    <a class="btn btn-sm btn-outline-link text-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-                                                </div>
-                                            </h4>
-                                            <h6>PT. BNI 46 | Riau, Indonesia</h6>
-                                            <hr>
-                                            <dl class="row">
-                                                <dt class="col-sm-4">Industri</dt>
-                                                <dd class="col-sm-8"> Komputer / Teknik Informatika (Perangkat Lunak)</dd>
-                                                <dt class="col-sm-4">
-                                                    Spesialisasi</dt>
-                                                <dd class="col-sm-8"> IT/Komputer - Perangkat Lunak (Perangkat Lunak)</dd>
-                                                <dt class="col-sm-4">Bidang pekerjaan</dt>
-                                                <dd class="col-sm-8"> Teknisi/Programer Perangkat Lunak</dd>
-                                                <dt class="col-sm-4">Jabatan</dt>
-                                                <dd class="col-sm-8"> Pegawai (non-manajemen & non-supervisor)</dd>
-                                                <dt class="col-sm-4">Gaji bulanan</dt>
-                                                <dd class="col-sm-8"> IDR 4,000,000</dd>
-                                            </dl>
-                                        </div>
-                                    </dd>
-                                </dl>
-
+                                @if(count($pengalaman) == 0)
+                                  <p class="text-danger">Anda belum mempunyai data pengalaman</p>
+                                @else
+                                  @foreach ($pengalaman as $pengalaman)
+                                  <dl class="row mt-2">
+                                      <dt class="col-sm-4">
+                                          {{ $pengalaman->dari }} - {{ $pengalaman->sampai }}
+                                          <br>
+                                          <div class="text-muted">
+                                              2 years 1 month
+                                          </div>
+                                      </dt>
+                                      <dd class="col-sm-8">
+                                          <div class="">
+                                              <h4>{{ $pengalaman->title }}
+                                                  <div class="float-right">
+                                                      <a class="btn btn-sm btn-outline-link text-primary">
+                                                          <i class="fa fa-pencil"></i>
+                                                          Sunting</a>
+                                                      <a class="btn btn-sm btn-outline-link text-danger">
+                                                          <i class="fa fa-trash"></i>
+                                                      </a>
+                                                  </div>
+                                              </h4>
+                                              <h6>{{ $pengalaman->intansi }} | {{ $pengalaman->daerah }}</h6>
+                                              <hr>
+                                              <dl class="row">
+                                                  <dt class="col-sm-4">Industri</dt>
+                                                  <dd class="col-sm-8">{{ $pengalaman->industri }}</dd>
+                                                  <dt class="col-sm-4">Spesialisasi</dt>
+                                                  <dd class="col-sm-8">{{ $pengalaman->spesialisasi }}</dd>
+                                                  <dt class="col-sm-4">Bidang pekerjaan</dt>
+                                                  <dd class="col-sm-8">{{ $pengalaman->bidang }}</dd>
+                                                  <dt class="col-sm-4">Jabatan</dt>
+                                                  <dd class="col-sm-8">{{ $pengalaman->jabatan }}</dd>
+                                                  <dt class="col-sm-4">Gaji bulanan</dt>
+                                                  <dd class="col-sm-8"> IDR {{ $pengalaman->gaji }}</dd>
+                                              </dl>
+                                          </div>
+                                      </dd>
+                                  </dl>
+                                  @endforeach
+                                @endif
                                 <p class="lead">
-                                    <strong>Sertifikat penunjang</strong>
-                                    <button class="btn btn-sm btn-outline-primary float-right">
+                                    <span class="font-weight-bold">Sertifikat</span >
+                                    <a href="{{ url('user/sertifikat/form') }}" class="btn btn-sm btn-outline-primary float-right">
                                         <i class="fa fa-plus"></i>
-                                        Tambah</button>
+                                        Tambah</a>
                                 </p>
                                 <hr>
-                                <dl class="row mt-2">
-                                    <dt class="col-sm-4">
-                                        2020 Januari - 2021 Desember
-                                        <br>
-                                        <div class="text-muted">
-                                            3 years
-                                        </div>
+                                @if(count($certificate) == 0)
+                                  <p class="text-danger">
+                                    Sertifikat anda masih kosong
+                                  </p>
+                                @else
+                                  @foreach ($certificate as $certificate)
+                                    <dl class="row mt-2">
+                                        <dt class="col-sm-4">
+                                            {{ $certificate->dari }} - {{ $certificate->sampai }}
+                                            <br>
+                                            <div class="text-muted">
+                                                3 years
+                                            </div>
 
-                                    </dt>
-                                    <dd class="col-sm-8">
-                                        <div class="">
-                                            <h4>Programmer
-                                                <div class="float-right">
-                                                    <a class="btn btn-sm btn-outline-link text-primary">
-                                                        <i class="fa fa-pencil"></i>
-                                                        Sunting</a>
-                                                    <a class="btn btn-sm btn-outline-link text-danger">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-                                                </div>
-                                            </h4>
-                                            <h6>Sertifikasi BNPS</h6>
-                                            <hr>
-                                            <dl class="row">
-                                                <dt class="col-sm-2">Desc</dt>
-                                                <dd class="col-sm-10">
-                                                  <small> Komputer / Teknik Informatika (Perangkat Lunak)</small>
-                                                </dd>
-                                                <dt class="col-sm-6">
-                                                  <img src="{{ asset('img/avatar-girl.png') }}" class="img-fluid" alt="">
-                                                </dt>
-                                                <dd class="col-sm-6">
-                                                  <img src="{{ asset('img/avatar-hat.png') }}" class="img-fluid" alt="">
-                                                </dd>
-                                            </dl>
-                                        </div>
-                                    </dd>
-                                </dl>
+                                        </dt>
+                                        <dd class="col-sm-8">
+                                            <div class="">
+                                                <h4>{{ $certificate->title }}
+                                                    <div class="float-right">
+                                                        <a class="btn btn-sm btn-outline-link text-primary">
+                                                            <i class="fa fa-pencil"></i>
+                                                            Sunting</a>
+                                                        <a class="btn btn-sm btn-outline-link text-danger">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </h4>
+                                                <h6>{{ $certificate->instansi }}</h6>
+                                                <hr>
+                                                <dl class="row">
+                                                    <dt class="col-sm-2">Desc</dt>
+                                                    <dd class="col-sm-10">
+                                                      <small>{{ $certificate->description }}</small>
+                                                    </dd>
+                                                    <dt class="col-sm-6">
+                                                      <img src="{{ url('sertifikat', [$certificate->image1]) }}" class="img-fluid" alt="">
+                                                    </dt>
+                                                    <dd class="col-sm-6">
+                                                      <img src="{{ url('sertifikat', [$certificate->image2]) }}" class="img-fluid" alt="">
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                  @endforeach
+
+                                @endif
                             </div>
                         </div>
                         <div class="col-auto d-none d-lg-block">

@@ -21,11 +21,11 @@ nav-user-active
                           </div>
                             <div class="mt-2">
                               @if(empty($profil))
-                                <form method="POST" action="{{ url('user/profil/store') }}" class="px-1">
+                                <form method="POST" action="{{ url('user/profil/store') }}" class="px-1" enctype="multipart/form-data">
                                   @csrf
                                     <div class="form-group">
                                         <label for="desc">Deskripsi tentang diri anda</label>
-                                        <textarea class="form-control form-control-sm" name="description" rows="5"></textarea>
+                                        <textarea class="form-control form-control-sm" name="description" rows="5" placeholder="Promosikan tentang diri anda dengan singkat dan jelas"></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col">
@@ -45,7 +45,7 @@ nav-user-active
                                         <div class="col">
                                           <div class="form-group">
                                               <label for="">Agama</label>
-                                              <input type="text" name="Agama" class="form-control form-control-sm" placeholder="Agama">
+                                              <input type="text" name="agama" class="form-control form-control-sm" placeholder="Agama">
                                           </div>
                                         </div>
                                         <div class="col">
@@ -85,7 +85,27 @@ nav-user-active
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="row">
+                                        <div class="col">
+                                          <div class="form-group">
+                                              <label for="">Sedang mencari kerja?(Ubah menjadi radio)</label>
+                                              <select class="form-control form-control-sm" name="status">
+                                                <option value="YES">Ya</option>
+                                                <option value="NO">Tidak</option>
+                                              </select>
+                                          </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="">Nominal gaji yang diharapkan</label>
+                                                <input type="text" class="form-control form-control-sm" name="gaji" placeholder="nominal">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Foto Profil</label>
+                                        <input type="file" class="form-control-file" name="profil" placeholder="Your social media link">
+                                    </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                               @else

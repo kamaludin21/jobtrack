@@ -1,10 +1,14 @@
 <div class="col-md-3">
     <div class="card">
         <div class="card-header">
-            Kamaludin
+            {{ Auth::user()->name }}
         </div>
         <div class="card-body">
-            <img src="{{ asset('img/avatar.png') }}" class="img-fluid" alt="">
+            @if(empty($profil))
+              <img src="{{ asset('img/profil/default.jpg') }}" class="img-fluid" alt="">
+            @else
+            <img src="{{ url('img/profil',[$profil->profil]) }}" class="img-fluid" alt="">
+            @endif
             <hr>
             <div class="pt-3">
                 <p class="p-1 pl-2 border @yield('user-dashboard')">
@@ -30,11 +34,6 @@
                 <p class="p-1 pl-2 border @yield('user-invite')">
                   <a href="{{ url('user/invite') }}" class="link-nav">
                     <i class="fa fa-certificate pr-1"></i> Undangan
-                    </a>
-                </p>
-                <p class="p-1 pl-2 border">
-                  <a href="#" class="link-nav">
-                    <i class="fa fa-cog pr-1"></i> Pengaturan Akun
                     </a>
                 </p>
             </div>

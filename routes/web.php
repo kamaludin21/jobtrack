@@ -25,6 +25,10 @@ Route::prefix('recruiter')->group(function () {
     Route::post('profil/store', 'RecruitersController@StoreProfil');
 });
 
+Route::prefix('candidate')->group(function () {
+    Route::get('', 'CandidatesController@index');
+});
+
 Route::prefix('lowongan')->group(function (){
   Route::get('/', 'VacanciesController@lowongan');
 });
@@ -40,9 +44,17 @@ Route::prefix('user')->group(function () {
   Route::get('profil', 'SearcherController@profil');
   Route::get('profil/form', 'SearcherController@editprofil');
   Route::post('profil/store', 'SearcherController@StoreProfil');
-  Route::get('/lamaran', 'SearcherController@index');
-  Route::get('/bookmark', 'SearcherController@index');
-  Route::get('/inviter', 'SearcherController@index');
+  Route::get('pengalaman/form', 'SearcherController@EditPengalaman');
+  Route::post('pengalaman/store', 'SearcherController@StorePengalaman');
+  Route::get('sertifikat/form', 'SearcherController@EditSertifikat');
+  Route::post('sertifikat/store', 'SearcherController@StoreSertifikat');
+  Route::get('pendidikan/form', 'SearcherController@EditPendidikan');
+  Route::post('pendidikan/store', 'SearcherController@StorePendidikan');
+  Route::get('skill/form', 'SearcherController@EditSkill');
+  Route::post('skill/store', 'SearcherController@StoreSkill');
+  Route::get('/lamaran', 'SearcherController@lamaran');
+  Route::get('/bookmark', 'SearcherController@bookmark');
+  Route::get('/inviter', 'SearcherController@inviter');
 });
 
 // Useless route- remove after

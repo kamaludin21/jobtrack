@@ -18,15 +18,19 @@ class CreateProfilsTable extends Migration
             // datadiri
             $table->string('idUser');
             $table->longText('description');
-            $table->string('Ttl');
+            $table->string('ttl');
             $table->string('alamat');
-            $table->string('Agama');
+            $table->string('agama');
             $table->string('kelamin');
             // Kontak
             $table->string('email');
             $table->string('telp');
             $table->string('social1');
             $table->string('social2');
+            //status
+            $table->string('status');
+            $table->string('profil');
+            $table->string('gaji');
             $table->timestamps();
         });
     }

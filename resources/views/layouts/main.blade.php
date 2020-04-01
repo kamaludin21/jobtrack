@@ -107,7 +107,7 @@
                                     <a class="nav-link" href="{{ url('recruiter/vacancy') }}">Lowongan</a>
                                 </li>
                                 <li class="nav-item @yield('status-candidate')">
-                                    <a class="nav-link" href="{{ url('recruiter/candidate') }}">Cari kandidat</a>
+                                    <a class="nav-link" href="{{ url('candidate') }}">Cari kandidat</a>
                                 </li>
                             </ul>
                             <div class="collapse navbar-collapse" id="navbars">

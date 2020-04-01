@@ -61,60 +61,76 @@
                 </div>
                 <div class="card-body">
                   <div class="row">
-                      <div class="col-md-4">
-                          <div class="card">
-                              <div class="card-body">
-                                <div class="row">
-                                  <div class="col-4">
-                                    <img src="{{ asset('img/avatar.png') }}" class="img-fluid rounded-circle" alt="">
-                                  </div>
-                                  <div class="col-8">
-                                    <h5>
-                                      <a target="_blank" href="#" class="text-decoration-none text-dark">
-                                        Kamaludin
-                                      </a>
-                                      <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="Additional information"></i>
-                                    </h5>
-                                    <div class="lead mt-n2">
-                                      <p>
-                                        <small>Selatpanjang, Riau</small>
-                                        <span class="badge badge-pill badge-success">Available</span>
-                                      </p>
+                      @if(empty($candidates))
+                        <p>Tidak ada candidate</p>
+                      @else
+                        @foreach ($candidates as $candidate)
+                          <div class="col-md-4">
+                              <div class="card">
+                                  <div class="card-body">
+                                    <div class="row">
+                                      <div class="col-4">
+                                        <img src="{{ url('img/profil', [$candidate->profil]) }}" class="img-fluid rounded-circle" alt="">
+                                      </div>
+                                      <div class="col-8">
+                                        <h5>
+                                          <a target="_blank" href="#" class="text-decoration-none text-dark">
+                                            {{ $candidate->name }}
+                                          </a>
+                                          <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="Additional information"></i>
+                                        </h5>
+                                        <div class="lead mt-n2">
+                                          <p>
+                                            <small>{{ Str::limit($candidate->ttl, 23, '') }}</small>
+                                            @if($candidate->status == 'YES')
+                                              <span class="badge badge-pill badge-success">Available</span>
+                                            @else
+                                              <span class="badge badge-pill badge-danger">not available</span>
+                                            @endif
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="">
+                                      <span class="text-muted">Education</span>
+                                      <div class="font-weight-light mb-2">
+                                        {{-- {{ $candidate->pendidikan }} --}}
+                                        @php($echo = explode(',', $candidate->pendidikan))
+                                        @foreach ($echo as $key)
+                                          &bull; {{ $key }}
+                                          <br>
+                                        @endforeach
+
+                                        {{-- <br>
+                                        &bull; S1 | Teknik Geologi UGM --}}
+                                      </div>
+                                      <span class="text-muted">Skill</span>
+                                      <div class="">
+                                        @php($skil = explode(',', $candidate->skill))
+                                        @foreach ($skil as $key)
+                                          <span class="badge badge-pill badge-dark">{{ $key }}</span>
+                                        @endforeach
+
+                                      </div>
+                                    </div>
+                                    <div class="row border-top p-2 mt-4">
+                                      <div class="col-6 mt-2 text-center">
+                                        9 Years Experience
+                                      </div>
+                                      <div class="col-6 mt-2 border-left text-center" >
+                                        Rp. {{ number_format($candidate->gaji) }} /Month
+                                        <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="Gaji yang diharapkan"></i>
+                                      </div>
+                                    </div>
+                                    <div class="mt-2">
+                                      <a href="#" class="btn btn-primary btn-block">Invite a Jobs</a>
                                     </div>
                                   </div>
-                                </div>
-                                <div class="">
-                                  <span class="text-muted">Education</span>
-                                  <div class="font-weight-light mb-2">
-                                    &bull; SMA | MAN Pekanbaru
-                                    <br>
-                                    &bull; S1 | Teknik Geologi UGM
-                                  </div>
-                                  <span class="text-muted">Spesifications</span>
-                                  <div class="">
-                                    <span class="badge badge-pill badge-dark">Full Stack Developer</span>
-                                    <span class="badge badge-pill badge-dark">Mobile Dev</span>
-                                    <span class="badge badge-pill badge-dark">UI Design</span>
-                                    <span class="badge badge-pill badge-dark">Content Writer</span>
-                                    <span class="badge badge-pill badge-dark">Front End</span>
-                                  </div>
-                                </div>
-                                <div class="row border-top p-2 mt-4">
-                                  <div class="col-6 mt-2 text-center">
-                                    9 Years Experience
-                                  </div>
-                                  <div class="col-6 mt-2 border-left text-center" >
-                                    Rp. 12.000.000 /Month
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="Gaji yang diharapkan"></i>
-                                  </div>
-                                </div>
-                                <div class="mt-2">
-                                  <a href="#" class="btn btn-primary btn-block">Invite a Jobs</a>
-                                </div>
                               </div>
                           </div>
-                      </div>
-                      <div class="col-md-4">
+                        @endforeach
+                      @endif
+                      {{-- <div class="col-md-4">
                           <div class="card">
                               <div class="card-body">
                                 <div class="row">
@@ -213,7 +229,7 @@
                                 </div>
                               </div>
                           </div>
-                      </div>
+                      </div> --}}
                   </div>
                   <hr>
                   <nav aria-label="Page navigation example">

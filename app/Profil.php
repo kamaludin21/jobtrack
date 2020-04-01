@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Profil extends Model
 {
     protected $fillable = [
-      'idUser', 'description', 'Ttl', 'alamat', 'Agama', 'kelamin', 'email', 'telp', 'social1', 'social2'
+      'idUser', 'description', 'ttl', 'alamat', 'agama', 'kelamin', 'email', 'telp', 'social1', 'social2', 'status', 'profil', 'gaji'
     ];
+
 }
