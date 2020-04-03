@@ -23,14 +23,14 @@ class RecruitersController extends Controller
     {
         // $flight = App\Flight::where('number', 'FR 900')->first();
         $idUser = Auth::user()->id;
-        $company = Perusahaan::where('idProfil', $idUser)->first();
+        $company = Perusahaan::where('idUser', $idUser)->first();
       	return view('recruiter.index', ['company' => $company]);
     }
 
     public function profil()
     {
         $idUser = Auth::user()->id;
-        $company = Perusahaan::where('idProfil', $idUser)->first();
+        $company = Perusahaan::where('idUser', $idUser)->first();
         return view('recruiter.form-profil', ['company' => $company]);
     }
 
@@ -43,18 +43,42 @@ class RecruitersController extends Controller
 
     public function StoreProfil(Request $request)
     {
-        $idProfil = Auth::user()->id;
-        // $status = 'verifyd/unverify';
+        $idUser = Auth::user()->id;
         $status = 'verify';
+        $website = 'https://'.''.$request->website;
+
+        // Poto profil
+        if ($request->hasfile('profil')) {
+            $profil = $request->file('profil');
+            $extension_profil = $profil->getClientOriginalExtension();
+            $filename_profil = rand().'.'.$extension_profil;
+            $profil->move('img/recruiter/profil', $filename_profil);
+            $profil = $filename_profil;
+        } else {
+            $profil = 'company.png';
+        }
+
+        // Poto sampul
+        if ($request->hasfile('sampul')) {
+            $sampul = $request->file('sampul');
+            $extension_sampul = $sampul->getClientOriginalExtension();
+            $filename_sampul = rand().'.'.$extension_sampul;
+            $sampul->move('img/recruiter/sampul', $filename_sampul);
+            $sampul = $filename_sampul;
+        } else {
+            $sampul = 'office.jpg';
+        }
+
         $company = Perusahaan::create([
-          'idProfil' => $idProfil,
+          'idUser' => $idUser,
           'name' => $request->name,
           'status' => $status,
           'alamat' => $request->alamat,
-          'website' => $request->website,
-          'profil' => $request->profil,
-          'sampul' => $request->sampul,
-          'description' => $request->description
+          'website' => $website,
+          'profil' => $profil,
+          'sampul' => $sampul,
+          'description' => $request->description,
+          'bidang' => $request->bidang
         ]);
 
         if($company->wasRecentlyCreated) {

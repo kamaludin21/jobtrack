@@ -23,19 +23,26 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="">Bidang</label>
+                                    <label for="">Kategori</label>
                                     <select class="form-control form-control-sm" name="bidang">
-                                        <option value="IT Software">IT Software</option>
-                                        <option value="Bank">Bank</option>
+                                        <option value="IT Software">Accounting and Finance</option>
+                                        <option value="Administration and Coordination">Administration and Coordination</option>
+                                        <option value="Architecture and Engineering">Architecture and Engineering</option>
+                                        <option value="Arts and Sports">Arts and Sports</option>
+                                        <option value="General Services">General Services</option>
+                                        <option value="IT and Software">IT and Software</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="">Sub Bidang</label>
+                                    <label for="">Level</label>
                                     <select class="form-control form-control-sm" name="subbidang">
-                                        <option value="Programmer">Programmer</option>
-                                        <option value="UI/UX Designer">UI/UX Designer</option>
+                                        <option value="Internship / OJT">Internship / OJT</option>
+                                        <option value="Entry Level / Junior">Entry Level / Junior</option>
+                                        <option value="Associate / Supervisor">Associate / Supervisor</option>
+                                        <option value="Mid-Senior Level / Manager">Mid-Senior Level / Manager</option>
+                                        <option value="Director / Executive">Director / Executive</option>
                                     </select>
                                 </div>
                             </div>

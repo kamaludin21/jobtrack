@@ -15,7 +15,7 @@ class CreatePerusahaansTable extends Migration
     {
         Schema::create('perusahaans', function (Blueprint $table) {
             $table->id();
-            $table->string('idProfil');
+            $table->string('idUser');
             $table->string('name')->nullable();
             $table->string('status')->nullable();
             $table->string('alamat')->nullable();
@@ -23,6 +23,7 @@ class CreatePerusahaansTable extends Migration
             $table->string('profil')->nullable();
             $table->string('sampul')->nullable();
             $table->longText('description')->nullable();
+            $table->string('bidang');
             $table->timestamps();
         });
     }

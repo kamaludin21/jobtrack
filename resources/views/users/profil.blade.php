@@ -36,7 +36,13 @@ nav-user-active
                                     <dd class="col-sm-9">{{ $profil->description }}</dd>
 
                                     <dt class="col-sm-3">Status</dt>
-                                    <dd class="col-sm-9">{{ $profil->status }}</dd>
+                                    <dd class="col-sm-9">
+                                      @if($profil->status == 'YES')
+                                        <span class="badge badge-pill badge-success">Mencari Kerja</span>
+                                      @else
+                                        <span class="badge badge-pill badge-danger">Tidak Mencari</span>
+                                      @endif
+                                    </dd>
 
                                     <dt class="col-sm-3">Gaji yang diharapkan</dt>
                                     <dd class="col-sm-9">Rp. {{ number_format($profil->gaji) }}</dd>

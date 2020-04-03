@@ -81,9 +81,10 @@
                                     </div>
                                 </div>
                             </li>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
-                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                <div class="dropdown-menu" aria-labelledby="dropdown01" style="right: 0; left: auto;">
                                     <a class="dropdown-item" href="{{ url('user/dashboard') }}">Profil</a>
                                     <a class="dropdown-item" href="#">Pengaturan Akun</a>
                                     <hr>
@@ -156,7 +157,7 @@
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Perusahaan</a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                        <div class="dropdown-menu" aria-labelledby="dropdown01" style="right: 0; left: auto;">
                                             <a class="dropdown-item" href="{{ url('employer/profil') }}">Profil</a>
                                             <a class="dropdown-item" href="#">Pengaturan Akun</a>
                                             <hr>

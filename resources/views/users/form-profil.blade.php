@@ -71,18 +71,24 @@ nav-user-active
                                         <label for="">No. Telp</label>
                                         <input type="text" name="telp" class="form-control form-control-sm" placeholder="Nomor telpon aktif">
                                     </div>
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col">
-                                            <div class="form-group">
-                                                <label for="">Sosial Media 1</label>
-                                                <input type="text" class="form-control form-control-sm" name="social1" placeholder="Your social media link">
+                                          <label for="social1">Facebook link</label>
+                                          <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="basic-addon3">https://facebook.com/</span>
                                             </div>
+                                            <input type="text" name="social1" class="form-control form-control-sm" id="social1" aria-describedby="basic-addon3">
+                                          </div>
                                         </div>
                                         <div class="col">
-                                            <div class="form-group">
-                                                <label for="">Sosial Media 2</label>
-                                                <input type="text" class="form-control form-control-sm" name="social2" placeholder="Your social media link">
+                                          <label for="social2">Linkedin link</label>
+                                          <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="basic-addon3">https://linkedin.com/</span>
                                             </div>
+                                            <input type="text" name="social2" class="form-control form-control-sm" id="social2" aria-describedby="basic-addon3">
+                                          </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -104,7 +110,7 @@ nav-user-active
                                     </div>
                                     <div class="form-group">
                                         <label for="">Foto Profil</label>
-                                        <input type="file" class="form-control-file" name="profil" placeholder="Your social media link">
+                                        <input type="file" class="form-control-file" name="profil">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
@@ -135,25 +141,27 @@ nav-user-active
                                         <input type="text" name="name" class="form-control form-control-sm" placeholder="Nama perusahaan">
                                     </div>
                                     <div class="form-group">
-                                        <label for="">Agama</label>
-                                        <input type="text" name="name" class="form-control form-control-sm" placeholder="Nama perusahaan">
-                                    </div>
-                                    <div class="form-group">
                                         <label for="">No. Telp</label>
                                         <input type="text" name="name" class="form-control form-control-sm" placeholder="Nama perusahaan">
                                     </div>
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col">
-                                            <div class="form-group">
-                                                <label for="">Sosial Media 1</label>
-                                                <input type="text" class="form-control form-control-sm" name="profil" placeholder="*Dalam angka">
+                                          <label for="social1">Facebook link</label>
+                                          <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="basic-addon3">https://facebook.com/</span>
                                             </div>
+                                            <input type="text" name="social1" class="form-control form-control-sm" id="social1" aria-describedby="basic-addon3">
+                                          </div>
                                         </div>
                                         <div class="col">
-                                            <div class="form-group">
-                                                <label for="">Sosial Media 2</label>
-                                                <input type="date" class="form-control form-control-sm" name="sampul" placeholder="*Dalam angka">
+                                          <label for="social2">Linkedin link</label>
+                                          <div class="input-group input-group-sm">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="basic-addon3">https://linkedin.com/</span>
                                             </div>
+                                            <input type="text" name="social2" class="form-control form-control-sm" id="social2" aria-describedby="basic-addon3">
+                                          </div>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Update</button>

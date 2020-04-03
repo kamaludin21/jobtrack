@@ -40,9 +40,9 @@
                                       <div class="p-1 d-flex flex-column position-static">
                                           <div class="row">
                                               <div class="col-md-9">
-                                                  <h4 class="mb-0">{{ $vacancy->title }}</h4>
+                                                  <h4 class="mb-0">{{ Str::limit($vacancy->title, 31, '...') }}</h4>
                                                   <div class="mb-1 text-muted">
-                                                      <small> <i class="fa fa-dollar"></i>&nbsp;&nbsp;Rp. {{ $vacancy->gajimin }} - {{ $vacancy->gajimax }} / Month
+                                                      <small> <i class="fa fa-dollar"></i>&nbsp;&nbsp;Rp. {{ number_format($vacancy->gajimin) }} - {{ number_format($vacancy->gajimax) }} / Month
                                                           <br>
                                                           <i class="fa fa-map-marker"></i>&nbsp;&nbsp; {{ $vacancy->daerah }}
                                                           &nbsp;&nbsp; &nbsp;&nbsp;
@@ -60,7 +60,7 @@
                                               </div>
                                           </div>
                                           <div class="card-text mb-auto text-justify">
-                                              {!! Str::limit($vacancy->description, 250) !!}
+                                              {{ strip_tags(Str::limit($vacancy->description, 260)) }}
                                           </div>
                                           <div class="d-flex justify-content-between align-items-center pt-2">
                                               <div class="btn-group btn-group-sm">
@@ -154,7 +154,7 @@
                         </p>
                         <p class="p-1 pl-2 text-white border" style="background: linear-gradient(110deg, #407cc9 50%, #f27cad 50%);">
                             <span>Laki-laki: 50%</span>
-                            <span class="float-right">Perempuan: 50%</span>
+                            <span class="float-right">50% :Perempuan</span>
                         </p>
                     </div>
                 </div>

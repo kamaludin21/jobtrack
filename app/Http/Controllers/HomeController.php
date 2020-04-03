@@ -30,7 +30,7 @@ class HomeController extends Controller
         return view('home');
       } else {
         $idUser = Auth::user()->id;
-        $company = Perusahaan::where('idProfil', $idUser)->first();
+        $company = Perusahaan::where('idUser', $idUser)->first();
         return view('recruiter.index', ['company' => $company]);
       }
     }
