@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="">
                     @if(empty($company))
-                    <img src="{{ asset('img/recruiter/sampul/company.jpg') }}" class="card-img-top" alt="Foto sampul">
+                    <img src="{{ asset('img/recruiter/sampul/office.jpg') }}" class="card-img-top" alt="Foto sampul">
                     @else
                     <img src="{{ url('img/recruiter/sampul', [$company->sampul]) }}" class="card-img-top" alt="Foto sampul">
                     @endif

@@ -78,6 +78,7 @@
                               </div>
                               <hr>
                               @endforeach
+                              {{ $vacancies->links() }}
                             @else
                               <div class="row text-center">
                                   <div class="col">

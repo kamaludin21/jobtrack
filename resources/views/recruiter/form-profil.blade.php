@@ -31,6 +31,7 @@
                                       <option value="Banda Aceh">Konstruksi bangunan</option>
                                       <option value="Denpasar">IT Software</option>
                                       <option value="Bengkulu">Firma Hukum</option>
+                                      <option value="Information Technology / IT">Information Technology / IT</option>
                                   </select>
                               </div>
                             </div>

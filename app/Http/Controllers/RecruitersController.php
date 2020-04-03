@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Perusahaan;
 use App\Vacancy;
 use Auth;
+use Image;
 
 class RecruitersController extends Controller
 {
@@ -37,7 +38,7 @@ class RecruitersController extends Controller
     public function vacancy()
     {
       $idPerusahaan = Auth::user()->id;
-      $vacancy = Vacancy::where('idPerusahaan', $idPerusahaan)->get();
+      $vacancy = Vacancy::where('idPerusahaan', $idPerusahaan)->paginate(3);
       return view('recruiter.vacancy', ['vacancies' => $vacancy]);
     }
 
@@ -52,7 +53,9 @@ class RecruitersController extends Controller
             $profil = $request->file('profil');
             $extension_profil = $profil->getClientOriginalExtension();
             $filename_profil = rand().'.'.$extension_profil;
-            $profil->move('img/recruiter/profil', $filename_profil);
+            $profils = Image::make($profil->getRealPath())
+                ->resize(160, 90)
+                ->save('img/recruiter/profil/' . $filename_profil);
             $profil = $filename_profil;
         } else {
             $profil = 'company.png';
@@ -63,7 +66,10 @@ class RecruitersController extends Controller
             $sampul = $request->file('sampul');
             $extension_sampul = $sampul->getClientOriginalExtension();
             $filename_sampul = rand().'.'.$extension_sampul;
-            $sampul->move('img/recruiter/sampul', $filename_sampul);
+            // $sampul->move('img/recruiter/sampul', $filename_sampul);
+            $sampuls = Image::make($sampul->getRealPath())
+                ->resize(160, 90)
+                ->save('img/recruiter/sampul/' . $filename_sampul);
             $sampul = $filename_sampul;
         } else {
             $sampul = 'office.jpg';

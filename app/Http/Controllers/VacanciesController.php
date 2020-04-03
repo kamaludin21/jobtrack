@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Vacancy;
@@ -21,8 +22,13 @@ class VacanciesController extends Controller
 
     public function lowongan()
     {
-      $lowongan = Vacancy::all();
-      return view('vacancies.index', ['lowongan' => $lowongan]);
+      $lowongan = DB::table('vacancies')
+      ->join('perusahaans', 'vacancies.idPerusahaan', '=', 'perusahaans.id')
+      ->where('vacancies.status', 'active')
+      ->orderBy('vacancies.created_at', 'desc')
+      ->paginate(3);
+      // return $lowongan;  
+      return view('vacancies.index', ['lowongans' => $lowongan]);
     }
 
     public function store(Request $request)
