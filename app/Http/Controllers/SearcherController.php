@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Auth;
 use App\Profil;
@@ -9,6 +10,8 @@ use App\Experience;
 use App\Certificate;
 use App\Educations;
 use App\Skill;
+use App\Lamaran;
+use App\Inviter;
 
 class SearcherController extends Controller
 {
@@ -205,5 +208,34 @@ class SearcherController extends Controller
         } else {
             return redirect('user/profil')->with('warning', 'Upps, Tampaknya ada yang salah, ulangi sekali lagi');
         }
+    }
+
+    public function lamaran()
+    {
+      $idUser = Auth::user()->id;
+      $profil = Profil::where('idUser', $idUser)->first();
+      $lamaran = DB::table('lamarans')
+            ->join('vacancies', 'lamarans.ticket', '=', 'vacancies.ticket')
+            ->join('perusahaans', 'lamarans.idPerusahaan', '=', 'perusahaans.id')
+            ->select(
+              'lamarans.ticket', 'lamarans.status',
+              'vacancies.title', 'vacancies.daerah', 'vacancies.gajimin', 'vacancies.gajimax',
+              'perusahaans.name')
+            ->where('lamarans.idUser', '=', Auth::user()->id)
+            ->get();
+      return view('users.lamaran', ['profil' => $profil, 'lamaran' => $lamaran]);
+    }
+
+    public function inviter()
+    {
+      $inviter = Inviter::where('idUser', Auth::user()->id)->get();
+
+      return view('users.inviter', ['inviter' => $inviter]);
+    }
+
+    public function ShowInviter($id)
+    {
+      $inviter = Inviter::find($id);
+      return view('users..inviter-detail', ['inviter' => $inviter]);
     }
 }

@@ -64,13 +64,22 @@ nav-user-active
                                     <div class="form-group">
                                         <label for="">Spesialisasi</label>
                                         {{-- spesialisasi dari industri --}}
-                                        <input type="text" name="spesialisasi" class="form-control form-control-sm" placeholder="Nomor telpon aktif">
+                                        <input type="text" name="spesialisasi" class="form-control form-control-sm" placeholder="Spesialisasi industri tempat anda bekerja">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="">Jabatan</label>
                                         {{-- Jabatan diperusahaan --}}
-                                        <input type="text" name="jabatan" class="form-control form-control-sm" placeholder="Ex. Supervisor">
+                                        <div class="form-group">
+                                            <label for="">Level</label>
+                                            <select class="form-control form-control-sm" name="jabatan">
+                                                <option value="Internship / OJT">Internship / OJT</option>
+                                                <option value="Entry Level / Junior">Entry Level / Junior</option>
+                                                <option value="Associate / Supervisor">Associate / Supervisor</option>
+                                                <option value="Mid-Senior Level / Manager">Mid-Senior Level / Manager</option>
+                                                <option value="Director / Executive">Director / Executive</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Gaji</label>

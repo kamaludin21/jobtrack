@@ -123,113 +123,13 @@
                                       </div>
                                     </div>
                                     <div class="mt-2">
-                                      <a href="#" class="btn btn-primary btn-block">Invite a Jobs</a>
+                                      <a href="{{ url('recruiter/inviter', [$candidate->IdUser]) }}" class="btn btn-primary btn-block">Invite a Jobs</a>
                                     </div>
                                   </div>
                               </div>
                           </div>
                         @endforeach
                       @endif
-                      {{-- <div class="col-md-4">
-                          <div class="card">
-                              <div class="card-body">
-                                <div class="row">
-                                  <div class="col-4">
-                                    <img src="{{ asset('img/avatar-girl.png') }}" class="img-fluid rounded-circle" alt="">
-                                  </div>
-                                  <div class="col-8">
-                                    <h5>Moana Kimberly
-                                      <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="Perusahaan terverifikasi mitra kami"></i>
-                                    </h5>
-                                    <div class="lead mt-n2">
-                                      <p>
-                                        <small>Makassar, Sulawesi Sela...</small>
-                                        <span class="badge badge-pill badge-danger">not available</span>
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="">
-                                  <span class="text-muted">Description</span>
-                                  <div class="font-weight-light mb-2">
-                                    &bull; SMA | SMK Kansai
-                                    <br>
-                                    &bull; S1 | Teknik Geologi UGM
-                                  </div>
-                                  <span class="text-muted">Spec</span>
-                                  <div class="">
-                                    <span class="badge badge-pill badge-dark">Full Stack Developer</span>
-                                    <span class="badge badge-pill badge-dark">Mobile Dev</span>
-                                    <span class="badge badge-pill badge-dark">UI Design</span>
-                                    <span class="badge badge-pill badge-dark">Content Writer</span>
-                                    <span class="badge badge-pill badge-dark">Front End</span>
-                                  </div>
-                                </div>
-                                <div class="row border-top p-2 mt-4">
-                                  <div class="col-6 mt-2 text-center">
-                                    3 Years Experience
-                                  </div>
-                                  <div class="col-6 mt-2 border-left text-center" >
-                                    Rp. 8.000.000 /Month
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="Gaji yang diharapkan"></i>
-                                  </div>
-                                </div>
-                                <div class="mt-2">
-                                  <a href="#" class="btn btn-primary btn-block">Invite a Jobs</a>
-                                </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-md-4">
-                          <div class="card">
-                              <div class="card-body">
-                                <div class="row">
-                                  <div class="col-4">
-                                    <img src="{{ asset('img/avatar-hat.png') }}" class="img-fluid rounded-circle" alt="">
-                                  </div>
-                                  <div class="col-8">
-                                    <h5>Raja Kumar
-                                      <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="Perusahaan terverifikasi mitra kami"></i>
-                                    </h5>
-                                    <div class="lead mt-n2">
-                                      <p>
-                                        <small>Semarang, Jawa Barat</small>
-                                        <span class="badge badge-pill badge-success">Available</span>
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="">
-                                  <span class="text-muted">Description</span>
-                                  <div class="font-weight-light mb-2">
-                                    &bull; SMA | MAN Pekanbaru
-                                    <br>
-                                    &bull; S1 | Teknik Geologi UGM
-                                  </div>
-                                  <span class="text-muted">Spec</span>
-                                  <div class="">
-                                    <span class="badge badge-pill badge-dark">Full Stack Developer</span>
-                                    <span class="badge badge-pill badge-dark">Mobile Dev</span>
-                                    <span class="badge badge-pill badge-dark">UI Design</span>
-                                    <span class="badge badge-pill badge-dark">Content Writer</span>
-                                    <span class="badge badge-pill badge-dark">Front End</span>
-                                  </div>
-                                </div>
-                                <div class="row border-top p-2 mt-4">
-                                  <div class="col-6 mt-2 text-center">
-                                    2 Years Experience
-                                  </div>
-                                  <div class="col-6 mt-2 border-left text-center" >
-                                    Rp. 6.500.000 /Month
-                                    <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="right" title="Gaji yang diharapkan"></i>
-                                  </div>
-                                </div>
-                                <div class="mt-2">
-                                  <a href="#" class="btn btn-primary btn-block">Invite a Jobs</a>
-                                </div>
-                              </div>
-                          </div>
-                      </div> --}}
                   </div>
                   <hr>
                   <nav aria-label="Page navigation example">

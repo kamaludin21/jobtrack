@@ -1,5 +1,8 @@
 @extends('layouts.main')
 
+@section('home-status') active
+@endsection
+
 @section('content')
 <div class="container pt-5">
     <div class="row mb-2">

@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="container pt-4">
-    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.14.0/basic/ckeditor.js"></script>
     <div class="row">
         <div class="col-12">
             <div class="card">

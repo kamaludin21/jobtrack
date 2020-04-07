@@ -42,10 +42,10 @@
                 @if(Auth::user()->level == 1)
                     <div class="collapse navbar-collapse" id="navbars">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="{{ url('home') }}">Home <span class="sr-only">(current)</span></a>
+                            <li class="nav-item @yield('home-status')">
+                                <a class="nav-link" href="{{ url('home') }}">Home</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item @yield('lowongan-status')">
                                 <a class="nav-link" href="{{ url('lowongan') }}">Lowongan</a>
                             </li>
                         </ul>

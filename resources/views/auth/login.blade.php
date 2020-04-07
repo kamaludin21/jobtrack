@@ -90,7 +90,6 @@
                 @csrf
                 <div class="form-group">
                     <label class="sr-only" for="l-form-username">Username</label>
-                    {{-- <input type="text" name="email" placeholder="Username..." class="l-form-username form-control" id="l-form-username"> --}}
                     <input id="l-form-username" type="text" class="l-form-username form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Enter your email" required
                     autocomplete="email" autofocus>
 
@@ -102,8 +101,6 @@
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="l-form-password">Password</label>
-                    {{-- <input type="password" name="l-form-password" placeholder="Password..." class="l-form-password form-control" id="l-form-password"> --}}
-
                     <input id="l-form-password" type="password" class="l-form-password form-control @error('password') is-invalid @enderror" name="password" required placeholder="Enter your password" autocomplete="current-password">
 
                     @error('password')

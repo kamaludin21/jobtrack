@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Perusahaan;
 use App\Vacancy;
+use App\Lamaran;
+use App\Profil;
+use App\Experience;
+use App\Certificate;
+use App\Educations;
+use App\Skill;
+use App\User;
 use Auth;
 use Image;
 
 class RecruitersController extends Controller
 {
-	/**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -25,7 +33,7 @@ class RecruitersController extends Controller
         // $flight = App\Flight::where('number', 'FR 900')->first();
         $idUser = Auth::user()->id;
         $company = Perusahaan::where('idUser', $idUser)->first();
-      	return view('recruiter.index', ['company' => $company]);
+        return view('recruiter.index', ['company' => $company]);
     }
 
     public function profil()
@@ -37,9 +45,16 @@ class RecruitersController extends Controller
 
     public function vacancy()
     {
-      $idPerusahaan = Auth::user()->id;
-      $vacancy = Vacancy::where('idPerusahaan', $idPerusahaan)->paginate(3);
-      return view('recruiter.vacancy', ['vacancies' => $vacancy]);
+        $idPerusahaan = Auth::user()->id;
+        $vacancy = Vacancy::where('idPerusahaan', $idPerusahaan)
+      ->orderBy('created_at', 'desc')
+      ->paginate(3);
+        return view('recruiter.vacancy', ['vacancies' => $vacancy]);
+    }
+
+    public function create()
+    {
+      return view('recruiter.form');
     }
 
     public function StoreProfil(Request $request)
@@ -87,26 +102,69 @@ class RecruitersController extends Controller
           'bidang' => $request->bidang
         ]);
 
-        if($company->wasRecentlyCreated) {
-          return redirect('recruiter/')->with('success', 'Lowongan berhasil ditambah');
+        if ($company->wasRecentlyCreated) {
+            return redirect('recruiter/')->with('success', 'Lowongan berhasil ditambah');
         } else {
-          return redirect('recruiter/')->with('warning', 'Upps, Tampaknya ada yang salah, ulangi sekali lagi');
+            return redirect('recruiter/')->with('warning', 'Upps, Tampaknya ada yang salah, ulangi sekali lagi');
         }
     }
 
     public function manage($id)
     {
         $vacancy = Vacancy::findOrFail($id);
-        return view('recruiter.manage-vacancies', ['vacancy' => $vacancy]);
+
+        $lamaran = DB::table('lamarans')
+            ->rightJoin('users', 'lamarans.idUser', '=', 'users.id')
+            ->rightJoin('educations', 'lamarans.idUser', '=', 'educations.idUser')
+            ->rightJoin('skills', 'lamarans.idUser', '=', 'skills.idUser')
+            ->select(DB::raw("
+              users.id, users.name, users.email,
+              lamarans.id as idLamar, lamarans.ticket, lamarans.status,
+              group_concat(DISTINCT educations.instansi, ' | ', educations.pendidikan  SEPARATOR', ') as pendidikan,
+              group_concat(DISTINCT skills.skill) as skill"))
+            ->where('lamarans.ticket', $vacancy->ticket)
+            ->groupBy('users.id', 'lamarans.id')
+            ->get();
+
+        return view('recruiter.manage-vacancies', ['vacancy' => $vacancy, 'lamaran' => $lamaran]);
     }
 
-    public function candidate()
+    public function UpdateStatus(Request $request, $idLamar)
     {
-    	return view('recruiter.candidate');
+        $id = $idLamar;
+        $lamaran = Lamaran::findOrFail($id);
+
+        $lamaran->status = $request->status;
+        $lamaran->save();
+
+        $pageId = $request->pageId;
+        return redirect('recruiter/vacancy/manage/'.$pageId)->with('success', 'Data berhasil diubah');
     }
 
-    public function create()
+    public function ProfilApplicants($id)
     {
-    	return view('recruiter.form');
+        $idUser =  $id;
+
+        $user = User::where('id', $id)->first();
+        $profil = Profil::where('idUser', $idUser)->first();
+        $pengalaman = Experience::where('idUser', $idUser)->get();
+        $certificate = Certificate::where('idUser', $idUser)->get();
+        $pendidikan = Educations::where('idUser', $idUser)->get();
+        $skill = Skill::where('idUser', $idUser)->get();
+
+        return view('vacancies.profil', [
+        'user' => $user,
+        'profil' => $profil,
+        'pengalaman' => $pengalaman,
+        'certificate' => $certificate,
+        'pendidikan' => $pendidikan,
+        'skill' => $skill
+      ]);
+    }
+
+    public function invite($id)
+    {
+      $candidate = User::findOrFail($id);
+      return view('recruiter.form-invite', ['candidate' => $candidate]);
     }
 }

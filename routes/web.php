@@ -23,6 +23,10 @@ Route::prefix('recruiter')->group(function () {
     Route::get('candidate', 'RecruitersController@candidate');
     Route::get('edit/profil', 'RecruitersController@profil');
     Route::post('profil/store', 'RecruitersController@StoreProfil');
+    Route::get('applicants/{id}', 'RecruitersController@ProfilApplicants');
+    Route::match(['put', 'patch'], '/updatestatus/{idLamar}', 'RecruitersController@UpdateStatus');
+    Route::get('/inviter/{id}', 'RecruitersController@invite');
+    Route::post('/inviter/store', 'InvitersController@store');
 });
 
 Route::prefix('candidate')->group(function () {
@@ -31,7 +35,15 @@ Route::prefix('candidate')->group(function () {
 
 Route::prefix('lowongan')->group(function (){
   Route::get('/', 'VacanciesController@lowongan');
+  Route::get('/detail/{ticket}', 'VacanciesController@detail');
+  Route::get('/detail/apply/{ticket}', 'VacanciesController@apply');
+  Route::post('/apply', 'VacanciesController@StoreApply');
+  Route::get('/apply/success', function(){
+    return view('vacancies.success');
+  });
 });
+
+
 
 // Vacancy
 Route::post('vacancy/store', 'VacanciesController@store');
@@ -53,8 +65,10 @@ Route::prefix('user')->group(function () {
   Route::get('skill/form', 'SearcherController@EditSkill');
   Route::post('skill/store', 'SearcherController@StoreSkill');
   Route::get('/lamaran', 'SearcherController@lamaran');
-  Route::get('/bookmark', 'SearcherController@bookmark');
-  Route::get('/inviter', 'SearcherController@inviter');
+  Route::get('/bookmark', 'BookmarksController@index');
+  Route::post('/bookmark/store', 'BookmarksController@store');
+  Route::get('/invite', 'SearcherController@inviter');
+  Route::get('/invite/{id}', 'SearcherController@ShowInviter');
 });
 
 // Useless route- remove after
@@ -78,46 +92,5 @@ Route::get('login', function() {
   return view('auth.login');
 });
 
-// Route::get('user/dashboard', function() {
-//   return view('users.dashboard');
-// });
-//
-// Route::get('user/profil', function() {
-//   return view('users.profil');
-// });
-//
-// Route::get('user/lamaran', function() {
-//   return view('users.lamaran');
-// });
-//
-// Route::get('user/bookmark', function() {
-//   return view('users.bookmark');
-// });
-//
-// Route::get('user/invite', function() {
-//   return view('users.inviter');
-// });
-
-// Mode Perusahaan
-
-Route::get('employer/home', function () {
-  return view('employer.home');
-});
-
-Route::get('employer/profil', function () {
-  return view('employer.profil');
-});
-
-Route::get('employer/lowongan', function () {
-  return view('employer.lowongan');
-});
-
-Route::get('employer/candidate', function () {
-  return view('employer.candidate');
-});
-
-Route::get('employer/form', function () {
-  return view('employer.form');
-});
 
 Auth::routes();

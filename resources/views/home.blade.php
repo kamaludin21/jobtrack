@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('home-status')
+active
+@endsection
+
 @section('content')
 <div class="container">
 <section class="py-5">

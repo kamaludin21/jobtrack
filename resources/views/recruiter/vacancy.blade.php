@@ -50,14 +50,13 @@
                                                       </small>
                                                   </div>
                                               </div>
-                                              <div class="col-md-3 mr-auto">
+                                              {{-- <div class="col-md-3 mr-auto">
                                                   <div class="text-right">
                                                       <small>8 Pelamar</small>
                                                       <br>
                                                       <small>{{ $vacancy->slot }} Slot</small>
                                                   </div>
-
-                                              </div>
+                                              </div> --}}
                                           </div>
                                           <div class="card-text mb-auto text-justify">
                                               {{ strip_tags(Str::limit($vacancy->description, 260)) }}

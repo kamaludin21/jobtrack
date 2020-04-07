@@ -1,5 +1,8 @@
 @extends('layouts.main')
 
+@section('lowongan-status') active
+@endsection
+
 @section('content')
 <div class="container pt-5">
     <div class="row mb-2">
@@ -14,33 +17,35 @@
                             <input type="text" class="form-control form-control-sm" placeholder="Posisi/kata kunci">
                         </div>
                         <div class="form-group">
-                            <input list="daerah" class="form-control form-control-sm" placeholder="Lokasi">
-                            <datalist id="daerah">
-                                <option value="Riau">Riau</option>
-                                <option value="Palembang">Palembang</option>
-                                <option value="Medan">Medan</option>
-                            </datalist>
+                          <select class="form-control form-control-sm" name="bidang">
+                              <option value="" disabled selected>Kategori</option>
+                              <option value="IT Software">Accounting and Finance</option>
+                              <option value="Administration and Coordination">Administration and Coordination</option>
+                              <option value="Architecture and Engineering">Architecture and Engineering</option>
+                              <option value="Arts and Sports">Arts and Sports</option>
+                              <option value="General Services">General Services</option>
+                              <option value="IT and Software">IT and Software</option>
+                          </select>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-sm" placeholder="Minimun Gaji (Rp.)">
+                          <select class="form-control form-control-sm" name="daerah">
+                              <option value="" disabled selected>Daerah</option>
+                              <option value="Banda Aceh">Banda Aceh</option>
+                              <option value="Denpasar">Denpasar</option>
+                              <option value="Bengkulu">Bengkulu</option>
+                              <option value="Jambi">Jambi</option>
+                          </select>
                         </div>
                         <div class="form-group">
-                            <input list="daerah" class="form-control form-control-sm" placeholder="Kategori">
-                            <datalist id="daerah">
-                                <option value="Riau">UX Designer</option>
-                                <option value="Palembang">Accounting</option>
-                                <option value="Medan">Art</option>
-                            </datalist>
+                          <select class="form-control form-control-sm" name="daerah">
+                              <option value="" disabled selected>Tipe pekerjaan</option>
+                              <option value="Full Time">Full Time</option>
+                              <option value="Part Time">Part Time</option>
+                              <option value="Kontrak">Kontrak</option>
+                          </select>
                         </div>
-                        <div class="form-group">
-                            <input list="daerah" class="form-control form-control-sm" placeholder="Tipe">
-                            <datalist id="daerah">
-                                <option value="Riau">Full Time</option>
-                                <option value="Palembang">Part Time</option>
-                                <option value="Palembang">Remote</option>
-                                <option value="Medan">Intern</option>
-                            </datalist>
-                        </div>
+
+
                     </form>
                     <a href="#" class="btn btn-block btn-sm btn-primary">Terapkan</a>
                 </div>
@@ -78,15 +83,15 @@
                                             <img src="{{ url('img/recruiter/profil', [$lowongan->profil]) }}" class="img-fluid" alt="">
                                         </div>
                                     </div>
-                                    <div class="card-text mb-auto text-justify">
+                                    <div class="card-text mb-3 text-justify">
                                       {{ strip_tags(Str::limit($lowongan->description, 300, '...')) }}
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center pt-2">
+                                    <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-secondary">{{ $lowongan->slot }} Posisi</button>
                                             <button type="button" class="btn btn-sm btn-outline-secondary">Posted {{ Str::limit($lowongan->created_at , 10, '') }} &bull; Apply before {{ $lowongan->expired }}</button>
                                         </div>
-                                        <a href="{{ url('lowongan-detail') }}" class="btn btn-sm btn-primary">
+                                        <a href="{{ url('lowongan/detail', [$lowongan->ticket]) }}" class="btn btn-sm btn-primary">
                                             Selengkapnya
                                         </a>
                                     </div>

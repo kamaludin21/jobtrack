@@ -11,7 +11,7 @@
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="row card no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
                             <div class="card-header bg-c-donker">
                                 <div class="lead">
@@ -19,17 +19,23 @@
                                 </div>
                             </div>
                             <div class="row mt-4">
-                              <div class="col-md-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Niaga Hoster</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted">Jakarta, Indonesia</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-sm btn-outline-success">Selengkapnya
-                                        </a>
+                              @if(empty($inviter))
+                                <p>Anda tidak memiliki undangan</p>
+                              @else
+                                @foreach ($inviter as $invite)
+                                  <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $invite->perusahaan }}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{ $invite->subjek }}</h6>
+                                            <p class="card-text">{{ strip_tags(Str::limit($invite->message, 150, '...')) }}</p>
+                                            <a href="{{ url('user/invite', [$invite->id]) }}" class="btn btn-sm btn-outline-success">Selengkapnya
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                              </div>
+                                  </div>
+                                @endforeach
+                              @endif
                             </div>
                             <nav aria-label="Page navigation">
                               <ul class="pagination">

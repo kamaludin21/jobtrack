@@ -33,17 +33,18 @@
                     </div>
                     <div class="row">
                         <div class="col-md-9">
-                            <h4 class="mb-n1">{{ Auth::user()->name }}</h4>
+                            <h4 class="mb-n1">{{ $company->name }}</h4>
                             @if(empty($company))
+                            <h4 class="mb-n1">{{ Auth::user()->name }}</h4>
                             <small class="text-danger">Lengkapi profil anda, tekan tombol edit profil!</small>
                             @else
-                            <small class="text-muted">
-                                <em>This account is verified</em>
-                                <i class="fa fa-check-circle fa-lg text-primary" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
-                            </small>
-                            <br>
-
-                            <div class="mt-2">
+                            @if($company->status == 'verify')
+                              <small class="text-muted">
+                                  <em>This account is verified</em>
+                                  <i class="fa fa-check-circle fa-lg text-primary" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
+                              </small>
+                            @endif
+                            <div class="mt-3">
                                 <strong>Alamat</strong>
                                 <p>
                                     {{ $company->alamat }}
@@ -65,12 +66,12 @@
                             </div>
                             @endif
                         </div>
-                        <div class="col-md-3 mr-auto text-right pt-5">
-                            <p><small>
+                        <div class="col-md-3 mr-auto text-right ">
+                            {{-- <p><small>
                                     <span class="badge badge-pill badge-success">Online</span>
                                     &bull;
-                                    <span class="badge badge-pill badge-danger">Offline</span></small></p>
-                            <p class="mt-n3"><small>2 vacancies available</small></p>
+                                    <span class="badge badge-pill badge-danger">Offline</span></small></p> --}}
+                            {{-- <p class="mt-n3"><small>2 vacancies available</small></p> --}}
                             <div class="text-justify" style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
                                 <p class="pt-2" style="line-height: 1.0;">
                                     <small>

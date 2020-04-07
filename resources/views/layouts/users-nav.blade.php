@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             @if(empty($profil))
-              <img src="{{ asset('img/profil/default.jpg') }}" class="img-fluid" alt="">
+              <img src="{{ asset('img/profil/default.jpg') }}" class="img-fluid img-rounded" alt="">
             @else
             <img src="{{ url('img/profil',[$profil->profil]) }}" class="img-fluid" alt="">
             @endif
