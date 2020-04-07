@@ -15,12 +15,14 @@ active
                 </h2>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="input-group">
+                        {{-- <div class="input-group">
                             <input type="search" class="form-control search-input" id="search-church" placeholder="Your position">
                             <span class="input-group-btn pl-2">
                                 <a class="btn btn-outline-light button-search " href="{{ asset('lowongan') }}">Search</a>
+
                             </span>
-                        </div>
+                        </div> --}}
+                        <a href="{{ asset('lowongan') }}" class="btn btn-lg btn-light rounded-pill">Jelajah sekarang</a>
                     </div>
                 </div>
             </div>

@@ -25,10 +25,13 @@ class VacanciesController extends Controller
     {
       $lowongan = DB::table('vacancies')
       ->join('perusahaans', 'vacancies.idPerusahaan', '=', 'perusahaans.id')
+      ->select('perusahaans.name', 'perusahaans.profil', 'vacancies.*')
       ->where('vacancies.status', 'active')
       ->orderBy('vacancies.created_at', 'desc')
       ->paginate(3);
-      
+
+      // return $lowongan;
+
       return view('vacancies.index', ['lowongans' => $lowongan]);
     }
 

@@ -117,7 +117,7 @@
 
                       <div class="col-6">
                         <p class="font-weight-bold mb-n1">Job Category</p>
-                        {{ $lowongan->subbidang }}
+                        {{ $lowongan->bidang }}
                       </div>
                       <div class="col-6">
                         <p class="font-weight-bold mb-n1">Slot</p>

@@ -31,7 +31,6 @@ class RecruitersController extends Controller
 
     public function index()
     {
-        // $flight = App\Flight::where('number', 'FR 900')->first();
         $idUser = Auth::user()->id;
         $company = Perusahaan::where('idUser', $idUser)->first();
         return view('recruiter.index', ['company' => $company]);
