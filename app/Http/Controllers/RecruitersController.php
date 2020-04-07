@@ -13,6 +13,7 @@ use App\Certificate;
 use App\Educations;
 use App\Skill;
 use App\User;
+use App\Agenda;
 use Auth;
 use Image;
 
@@ -112,11 +113,12 @@ class RecruitersController extends Controller
     public function manage($id)
     {
         $vacancy = Vacancy::findOrFail($id);
+        $agenda = Agenda::where('ticket', $vacancy->ticket)->get();
 
         $lamaran = DB::table('lamarans')
-            ->rightJoin('users', 'lamarans.idUser', '=', 'users.id')
-            ->rightJoin('educations', 'lamarans.idUser', '=', 'educations.idUser')
-            ->rightJoin('skills', 'lamarans.idUser', '=', 'skills.idUser')
+            ->join('users', 'lamarans.idUser', '=', 'users.id')
+            ->join('educations', 'lamarans.idUser', '=', 'educations.idUser')
+            ->join('skills', 'lamarans.idUser', '=', 'skills.idUser')
             ->select(DB::raw("
               users.id, users.name, users.email,
               lamarans.id as idLamar, lamarans.ticket, lamarans.status,
@@ -126,7 +128,7 @@ class RecruitersController extends Controller
             ->groupBy('users.id', 'lamarans.id')
             ->get();
 
-        return view('recruiter.manage-vacancies', ['vacancy' => $vacancy, 'lamaran' => $lamaran]);
+        return view('recruiter.manage-vacancies', ['vacancy' => $vacancy, 'lamaran' => $lamaran, 'agenda' => $agenda]);
     }
 
     public function UpdateStatus(Request $request, $idLamar)

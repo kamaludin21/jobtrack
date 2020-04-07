@@ -10,29 +10,26 @@
               <form>
               <div class="form-row">
                 <div class="col">
-                  <input type="text" class="form-control" placeholder="Profesi">
-                </div>
-                <div class="col">
-                  <input type="text" class="form-control" placeholder="Pendidikan">
+                  <input type="text" class="form-control" placeholder="Keahlian">
                 </div>
                 <div class="col">
                   <select class="custom-select">
-                    <option selected>Pengalaman</option>
-                    <option value="1">1 Tahun</option>
-                    <option value="2">2 Tahun</option>
-                    <option value="3">3 Tahun</option>
-                    <option value="3">4 Tahun</option>
-                    <option value="3">> 5 Tahun</option>
+                    <option selected>Pendidikan</option>
+                    <option value="1">S1</option>
+                    <option value="2">S2</option>
+                    <option value="3">S3</option>
                   </select>
                 </div>
                 <div class="col">
-                  <div class="form-group">
-                    <label for="gaji">Maks Gaji</label>
-                    <input type="text" class="form-control" id="gaji" placeholder="Rp. 000">
-                  </div>
+                  <select class="custom-select">
+                    <option selected>Domisili</option>
+                    <option value="1">Pekanbaru</option>
+                    <option value="2">Jakarta</option>
+                    <option value="3">Palembang</option>
+                  </select>
                 </div>
                 <div class="col">
-                  <input type="text" class="form-control" placeholder="Daerah">
+                  <input type="text" class="form-control" placeholder="Nominal gaji">
                 </div>
                 <div class="col-auto">
                   <button class="btn btn-primary">Search now</button>

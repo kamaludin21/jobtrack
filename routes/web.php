@@ -27,6 +27,7 @@ Route::prefix('recruiter')->group(function () {
     Route::match(['put', 'patch'], '/updatestatus/{idLamar}', 'RecruitersController@UpdateStatus');
     Route::get('/inviter/{id}', 'RecruitersController@invite');
     Route::post('/inviter/store', 'InvitersController@store');
+    Route::post('/agenda/store', 'AgendaController@store');
 });
 
 Route::prefix('candidate')->group(function () {
@@ -38,12 +39,11 @@ Route::prefix('lowongan')->group(function (){
   Route::get('/detail/{ticket}', 'VacanciesController@detail');
   Route::get('/detail/apply/{ticket}', 'VacanciesController@apply');
   Route::post('/apply', 'VacanciesController@StoreApply');
+  Route::post('/search', 'VacanciesController@search');
   Route::get('/apply/success', function(){
     return view('vacancies.success');
   });
 });
-
-
 
 // Vacancy
 Route::post('vacancy/store', 'VacanciesController@store');

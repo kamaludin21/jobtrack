@@ -12,9 +12,10 @@
                     Search with your custom
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
+                    <form action="{{ url('lowongan/search') }}" method="post">
+                      @csrf
                         <div class="form-group">
-                            <input type="text" class="form-control form-control-sm" placeholder="Posisi/kata kunci">
+                            <input type="text" name="title" class="form-control form-control-sm" placeholder="Posisi/kata kunci">
                         </div>
                         <div class="form-group">
                           <select class="form-control form-control-sm" name="bidang">
@@ -37,17 +38,16 @@
                           </select>
                         </div>
                         <div class="form-group">
-                          <select class="form-control form-control-sm" name="daerah">
+                          <select class="form-control form-control-sm" name="type">
                               <option value="" disabled selected>Tipe pekerjaan</option>
                               <option value="Full Time">Full Time</option>
                               <option value="Part Time">Part Time</option>
                               <option value="Kontrak">Kontrak</option>
                           </select>
                         </div>
-
-
+                        <button type="submit" class="btn btn-block btn-sm btn-primary">Terapkan</button>
                     </form>
-                    <a href="#" class="btn btn-block btn-sm btn-primary">Terapkan</a>
+
                 </div>
             </div>
         </div>

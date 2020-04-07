@@ -12,6 +12,7 @@ use App\Educations;
 use App\Skill;
 use App\Lamaran;
 use App\Inviter;
+use App\Agenda;
 
 class SearcherController extends Controller
 {
@@ -28,18 +29,27 @@ class SearcherController extends Controller
     {
         $idUser = Auth::user()->id;
         $profil = Profil::where('idUser', $idUser)->first();
+
+
+        $posts = DB::select('SELECT lamarans.idUser, lamarans.status as statusLamar, lamarans.idPerusahaan, agendas.status as statusAgenda, agendas.title
+            FROM lamarans
+            INNER JOIN agendas ON lamarans.ticket=agendas.ticket
+            WHERE lamarans.status=agendas.status AND lamarans.idUser = '.$idUser.'');
+
+        // return $posts;
+
         return view('users.dashboard', ['profil' => $profil]);
     }
 
     public function profil()
     {
-      $idUser = Auth::user()->id;
-      $profil = Profil::where('idUser', $idUser)->first();
-      $pengalaman = Experience::where('idUser', $idUser)->get();
-      $certificate = Certificate::where('idUser', $idUser)->get();
-      $pendidikan = Educations::where('idUser', $idUser)->get();
-      $skill = Skill::where('idUser', $idUser)->get();
-      return view('users.profil', [
+        $idUser = Auth::user()->id;
+        $profil = Profil::where('idUser', $idUser)->first();
+        $pengalaman = Experience::where('idUser', $idUser)->get();
+        $certificate = Certificate::where('idUser', $idUser)->get();
+        $pendidikan = Educations::where('idUser', $idUser)->get();
+        $skill = Skill::where('idUser', $idUser)->get();
+        return view('users.profil', [
         'profil' => $profil,
         'pengalaman' => $pengalaman,
         'certificate' => $certificate,
@@ -212,30 +222,38 @@ class SearcherController extends Controller
 
     public function lamaran()
     {
-      $idUser = Auth::user()->id;
-      $profil = Profil::where('idUser', $idUser)->first();
-      $lamaran = DB::table('lamarans')
+        $idUser = Auth::user()->id;
+        $profil = Profil::where('idUser', $idUser)->first();
+        $lamaran = DB::table('lamarans')
             ->join('vacancies', 'lamarans.ticket', '=', 'vacancies.ticket')
             ->join('perusahaans', 'lamarans.idPerusahaan', '=', 'perusahaans.id')
             ->select(
-              'lamarans.ticket', 'lamarans.status',
-              'vacancies.title', 'vacancies.daerah', 'vacancies.gajimin', 'vacancies.gajimax',
-              'perusahaans.name')
+                'lamarans.ticket',
+                'lamarans.status',
+                'vacancies.title',
+                'vacancies.daerah',
+                'vacancies.gajimin',
+                'vacancies.gajimax',
+                'perusahaans.name'
+            )
             ->where('lamarans.idUser', '=', Auth::user()->id)
             ->get();
-      return view('users.lamaran', ['profil' => $profil, 'lamaran' => $lamaran]);
+        return view('users.lamaran', ['profil' => $profil, 'lamaran' => $lamaran]);
     }
 
     public function inviter()
     {
-      $inviter = Inviter::where('idUser', Auth::user()->id)->get();
-
-      return view('users.inviter', ['inviter' => $inviter]);
+        $idUser = Auth::user()->id;
+        $inviter = Inviter::where('idUser', Auth::user()->id)->get();
+        $profil = Profil::where('idUser', $idUser)->first();
+        return view('users.inviter', ['inviter' => $inviter, 'profil' => $profil]);
     }
 
     public function ShowInviter($id)
     {
-      $inviter = Inviter::find($id);
-      return view('users..inviter-detail', ['inviter' => $inviter]);
+        $idUser = Auth::user()->id;
+        $inviter = Inviter::find($id);
+        $profil = Profil::where('idUser', $idUser)->first();
+        return view('users..inviter-detail', ['inviter' => $inviter, 'profil' => $profil]);
     }
 }

@@ -31,6 +31,22 @@ class VacanciesController extends Controller
       return view('vacancies.index', ['lowongans' => $lowongan]);
     }
 
+    public function search(Request $request)
+    {
+      $lowongan = DB::table('vacancies')
+      ->join('perusahaans', 'vacancies.idPerusahaan', '=', 'perusahaans.id')
+      ->where([
+        ['vacancies.status', '=', 'active'],
+        ['vacancies.title', 'like', '%'.$request->title.'%'],
+        ['vacancies.bidang', 'like', '%'.$request->bidang.'%'],
+        ['vacancies.daerah', 'like', '%'.$request->daerah.'%'],
+        ['vacancies.type', 'like', '%'.$request->type.'%']
+      ])
+      ->orderBy('vacancies.created_at', 'desc')
+      ->get();
+      return view('vacancies.result', ['lowongans' => $lowongan]);
+    }
+
     public function detail($ticket)
     {
       $lowongan = DB::table('vacancies')
@@ -126,6 +142,8 @@ class VacanciesController extends Controller
         return redirect('recruiter/vacancy')->with('warning', 'Upps, Tampaknya ada yang salah, ulangi sekali lagi');
       }
     }
+
+
 
 
 }

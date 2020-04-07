@@ -18,7 +18,7 @@
                     </p>
                     <div class="row">
                         <div class="col">
-                            <p>Tiket : {{ $vacancy->ticket }} - {{ $vacancy->id }}</p>
+                            <p>Tiket : {{ $vacancy->ticket }}
                             <p>
                                 Jabatan : {{ $vacancy->title }}
                             </p>
@@ -105,7 +105,92 @@
         <div class="col-3 ">
             <div class="card">
                 <div class="p-4">
-                    <h5>Statistik</h5>
+                    <h5>Agenda
+                      <a href="{{ url('user/profil/form') }}" class="btn btn-sm btn-outline-primary float-right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i>
+                      Tambah</a>
+                    </h5>
+                    <hr>
+                    <div class="pt-3">
+                      @if(!empty($agenda))
+                        @foreach ($agenda as $key)
+                          <a href="#" class="text-decoration-none">
+                            <p class="p-1 pl-2 border">
+                                <i class="fa fa-info-circle pr-1"></i> {{ $key->title }}
+                            </p>
+                          </a>
+                        @endforeach
+                      @endif
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Buat Agenda
+                <br>
+                <small>{{ $vacancy->title }}</small>
+               </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="" action="{{ url('recruiter/agenda/store') }}" method="post">
+                  @csrf
+                  <input type="hidden" name="idPage" value="{{ $vacancy->id }}">
+                  <input type="hidden" name="ticket" value="{{ $vacancy->ticket }}">
+                  <input type="hidden" name="idPerusahaan" value="{{ $vacancy->idPerusahaan }}">
+                  <div class="form-group">
+                      <label for="">Judul agenda</label>
+                      <input type="text" name="title" class="form-control form-control-sm" placeholder="Agenda" autofocus autocomplete="off">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Spesifikasi</label>
+                    <select class="form-control form-control-sm" name="status">
+                      <option value="2">Administrasi</option>
+                      <option value="3">Interview</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                      <div class="row">
+                        <div class="col">
+                          <label for="">Tanggal</label>
+                          <input type="date" name="tanggal" class="form-control form-control-sm" placeholder="Agenda">
+                        </div>
+                        <div class="col">
+                          <label for="">Mulai</label>
+                          <input type="time" name="mulai" class="form-control form-control-sm">
+                        </div>
+                        <div class="col">
+                          <label for="">Sampai</label>
+                          <input type="time" name="sampai" class="form-control form-control-sm">
+                        </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="">Deskripsi</label>
+                      <textarea name="deskripsi" class="form-control form-control-sm" id="deskripsi" rows="3" placeholder="Deskripsi singkat tentang agenda"></textarea>
+                  </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        {{-- <div class="col-3 ">
+            <div class="card">
+                <div class="p-4">
+                    <h5>Agenda
+                      <a href="{{ url('user/profil/form') }}" class="btn btn-sm btn-outline-primary float-right"><i class="fa fa-pencil"></i>
+                      Tambah</a>
+                    </h5>
                     <hr>
                     <div class="pt-3">
                         <p class="p-1 pl-2 border">
@@ -132,7 +217,7 @@
                 </div>
 
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 
