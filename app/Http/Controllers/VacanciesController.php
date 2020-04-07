@@ -28,6 +28,7 @@ class VacanciesController extends Controller
       ->where('vacancies.status', 'active')
       ->orderBy('vacancies.created_at', 'desc')
       ->paginate(3);
+      
       return view('vacancies.index', ['lowongans' => $lowongan]);
     }
 

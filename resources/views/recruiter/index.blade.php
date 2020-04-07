@@ -33,7 +33,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-9">
-                            <h4 class="mb-n1">{{ $company->name }}</h4>
+                            {{-- <h4 class="mb-n1">{{ $company->name }}</h4> --}}
                             @if(empty($company))
                             <h4 class="mb-n1">{{ Auth::user()->name }}</h4>
                             <small class="text-danger">Lengkapi profil anda, tekan tombol edit profil!</small>
