@@ -26,7 +26,7 @@
                             </h6>
                         </div>
                         <div class="col-md-6 mr-auto mt-3">
-                            <h4>Kirim Lamaran? {{ Auth::user()->id }} / {{ $lowongan->idPerusahaan }}</h4>
+                            <h4>Kirim Lamaran?</h4>
                             <hr>
 
                             <p>

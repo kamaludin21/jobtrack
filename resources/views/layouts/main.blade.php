@@ -32,6 +32,11 @@
                 </button>
                 @guest
                 <div class="collapse navbar-collapse" id="navbars">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item @yield('lowongan-status')">
+                            <a class="nav-link" href="{{ url('lowongan') }}">Lowongan</a>
+                        </li>
+                    </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item pr-3">
                             <a class="nav-link" href="{{ route('login') }}">Masuk</a>

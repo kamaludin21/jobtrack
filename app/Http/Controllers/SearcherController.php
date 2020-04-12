@@ -27,29 +27,49 @@ class SearcherController extends Controller
     }
     public function index()
     {
-// Rule agenda:
-// 1. Agenda ditampilkan jika status lamaran, sama dengan status agenda, (administrasi, dan interview)
+        // Rule agenda:
+        // 1. Agenda ditampilkan jika status lamaran, sama dengan status agenda, (administrasi, dan interview)
 //     1-a. jika status lamaran user administrasi, maka tidak bisa melihat agenda dengan status Interview
-// Way:
-// 1. Cari lamaran dengan status 2 & 3,
-// 2. cari agenda dengan ticket lamaran yang tersedia
-// 3. jika agenda berstatus 3, dan lamaran berstatus 2, maka user tidak bisa melihat
-// 4. jika agenda berstatus 2, dan lamaran berstatus 2, maka user bisa melihat
+        // Way:
+        // 1. Cari lamaran dengan status 2 & 3,
+        // 2. cari agenda dengan ticket lamaran yang tersedia
+        // 3. jika agenda berstatus 3, dan lamaran berstatus 2, maka user tidak bisa melihat
+        // 4. jika agenda berstatus 2, dan lamaran berstatus 2, maka user bisa melihat
 
         $idUser = Auth::user()->id;
         $profil = Profil::where('idUser', $idUser)->first();
+        // For counting
+        $lamar = Lamaran::where('idUser', $idUser)->count();
+        $certificate = Certificate::where('idUser', $idUser)->count();
+        $experience = Experience::where('idUser', $idUser)->count();
+        $agendaCount = DB::table('lamarans')
+            ->join('vacancies', 'lamarans.ticket', '=', 'vacancies.ticket')
+            ->where([
+              ['lamarans.idUser', '=', $idUser],
+              ['lamarans.status', '=', '3'],
+            ])->count();
 
         $lamaran = DB::table('lamarans')
             ->join('vacancies', 'lamarans.ticket', '=', 'vacancies.ticket')
+            ->join('perusahaans', 'lamarans.idPerusahaan', '=', 'perusahaans.id')
             ->where([
               ['lamarans.idUser', '=', $idUser],
             ])
             ->whereIn('lamarans.status', [2, 3])
-            ->select('lamarans.ticket', 'lamarans.status', 'vacancies.title',)
+            ->select('lamarans.ticket', 'lamarans.status', 'vacancies.title', 'perusahaans.name')
             ->get();
+
         $agenda = Agenda::all();
 
-        return view('users.dashboard', ['profil' => $profil, 'lamaran' => $lamaran, 'agenda' => $agenda]);
+        return view('users.dashboard', [
+          'profil' => $profil,
+          'lamaran' => $lamaran,
+          'agenda' => $agenda,
+          'lamar' => $lamar,
+          'certificate' => $certificate,
+          'experience' => $experience,
+          'agendaCount' => $agendaCount
+        ]);
     }
 
     public function profil()

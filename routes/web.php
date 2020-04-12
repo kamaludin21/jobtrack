@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'WelcomesController@welcome');
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Recruiter
@@ -72,22 +72,6 @@ Route::prefix('user')->group(function () {
   Route::get('/invite/{id}', 'SearcherController@ShowInviter');
 });
 
-// Useless route- remove after
-Route::get('lowongan-detail', function() {
-  return view('pages.detail');
-});
-
-Route::get('lowongan/employer', function() {
-  return view('pages.employer');
-});
-
-Route::get('lowongan/apply', function() {
-  return view('pages.apply');
-});
-
-Route::get('lowongan/success-apply', function() {
-  return view('pages.success-apply');
-});
 
 Route::get('login', function() {
   return view('auth.login');

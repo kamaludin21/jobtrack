@@ -22,7 +22,7 @@ nav-user-active
                                     <div class="card bg-c-blue order-card">
                                         <div class="card-block">
                                             <h6 class="m-b-20">Lamaran</h6>
-                                            <h2 class="text-right"><i class="fa fa-envelope-open f-left"></i><span>6</span></h2>
+                                            <h2 class="text-right"><i class="fa fa-envelope-open f-left"></i><span>{{ $lamar }}</span></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@ nav-user-active
                                     <div class="card bg-c-green order-card">
                                         <div class="card-block">
                                             <h6 class="m-b-20">Certificate</h6>
-                                            <h2 class="text-right"><i class="fa fa-certificate f-left"></i><span>3</span></h2>
+                                            <h2 class="text-right"><i class="fa fa-certificate f-left"></i><span>{{ $certificate }}</span></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -40,16 +40,15 @@ nav-user-active
                                     <div class="card bg-c-yellow order-card">
                                         <div class="card-block">
                                             <h6 class="m-b-20">Experience</h6>
-                                            <h2 class="text-right"><i class="fa fa-wrench f-left"></i><span>5</span></h2>
+                                            <h2 class="text-right"><i class="fa fa-wrench f-left"></i><span>{{ $experience }}</span></h2>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-md-4 col-xl-3">
                                     <div class="card bg-c-pink order-card">
                                         <div class="card-block">
                                             <h6 class="m-b-20">Interview</h6>
-                                            <h2 class="text-right"><i class="fa fa-headphones f-left"></i><span>8</span></h2>
+                                            <h2 class="text-right"><i class="fa fa-headphones f-left"></i><span>{{ $agendaCount }}</span></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -65,12 +64,16 @@ nav-user-active
                     <div class="card row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
                             <div class="card-header">
-                                <h4>Your activity now</h4>
+                                <h4>Your activity</h4>
                             </div>
                             <div class="row py-2 pt-2">
                                 <div class="container">
                                     @if(count($lamaran) == 0)
-                                      <p>Anda belum memiliki agenda</p>
+                                      <div class="p-4 text-center">
+                                        <img src="{{ asset('img/searching.png') }}" alt="Kosong" class="img-fluid">
+                                        <p>Belum ada agenda</p>
+                                      </div>
+
                                     @else
                                     @php($view = $lamaran[0]->ticket)
                                     @php($statusLamaran = $lamaran[0]->status)
@@ -78,6 +81,8 @@ nav-user-active
                                     <div class="page-header">
                                         <h4 id="timeline">
                                           <a href="{{ url('lowongan/detail', [$lamaran[0]->ticket]) }}" class="text-none-decoration" target="_blank">{{ $lamaran[0]->title }}</a>
+                                          <br>
+                                          <small>{{ $lamaran[0]->name }}</small>
                                         </h4>
                                     </div>
 
@@ -110,7 +115,7 @@ nav-user-active
 
 
                                               <li class="nav-item pr-2">
-                                                  <a class="nav-link " href="{{ $key->ticket }}">{{ Str::limit($key->title, 10, '') }}</a>
+                                                  <a class="nav-link {{ $key->ticket == $lamaran[0]->ticket  ? 'active' : '' }}" href="{{ $key->ticket }}">{{ Str::limit($key->title, 10, '') }}</a>
                                               </li>
                                               @endforeach
                                           </ul>

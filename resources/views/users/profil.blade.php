@@ -197,12 +197,13 @@ nav-user-active
                                     </p>
                                     @else
                                     @foreach ($certificate as $certificate)
+
                                     <dl class="row mt-2">
                                         <dt class="col-sm-4">
                                             {{ $certificate->dari }} - {{ $certificate->sampai }}
                                             <br>
                                             <div class="text-muted">
-                                                3 years
+
                                             </div>
 
                                         </dt>

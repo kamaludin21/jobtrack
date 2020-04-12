@@ -43,12 +43,12 @@ nav-user-active
                                                 <input type="date" class="form-control form-control-sm" name="dari" placeholder="Masa berlaku">
                                             </div>
                                         </div>
-                                        <div class="col">
+                                        {{-- <div class="col">
                                             <div class="form-group">
                                                 <label for="">Sampai</label>
                                                 <input type="date" class="form-control form-control-sm" name="sampai" placeholder="*Dalam angka">
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="row">
                                         <div class="col">

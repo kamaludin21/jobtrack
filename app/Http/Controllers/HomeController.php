@@ -34,4 +34,9 @@ class HomeController extends Controller
         return view('recruiter.index', ['company' => $company]);
       }
     }
+
+    public function home()
+    {
+      return view('welcome');
+    }
 }

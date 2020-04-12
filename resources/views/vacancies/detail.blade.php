@@ -56,16 +56,21 @@
                         <div class="col-12 mt-3">
                             <div class="float-left">
                               @include('layouts.alert')
-                              @if(count($lamaran) == 0)
+                              {{-- @if(count($lamaran) == 0)
                                 <a href="{{ url('lowongan/detail/apply', [$lowongan->ticket]) }}" class="btn btn-outline-primary">
                                     APPLY NOW
                                 </a>
-                              @endif
+                              @endif --}}
                               @if(empty($lamaran))
                                 <a href="{{ url('lowongan/detail/apply', [$lowongan->ticket]) }}" class="btn btn-outline-primary">
                                     APPLY NOW
                                 </a>
                               @endif
+                              @guest
+                                <a href="{{ url('login') }}" class="btn btn-primary">
+                                    Login untuk melamar
+                                </a>
+                              @endguest
                             </div>
                             <div class="float-right">
                                 <form action="{{ url('user/bookmark/store') }}" method="post">
@@ -158,158 +163,41 @@
                 </div>
                 <div class="card-body bg-light">
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="card ">
-                                <div class="card-body">
-                                    <strong class="d-inline-block mb-2 text-muted">
-                                        <a href="{{ url('lowongan/employer') }}" class="text-muted">PT BNI 46</a>
-                                    </strong>
-                                    <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
-                                    <h5 class="card-title text-muted mb-n1">
-                                        <a href="#" style="text-decoration: none;">
-                                            IT Consultant
-                                        </a>
-                                    </h5>
-                                    <small class="text-muted">
-                                        Rp. 1.000.000 - 2.000.000
-                                    </small>
-                                    <p class="mt-2">
-                                        <i class="fa fa-map-marker"></i>&nbsp;&nbsp;Jawa Timur, Bandung
-                                        <br>
-                                        <i class="fa fa-briefcase"></i>&nbsp;&nbsp;Full Time
-                                    </p>
-                                    <div class="mt-n2">
-                                        <small>Required skill</small>
-                                        <br>
-                                        <span class="badge badge-pill badge-dark">Digital Marketing</span>
-                                        <span class="badge badge-pill badge-dark">Leadership</span>
-                                        <span class="badge badge-pill badge-dark">Innovative</span>
-                                    </div>
-                                </div>
-                                <div class="card-footer text-right  ">
-                                    <a href="#" class="btn btn-sm btn-light px-2">
-                                        <i class="fa fa-bookmark"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-primary">
-                                        Selengkapnya
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card ">
-                                <div class="card-body">
-                                    <strong class="d-inline-block mb-2 text-muted">
-                                        <a href="{{ url('lowongan/employer') }}" class="text-muted">PT BNI 46</a>
-                                    </strong>
-                                    <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
-                                    <h5 class="card-title text-muted mb-n1">
-                                        <a href="#" style="text-decoration: none;">
-                                            IT Consultant
-                                        </a>
-                                    </h5>
-                                    <small class="text-muted">
-                                        Rp. 1.000.000 - 2.000.000
-                                    </small>
-                                    <p class="mt-2">
-                                        <i class="fa fa-map-marker"></i>&nbsp;&nbsp;Jawa Timur, Bandung
-                                        <br>
-                                        <i class="fa fa-briefcase"></i>&nbsp;&nbsp;Full Time
-                                    </p>
-                                    <div class="mt-n2">
-                                        <small>Required skill</small>
-                                        <br>
-                                        <span class="badge badge-pill badge-dark">Digital Marketing</span>
-                                        <span class="badge badge-pill badge-dark">Leadership</span>
-                                        <span class="badge badge-pill badge-dark">Innovative</span>
-                                    </div>
-                                </div>
-                                <div class="card-footer text-right  ">
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fa fa-bookmark"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">
-                                        Selengkapnya
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card ">
-                                <div class="card-body">
-                                    <strong class="d-inline-block mb-2 text-muted">
-                                        <a href="{{ url('lowongan/employer') }}" class="text-muted">PT BNI 46</a>
-                                    </strong>
-                                    <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
-                                    <h5 class="card-title text-muted mb-n1">
-                                        <a href="#" style="text-decoration: none;">
-                                            IT Consultant
-                                        </a>
-                                    </h5>
-                                    <small class="text-muted">
-                                        Rp. 1.000.000 - 2.000.000
-                                    </small>
-                                    <p class="mt-2">
-                                        <i class="fa fa-map-marker"></i>&nbsp;&nbsp;Jawa Timur, Bandung
-                                        <br>
-                                        <i class="fa fa-briefcase"></i>&nbsp;&nbsp;Full Time
-                                    </p>
-                                    <div class="mt-n2">
-                                        <small>Required skill</small>
-                                        <br>
-                                        <span class="badge badge-pill badge-dark">Digital Marketing</span>
-                                        <span class="badge badge-pill badge-dark">Leadership</span>
-                                        <span class="badge badge-pill badge-dark">Innovative</span>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="#" class="btn btn-sm btn-light">
-                                        Selengkapnya
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-light">
-                                        <i class="fa fa-bookmark"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card ">
-                                <div class="card-body" >
-                                    <strong class="d-inline-block mb-2 text-muted">
-                                        <a href="{{ url('lowongan/employer') }}" class="text-muted">PT BNI 46</a>
-                                    </strong>
-                                    <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
-                                    <h5 class="card-title text-muted mb-n1">
-                                        <a href="#" style="text-decoration: none;">
-                                            IT Consultant
-                                        </a>
-                                    </h5>
-                                    <small class="text-muted">
-                                        Rp. 1.000.000 - 2.000.000
-                                    </small>
-                                    <p class="mt-2">
-                                        <i class="fa fa-map-marker"></i>&nbsp;&nbsp;Jawa Timur, Bandung
-                                        <br>
-                                        <i class="fa fa-briefcase"></i>&nbsp;&nbsp;Full Time
-                                    </p>
-                                    <div class="mt-n2">
-                                        <small>Required skill</small>
-                                        <br>
-                                        <span class="badge badge-pill badge-dark">Digital Marketing</span>
-                                        <span class="badge badge-pill badge-dark">Leadership</span>
-                                        <span class="badge badge-pill badge-dark">Innovative</span>
-                                    </div>
-                                </div>
-                                <div class="card-footer text-right  ">
-                                    <a href="#" class="btn btn-sm btn-light">
-                                        <i class="fa fa-bookmark"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-sm btn-outline-primary">
-                                        Selengkapnya
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                        @foreach ($lowongans as $key)
+                          <div class="col-md-3">
+                              <div class="card ">
+                                  <div class="card-body" >
+                                      <strong class="d-inline-block mb-2 text-muted">
+                                          <a href="{{ url('lowongan/employer') }}" class="text-muted">{{ Str::limit($key->name, 23, '') }}</a>
+                                      </strong>
+                                      <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
+                                      <h5 class="card-title text-muted mb-n1">
+                                          <a href="#" style="text-decoration: none;">
+                                              {{ $key->title }}
+                                          </a>
+                                      </h5>
+                                      <small class="text-muted">
+                                          Rp. {{ number_format($key->gajimin) }} - {{ number_format($key->gajimax) }}
+                                      </small >
+                                      <p class="mt-2">
+                                          <i class="fa fa-map-marker"></i>&nbsp;&nbsp;{{ $key->daerah }}
+                                          <br>
+                                          <i class="fa fa-briefcase"></i>&nbsp;&nbsp;{{ $key->type }}
+                                      </p>
+                                      <div class="mt-n2">
+                                          <strong style="text-decoration: underline;">Desc</strong>
+                                          <br>
+                                          <div style="line-height: 90%;">
+                                            <small>
+                                              {{ Str::limit(strip_tags($key->description), 110, '...') }}
+                                            </small>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
