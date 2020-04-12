@@ -200,7 +200,7 @@ nav-user-active
 
                                     <dl class="row mt-2">
                                         <dt class="col-sm-4">
-                                            {{ $certificate->dari }} - {{ $certificate->sampai }}
+                                            {{ $certificate->dari }} &mdash; {{ $certificate->sampai }}
                                             <br>
                                             <div class="text-muted">
 

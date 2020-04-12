@@ -178,13 +178,14 @@ class SearcherController extends Controller
     public function StoreSertifikat(Request $request)
     {
         $sertifikat = new Certificate();
+        $tanggal= explode("-", $request->dari);
 
         $sertifikat->idUser = Auth::user()->id;
         $sertifikat->title = $request->title;
         $sertifikat->instansi = $request->instansi;
         $sertifikat->description = $request->description;
-        $sertifikat->dari = $request->dari;
-        $sertifikat->sampai = $request->sampai;
+        $sertifikat->dari = $tanggal[0];
+        $sertifikat->sampai = $tanggal[1];
 
         if ($request->hasfile('image1')) {
             $image1 = $request->file('image1');

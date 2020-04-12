@@ -39,8 +39,8 @@ nav-user-active
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="">Berlaku Dari</label>
-                                                <input type="date" class="form-control form-control-sm" name="dari" placeholder="Masa berlaku">
+                                                <label for="">Berlaku</label>
+                                                <input type="text" class="form-control form-control-sm" name="dari" placeholder="Masa berlaku">
                                             </div>
                                         </div>
                                         {{-- <div class="col">
