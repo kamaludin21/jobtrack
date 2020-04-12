@@ -17,6 +17,8 @@ class CreateAgendasTable extends Migration
             $table->id();
             $table->string('ticket');
             $table->string('idPerusahaan');
+            $table->string('namaperusahaan');
+            $table->string('namalowongan');
             $table->string('title');
             $table->string('status');
             $table->string('tanggal');

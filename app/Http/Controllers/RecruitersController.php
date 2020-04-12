@@ -29,6 +29,11 @@ class RecruitersController extends Controller
         $this->middleware('auth');
     }
 
+    public function home()
+    {
+      return view('recruiter.home');
+    }
+
     public function index()
     {
         $idUser = Auth::user()->id;
@@ -126,7 +131,6 @@ class RecruitersController extends Controller
             ->where('lamarans.ticket', $vacancy->ticket)
             ->groupBy('users.id', 'lamarans.id')
             ->get();
-
         return view('recruiter.manage-vacancies', ['vacancy' => $vacancy, 'lamaran' => $lamaran, 'agenda' => $agenda]);
     }
 

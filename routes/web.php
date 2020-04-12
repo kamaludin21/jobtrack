@@ -16,6 +16,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Recruiter
 Route::prefix('recruiter')->group(function () {
+    Route::get('home', 'RecruitersController@home');
     Route::get('', 'RecruitersController@index');
     Route::get('vacancy', 'RecruitersController@vacancy');
     Route::get('vacancy/form', 'RecruitersController@create');

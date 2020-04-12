@@ -69,92 +69,54 @@ nav-user-active
                             </div>
                             <div class="row py-2 pt-2">
                                 <div class="container">
-                                    <div class="page-header">
-                                        <h4 id="timeline">Programmer BACK END</h4>
-                                        <p>PT BNI</p>
-                                    </div>
-                                    <ul class="timeline">
-                                        <li>
-                                            <div class="timeline-badge success"><i class="fa fa-check"></i></div>
-                                            <div class="timeline-panel">
-                                                <div class="timeline-heading">
-                                                    <h4 class="timeline-title">Administrasi</h4>
-                                                    <p><small class="text-muted"><i class="fa fa-calendar"></i> 12 Juni 2020 &bull; 09:00 - 16:00 WIB</small></p>
-                                                </div>
-                                                <div class="timeline-body">
-                                                    <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. </p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="timeline-inverted">
-                                            <div class="timeline-badge warning"><i class="fa fa-clock-o"></i></div>
-                                            <div class="timeline-panel">
-                                                <div class="timeline-heading">
-                                                    <h4 class="timeline-title">Test Wawancara</h4>
-                                                    <p><small class="text-muted"><i class="fa fa-calendar"></i> 12 Juni 2020 &bull; 09:00 - 16:00 WIB</small></p>
-                                                </div>
-                                                <div class="timeline-body">
-                                                    <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá, depois divoltis porris, paradis. Paisis, filhis, espiritis santis</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-badge danger"><i class="fa fa-ban"></i></div>
-                                            <div class="timeline-panel">
-                                                <div class="timeline-heading">
-                                                    <h4 class="timeline-title">TEST PNS</h4>
-                                                    <p><small class="text-muted"><i class="fa fa-calendar"></i> 12 Juni 2020 &bull; 09:00 - 16:00 WIB</small></p>
-                                                </div>
-                                                <div class="timeline-body">
-                                                    <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. </p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="timeline-inverted">
-                                            <div class="timeline-badge info"><i class="fa fa-genderless"></i></div>
-                                            <div class="timeline-panel">
-                                                <div class="timeline-heading">
-                                                    <h4 class="timeline-title">Congratulations</h4>
-                                                </div>
-                                                <div class="timeline-body">
+                                    @if(count($lamaran) == 0)
+                                      <p>Anda belum memiliki agenda</p>
+                                    @else
+                                    @php($view = $lamaran[0]->ticket)
+                                    @php($statusLamaran = $lamaran[0]->status)
 
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-badge danger"><i class="fa fa-close"></i></div>
-                                            {{-- <div class="timeline-panel">
-                                                <div class="timeline-heading">
-                                                    <h4 class="timeline-title">Maybe next time buddy</h4>
-                                                </div>
-                                                <div class="timeline-body">
-                                                    <p>
-                                                        Good luck and succeed in finding other desired positions
-                                                    </p>
-                                                </div>
-                                            </div> --}}
-                                        </li>
-                                    </ul>
+                                    <div class="page-header">
+                                        <h4 id="timeline">
+                                          <a href="{{ url('lowongan/detail', [$lamaran[0]->ticket]) }}" class="text-none-decoration" target="_blank">{{ $lamaran[0]->title }}</a>
+                                        </h4>
+                                    </div>
+
+                                      <ul class="timeline">
+                                          @foreach ($agenda as $value)
+                                            @if($value->ticket == $view && $value->status <= $statusLamaran)
+                                              <li class="{{ $value->status == '2' ? '' : 'timeline-inverted' }}">
+                                                  <div class="timeline-badge success"><i class="fa fa-calendar"></i></div>
+                                                  <div class="timeline-panel">
+                                                      <div class="timeline-heading">
+                                                          <h4 class="timeline-title">{{ $value->title }}</h4>
+                                                          <p><small class="text-muted"><i class="fa fa-calendar"></i> {{ $value->tanggal }} &bull; {{ $value->mulai }} - {{ $value->sampai }} WIB</small></p>
+                                                      </div>
+                                                      <div class="timeline-body">
+                                                          <p>{{ $value->deskripsi }}</p>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                            @endif
+                                          @endforeach
+                                      </ul>
+                                    @endif
                                 </div>
                                 <hr>
-                                <div class="container mt-5">
-                                    <div class="row justify-content-center">
-                                        <ul class="nav nav-pills">
-                                            <li class="nav-item pr-2">
-                                                <a class="nav-link " href="#">Argapro</a>
-                                            </li>
-                                            <li class="nav-item pr-2">
-                                                <a class="nav-link active" href="#">BNI</a>
-                                            </li>
-                                            <li class="nav-item pr-2">
-                                                <a class="nav-link " href="#">BPJS Kesehatan</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="#">KPK</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                @if(count($lamaran) > 0)
+                                  <div class="container mt-5">
+                                      <div class="row justify-content-center">
+                                          <ul class="nav nav-pills">
+                                            @foreach ($lamaran as $key )
+
+
+                                              <li class="nav-item pr-2">
+                                                  <a class="nav-link " href="{{ $key->ticket }}">{{ Str::limit($key->title, 10, '') }}</a>
+                                              </li>
+                                              @endforeach
+                                          </ul>
+                                      </div>
+                                  </div>
+                                @endif
 
                             </div>
                         </div>

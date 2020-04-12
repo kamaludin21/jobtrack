@@ -27,18 +27,29 @@ class SearcherController extends Controller
     }
     public function index()
     {
+// Rule agenda:
+// 1. Agenda ditampilkan jika status lamaran, sama dengan status agenda, (administrasi, dan interview)
+//     1-a. jika status lamaran user administrasi, maka tidak bisa melihat agenda dengan status Interview
+// Way:
+// 1. Cari lamaran dengan status 2 & 3,
+// 2. cari agenda dengan ticket lamaran yang tersedia
+// 3. jika agenda berstatus 3, dan lamaran berstatus 2, maka user tidak bisa melihat
+// 4. jika agenda berstatus 2, dan lamaran berstatus 2, maka user bisa melihat
+
         $idUser = Auth::user()->id;
         $profil = Profil::where('idUser', $idUser)->first();
 
+        $lamaran = DB::table('lamarans')
+            ->join('vacancies', 'lamarans.ticket', '=', 'vacancies.ticket')
+            ->where([
+              ['lamarans.idUser', '=', $idUser],
+            ])
+            ->whereIn('lamarans.status', [2, 3])
+            ->select('lamarans.ticket', 'lamarans.status', 'vacancies.title',)
+            ->get();
+        $agenda = Agenda::all();
 
-        $posts = DB::select('SELECT lamarans.idUser, lamarans.status as statusLamar, lamarans.idPerusahaan, agendas.status as statusAgenda, agendas.title
-            FROM lamarans
-            INNER JOIN agendas ON lamarans.ticket=agendas.ticket
-            WHERE lamarans.status=agendas.status AND lamarans.idUser = '.$idUser.'');
-
-        // return $posts;
-
-        return view('users.dashboard', ['profil' => $profil]);
+        return view('users.dashboard', ['profil' => $profil, 'lamaran' => $lamaran, 'agenda' => $agenda]);
     }
 
     public function profil()
@@ -116,12 +127,14 @@ class SearcherController extends Controller
     {
         $idUser = Auth::user()->id;
 
+        $tanggal= explode("-", $request->dari);
+
         $experience = Experience::create([
         'idUser' => $idUser,
         'title' => $request->title,
         'intansi' => $request->instansi,
-        'dari' => $request->dari,
-        'sampai' => $request->sampai,
+        'dari' => $tanggal[0],
+        'sampai' => $tanggal[1],
         'daerah' => $request->daerah,
         'industri' => $request->industri,
         'spesialisasi' => $request->spesialisasi,

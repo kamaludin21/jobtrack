@@ -89,7 +89,7 @@
                             <div class="col">
                                 <div class="form-group">
                                   <label for="expired">Tutup penerimaan</label>
-                                  <input type="date" class="form-control form-control-sm" name="expired">
+                                  <input type="date" id="txtDate" class="form-control form-control-sm" name="expired">
                                 </div>
                             </div>
                             <div class="col">

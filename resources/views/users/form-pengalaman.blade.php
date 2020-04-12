@@ -40,16 +40,11 @@ nav-user-active
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="">Dari</label>
-                                                <input type="date" class="form-control form-control-sm" name="dari">
+                                                <label for="">Waktu bekerja</label>
+                                                <input type="text" name="dari" class="form-control form-control-sm" name="dari">
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="">Sampai</label>
-                                                <input type="date" class="form-control form-control-sm" name="sampai" placeholder="*Dalam angka">
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <div class="form-group">
                                         <label for="">Daerah tempat kerja</label>
@@ -68,10 +63,8 @@ nav-user-active
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="">Jabatan</label>
-                                        {{-- Jabatan diperusahaan --}}
                                         <div class="form-group">
-                                            <label for="">Level</label>
+                                            <label for="">Level jabatan</label>
                                             <select class="form-control form-control-sm" name="jabatan">
                                                 <option value="Internship / OJT">Internship / OJT</option>
                                                 <option value="Entry Level / Junior">Entry Level / Junior</option>

@@ -135,12 +135,22 @@ nav-user-active
                                     <p class="text-danger">Anda belum mempunyai data pengalaman</p>
                                     @else
                                     @foreach ($pengalaman as $pengalaman)
+                                    @php
+                                    $sdate = $pengalaman->dari;
+                                    $edate = $pengalaman->sampai;
+
+                                    $date_diff = abs(strtotime($edate) - strtotime($sdate));
+
+                                    $years = floor($date_diff / (365*60*60*24));
+                                    $months = floor(($date_diff - $years * 365*60*60*24) / (30*60*60*24));
+                                    $days = floor(($date_diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+                                    @endphp
                                     <dl class="row mt-2">
                                         <dt class="col-sm-4">
                                             {{ $pengalaman->dari }} - {{ $pengalaman->sampai }}
                                             <br>
                                             <div class="text-muted">
-                                                2 years 1 month
+                                                @php(printf("%d Tahun, %d bulan", $years, $months))
                                             </div>
                                         </dt>
                                         <dd class="col-sm-8">

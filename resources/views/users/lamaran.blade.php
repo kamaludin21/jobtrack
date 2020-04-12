@@ -36,7 +36,7 @@ nav-user-active
                                             @foreach ($lamaran as $lamaran)
                                             <tr>
                                                 <td class="text-left">
-                                                    <a href="{{ url('lowongan-detail') }}" class="font-weight-light" style="text-decoration: none;">
+                                                    <a href="{{ url('lowongan/detail', [$lamaran->ticket]) }}" class="font-weight-light" style="text-decoration: none;">
                                                         <strong>
                                                             {{ $lamaran->title }}
                                                         </strong>

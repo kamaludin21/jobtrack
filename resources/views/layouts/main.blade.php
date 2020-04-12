@@ -14,6 +14,12 @@
 
     {{-- Icon CDN --}}
     <script src="https://use.fontawesome.com/1d5fe44475.js"></script>
+    <script type="text/javascript">
+    var maxDate = year + '-' + month + '-' + day;
+    // alert(maxDate);
+    $('#txtDate').attr('min', maxDate);
+
+    </script>
 </head>
 
 <body class="bg-grey" role="main">
@@ -102,7 +108,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mr-auto">
                                 <li class="nav-item @yield('status-home')">
-                                    <a class="nav-link" href="{{ url('recruiter/') }}">Home</a>
+                                    <a class="nav-link" href="{{ url('recruiter/home') }}">Home</a>
                                 </li>
                                 <li class="nav-item @yield('status-vacancy')">
                                     <a class="nav-link" href="{{ url('recruiter/vacancy') }}">Lowongan</a>
@@ -158,7 +164,7 @@
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                                         <div class="dropdown-menu" aria-labelledby="dropdown01" style="right: 0; left: auto;">
-                                            <a class="dropdown-item" href="{{ url('employer/profil') }}">Profil</a>
+                                            <a class="dropdown-item" href="{{ url('recruiter') }}">Profil</a>
                                             <a class="dropdown-item" href="#">Pengaturan Akun</a>
                                             <hr>
                                             <a class="dropdown-item" href="#" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -222,9 +228,51 @@
     <script src="{{ asset('js/bootstrap.bundle.js') }}" charset="utf-8"></script>
     <script src="{{ asset('js/popper.min.js') }}" charset="utf-8"></script>
     <script src="{{ asset('js/bootstrap.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
     {{-- Active script --}}
     <script src="{{ asset('js/activate.js') }}" charset="utf-8"></script>
     <script src="{{ asset('js/tools.js') }}" charset="utf-8"></script>
+    <script type="text/javascript">
+
+    $(function() {
+  $('input[name="dari"]').daterangepicker({
+    opens: 'left'
+  }, function(start, end, label) {
+    // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+    // $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+  });
+});
+
+
+        $(function() {
+            var dtToday = new Date();
+
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+
+            var maxDate = year + '-' + month + '-' + day;
+            // alert(maxDate);
+            $('#txtDate').attr('min', maxDate);
+        });
+
+        function myFunction() {
+            let x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 

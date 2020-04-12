@@ -32,7 +32,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="font-weight-bold">Pelamar - Belum proses</p>
+                    <p class="font-weight-bold">Pelamar</p>
+                    @if(count($lamaran) == 0)
+                    <p>Belum ada pelamar</p>
+                    @else
                     <table class="table table-sm">
                         <thead>
                             <tr>
@@ -44,10 +47,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(count($lamaran) == 0)
-                            <p>Belum ada pelamar</p>
-                            @else
-                            @php($i = 1)
+
+                          @php($i = 1)
                             @foreach ($lamaran as $lamaran)
                             <tr>
                                 <td scope="col">{{ $i }}.</td>
@@ -94,7 +95,8 @@
                                 </td>
                             </tr>
 
-                            @php($i++)@endforeach
+                            @php($i++)
+                          @endforeach
 
                             @endif
                         </tbody>
@@ -143,6 +145,7 @@
                   <input type="hidden" name="idPage" value="{{ $vacancy->id }}">
                   <input type="hidden" name="ticket" value="{{ $vacancy->ticket }}">
                   <input type="hidden" name="idPerusahaan" value="{{ $vacancy->idPerusahaan }}">
+                  <input type="hidden" name="namalowongan" value="{{ $vacancy->title }}">
                   <div class="form-group">
                       <label for="">Judul agenda</label>
                       <input type="text" name="title" class="form-control form-control-sm" placeholder="Agenda" autofocus autocomplete="off">
@@ -158,7 +161,7 @@
                       <div class="row">
                         <div class="col">
                           <label for="">Tanggal</label>
-                          <input type="date" name="tanggal" class="form-control form-control-sm" placeholder="Agenda">
+                          <input type="date" id="txtDate" name="tanggal" class="form-control form-control-sm" placeholder="Agenda">
                         </div>
                         <div class="col">
                           <label for="">Mulai</label>

@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Agenda extends Model
 {
     protected $fillable = [
-      'ticket', 'idPerusahaan', 'title', 'status', 'tanggal', 'mulai', 'sampai', 'deskripsi'
+      'ticket', 'idPerusahaan', 'namaperusahaan', 'namalowongan', 'title', 'status', 'tanggal', 'mulai', 'sampai', 'deskripsi'
     ];
 }

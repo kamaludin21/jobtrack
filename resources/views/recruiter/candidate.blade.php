@@ -5,7 +5,7 @@
 @section('content')
 <div class="container pt-4">
     <div class="row mb-2">
-        <div class="col-12">
+        <div class="col-12" id="myDIV" style="display: none;">
           <div class="card p-4">
               <form>
               <div class="form-row">
@@ -42,14 +42,14 @@
             <div class="card bg-light">
                 <div class="px-4 pt-4">
                   <div class="float-right">
-                      <a href="#" class="btn btn-sm btn-secondary py-1">
+                      <button type="button" onclick="myFunction()" class="btn btn-sm btn-secondary py-1">
                           Filters
-                          <i class="fa fa-chevron-down"></i>
-                      </a>
-                      <button class="btn btn-sm btn-outline-primary">
-                          <i class="fa fa-th-large"></i>
+                          <i class="fa fa-chevron-up"></i>
                       </button>
                       <button class="btn btn-sm btn-primary">
+                          <i class="fa fa-th-large"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-primary">
                           <i class="fa fa-th-list"></i>
                       </button>
                   </div>
