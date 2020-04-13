@@ -57,16 +57,16 @@
                         <div class="col-12 mt-3">
                             <div class="float-left">
                               @include('layouts.alert')
-                              {{-- @if(count($lamaran) == 0)
+                              @if(count($lamaran) == 0)
+                                <a href="{{ url('lowongan/detail/apply', [$lowongan->ticket]) }}" class="btn btn-outline-primary">
+                                    APPLYS NOW
+                                </a>
+                              @endif
+                              {{-- @if(empty($lamaran))
                                 <a href="{{ url('lowongan/detail/apply', [$lowongan->ticket]) }}" class="btn btn-outline-primary">
                                     APPLY NOW
                                 </a>
                               @endif --}}
-                              @if(empty($lamaran))
-                                <a href="{{ url('lowongan/detail/apply', [$lowongan->ticket]) }}" class="btn btn-outline-primary">
-                                    APPLY NOW
-                                </a>
-                              @endif
                               @guest
                                 <a href="{{ url('login') }}" class="btn btn-primary">
                                     Login untuk melamar
