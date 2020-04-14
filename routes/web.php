@@ -36,11 +36,12 @@ Route::prefix('candidate')->group(function () {
 });
 
 Route::prefix('lowongan')->group(function (){
-  Route::get('/', 'VacanciesController@lowongan');
-  Route::get('/detail/{ticket}', 'VacanciesController@detail');
-  Route::get('/detail/apply/{ticket}', 'VacanciesController@apply');
-  Route::post('/apply', 'VacanciesController@StoreApply');
-  Route::post('/search', 'VacanciesController@search');
+  Route::get('', 'VacanciesController@lowongan');
+  Route::get('detail/{ticket}', 'VacanciesController@detail');
+  Route::get('detail/apply/{ticket}', 'VacanciesController@apply');
+  Route::post('apply', 'VacanciesController@StoreApply');
+  Route::post('search', 'VacanciesController@search');
+  Route::get('company/{id}', 'VacanciesController@company');
   Route::get('/apply/success', function(){
     return view('vacancies.success');
   });

@@ -10,7 +10,7 @@
                 <h1 class="display-4">Pasang lowongan</h1>
                 <p class="lead">Postingan lowongan, dan dapatkan kemudahan dalam memanajemen kebutuhan-kebutuhan perusahaan anda</p>
                 <hr class="my-4">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Pasang sekarang!</a>
+                <a class="btn btn-primary btn-lg" href="{{ url('recruiter/vacancy/form') }}" role="button">Pasang sekarang!</a>
             </div>
         </div>
         <div class="col-md-6">
@@ -18,7 +18,7 @@
                 <h1 class="display-4">Cari kandidat</h1>
                 <p class="lead">Cari ribuan kandidat yang memiliki kemampuan sesuai dengan yang anda butuhkan. Segera cari sekarang juga</p>
                 <hr class="my-4">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Cari sekarang!</a>
+                <a class="btn btn-primary btn-lg" href="{{ url('candidate') }}" role="button">Cari sekarang!</a>
             </div>
         </div>
     </div>

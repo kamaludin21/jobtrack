@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Vacancy;
 use App\Lamaran;
+use App\Perusahaan;
 use Auth;
 
 class VacanciesController extends Controller
@@ -77,6 +78,7 @@ class VacanciesController extends Controller
             $lamaran = [0];
         }
 
+          // Untuk lowongan terkait
         $lowongans = DB::table('vacancies')
       ->join('perusahaans', 'vacancies.idPerusahaan', '=', 'perusahaans.id')
       ->where([
@@ -167,5 +169,11 @@ class VacanciesController extends Controller
         } else {
             return redirect('recruiter/vacancy')->with('warning', 'Upps, Tampaknya ada yang salah, ulangi sekali lagi');
         }
+    }
+
+    public function company($id)
+    {
+      $company = Perusahaan::findOrFail($id);
+      return view('vacancies.company', ['company' => $company]);
     }
 }

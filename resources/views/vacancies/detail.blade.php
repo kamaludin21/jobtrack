@@ -25,7 +25,7 @@
                         <div class="col-md-9">
                             <div class="">
                                 <strong class="d-inline-block mb-2 text-muted">
-                                    <a href="{{ url('lowongan/employer') }}" class="text-decoration-none text-muted">{{ $lowongan->name }}</a>
+                                    <a href="{{ url('lowongan/company', [$lowongan->idPerusahaan]) }}" class="text-decoration-none text-muted">{{ $lowongan->name }}</a>
                                 </strong>
                                 <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
                             </div>
@@ -170,7 +170,7 @@
                               <div class="card ">
                                   <div class="card-body" >
                                       <strong class="d-inline-block mb-2 text-muted">
-                                          <a href="{{ url('lowongan/employer') }}" class="text-muted">{{ Str::limit($key->name, 23, '') }}</a>
+                                          <a href="{{ url('lowongan/company', [$key->idPerusahaan]) }}" class="text-muted">{{ Str::limit($key->name, 23, '') }}</a>
                                       </strong>
                                       <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
                                       <h5 class="card-title text-muted mb-n1">
