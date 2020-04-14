@@ -105,7 +105,7 @@
 
                   <div class="p-4 text-center">
                     <img src="{{ asset('img/searching.png') }}" alt="Kosong" class="img-fluid">
-                    <p>Lowongan tidak ditemukan</p>
+                    <p>Lowongan tidak ditemukan</p> <a href="{{ url('lowongan') }}" class="btn btn-light">Kembali</a>
                   </div>
 
                 @endif
