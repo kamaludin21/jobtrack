@@ -70,7 +70,7 @@ nav-user-active
                                                         <span class="badge badge-success">Terima</span>
                                                         @break
                                                     @case(5)
-                                                        <span class="badge badge-success">Terima</span>
+                                                        <span class="badge badge-danger">Tolak</span>
                                                         @break
 
                                                     @default

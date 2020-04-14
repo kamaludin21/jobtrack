@@ -82,8 +82,8 @@
                                                 <option value="1" @if($lamaran->status == '1') selected @endif>Belum proses</option>
                                                 <option value="2" @if($lamaran->status == '2') selected @endif>Administrasi</option>
                                                 <option value="3" @if($lamaran->status == '3') selected @endif>Interview</option>
-                                                <option value="3" @if($lamaran->status == '4') selected @endif>Tolak</option>
-                                                <option value="3" @if($lamaran->status == '5') selected @endif>Terima</option>
+                                                <option value="4" @if($lamaran->status == '4') selected @endif>Terima</option>
+                                                <option value="5" @if($lamaran->status == '5') selected @endif>Tolak</option>
                                             </select>
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-primary" type="submit">
