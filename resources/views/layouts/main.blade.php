@@ -15,10 +15,9 @@
     {{-- Icon CDN --}}
     <script src="https://use.fontawesome.com/1d5fe44475.js"></script>
     <script type="text/javascript">
-    var maxDate = year + '-' + month + '-' + day;
-    // alert(maxDate);
-    $('#txtDate').attr('min', maxDate);
-
+        var maxDate = year + '-' + month + '-' + day;
+        // alert(maxDate);
+        $('#txtDate').attr('min', maxDate);
     </script>
 </head>
 
@@ -62,13 +61,13 @@
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fa fa-bookmark"></i>
+                                <a class="nav-link" href="{{ url('user/bookmark') }}">
+                                    <i class="fa fa-bookmark">B</i>
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropleft" href="#" id="mess" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-bell"></i>
+                                <a class="nav-link dropleft" id="mess" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-bell">N</i>
                                 </a>
                                 <div class="dropdown-menu ml-notification" aria-labelledby="mess" style="width: 250px !important">
                                     <div class="card m-n3">
@@ -97,7 +96,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01" style="right: 0; left: auto;">
                                     <a class="dropdown-item" href="{{ url('user/dashboard') }}">Profil</a>
-                                    <a class="dropdown-item" href="#">Pengaturan Akun</a>
+                                    <a class="dropdown-item" href="{{ url('user/account') }}">Pengaturan Akun</a>
                                     <hr>
                                     <a class="dropdown-item" href="#" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                        document.getElementById('logout-form').submit();">Logout</a>
@@ -242,15 +241,22 @@
     <script src="{{ asset('js/activate.js') }}" charset="utf-8"></script>
     <script src="{{ asset('js/tools.js') }}" charset="utf-8"></script>
     <script type="text/javascript">
+        $(function() {
+            $('input[name="dari"]').daterangepicker({
+                opens: 'left'
+            }, function(start, end, label) {
+                // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                // $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+            });
+        });
 
-    $(function() {
-  $('input[name="dari"]').daterangepicker({
-    opens: 'left'
-  }, function(start, end, label) {
-    // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-    // $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-  });
-});
+        function numberFilter(evt) {
+            let charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+                return false;
+            return true;
+        }
 
 
         $(function() {

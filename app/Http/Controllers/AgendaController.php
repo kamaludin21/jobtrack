@@ -10,7 +10,6 @@ class AgendaController extends Controller
 {
     public function store(Request $request)
     {
-      // 'ticket', 'idPerusahaan', 'namaperusahaan', 'namalowongan', 'title', 'status', 'tanggal', 'mulai', 'sampai', 'deskripsi'
       $perusahaan = Perusahaan::where('id', $request->idPerusahaan)->first();
       $agenda = Agenda::firstOrCreate([
         'ticket' => $request->ticket,

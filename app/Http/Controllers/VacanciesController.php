@@ -5,22 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Vacancy;
-use App\Lamaran;
-use App\Perusahaan;
+use App\{Vacancy, Lamaran, Perusahaan};
+// use App\Vacancy;
+// use App\Lamaran;
+// use App\Perusahaan;
 use Auth;
 
 class VacanciesController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
 
     public function lowongan()
     {
@@ -30,7 +22,6 @@ class VacanciesController extends Controller
       ->where('vacancies.status', 'active')
       ->orderByRaw('vacancies.created_at DESC')
       ->paginate(3);
-
 
         return view('vacancies.index', ['lowongans' => $lowongan]);
     }
@@ -142,7 +133,7 @@ class VacanciesController extends Controller
 
     public function store(Request $request)
     {
-        // id perusahaan
+
         $ticket = Str::random(15);
         $idPerusahaan = Auth::user()->id;
         $status = 'active';
@@ -174,6 +165,8 @@ class VacanciesController extends Controller
     public function company($id)
     {
       $company = Perusahaan::findOrFail($id);
-      return view('vacancies.company', ['company' => $company]);
+      $lowongan = Vacancy::where('idPerusahaan', $id)->orderByRaw('vacancies.created_at DESC')->get();
+      return view('vacancies.company', ['company' => $company, 'lowongans' => $lowongan]);
     }
+
 }

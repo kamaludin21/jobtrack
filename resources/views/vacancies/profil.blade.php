@@ -12,44 +12,44 @@
                     <div class="row card no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
                             <div class="card-header">
-                                  {{ $user->name }}
+                                {{ $user->name }}
                             </div>
                             <div>
-                              <div class="float-right d-flex">
-                                <img src="{{ url('img/profil', [$profil->profil]) }}" class="img-thumbnail" width="200px">
-                              </div>
+                                <div class="float-right d-flex">
+                                    <img src="{{ url('img/profil', [$profil->profil]) }}" class="img-thumbnail" width="200px">
+                                </div>
                                 @if(empty($profil))
                                 <p class="text-danger">Silahkan lengkapi profil anda</p>
                                 @else
                                 <div class="ml-n3 pl-1">
-                                  <dl class="row mt-2">
-                                      <dt class="col-sm-3">Tentang saya</dt>
-                                      <dd class="col-sm-9">{{ $profil->description }}</dd>
+                                    <dl class="row mt-2">
+                                        <dt class="col-sm-3">Tentang saya</dt>
+                                        <dd class="col-sm-9">{{ $profil->description }}</dd>
 
-                                      <dt class="col-sm-3">Status</dt>
-                                      <dd class="col-sm-9">
-                                          @if($profil->status == 'YES')
-                                              <span class="badge badge-pill badge-success">Mencari Kerja</span>
-                                              @else
-                                              <span class="badge badge-pill badge-danger">Tidak Mencari</span>
-                                              @endif
-                                      </dd>
+                                        <dt class="col-sm-3">Status</dt>
+                                        <dd class="col-sm-9">
+                                            @if($profil->status == 'YES')
+                                                <span class="badge badge-pill badge-success">Mencari Kerja</span>
+                                                @else
+                                                <span class="badge badge-pill badge-danger">Tidak Mencari</span>
+                                                @endif
+                                        </dd>
 
-                                      <dt class="col-sm-3">Gaji yang diharapkan</dt>
-                                      <dd class="col-sm-9">Rp. {{ number_format($profil->gaji) }}</dd>
+                                        <dt class="col-sm-3">Gaji yang diharapkan</dt>
+                                        <dd class="col-sm-9">Rp. {{ number_format($profil->gaji) }}</dd>
 
-                                      <dt class="col-sm-3">Ttl</dt>
-                                      <dd class="col-sm-9">{{ $profil->ttl }}</dd>
+                                        <dt class="col-sm-3">Ttl</dt>
+                                        <dd class="col-sm-9">{{ $profil->ttl }}</dd>
 
-                                      <dt class="col-sm-3">Jenis Kelamin</dt>
-                                      <dd class="col-sm-9">{{ $profil->kelamin }}</dd>
+                                        <dt class="col-sm-3">Jenis Kelamin</dt>
+                                        <dd class="col-sm-9">{{ $profil->kelamin }}</dd>
 
-                                      <dt class="col-sm-3">Alamat</dt>
-                                      <dd class="col-sm-9">{{ $profil->alamat }}</dd>
+                                        <dt class="col-sm-3">Alamat</dt>
+                                        <dd class="col-sm-9">{{ $profil->alamat }}</dd>
 
-                                      <dt class="col-sm-3">Agama</dt>
-                                      <dd class="col-sm-9">{{ $profil->agama }}</dd>
-                                  </dl>
+                                        <dt class="col-sm-3">Agama</dt>
+                                        <dd class="col-sm-9">{{ $profil->agama }}</dd>
+                                    </dl>
                                 </div>
                                 <p class="lead">
                                     <span class="font-weight-bold">Kontak</span>
@@ -62,11 +62,11 @@
                                     <dd class="col-sm-9">{{ $profil->telp }}</dd>
                                     <dt class="col-sm-3">Facebook</dt>
                                     <dd class="col-sm-9">
-                                        <a href="#">{{ $profil->social1 }}</a>
+                                        <a href="#">https://facebook.com/{{ $profil->social1 }}</a>
                                     </dd>
                                     <dt class="col-sm-3">Linkedin</dt>
                                     <dd class="col-sm-9">
-                                        <a href="#">{{ $profil->social2 }}</a>
+                                        <a href="#">https://linkedin.com/{{ $profil->social2 }}</a>
                                     </dd>
                                 </dl>
                                 @endif

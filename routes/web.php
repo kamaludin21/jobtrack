@@ -35,16 +35,23 @@ Route::prefix('candidate')->group(function () {
     Route::get('', 'CandidatesController@index');
 });
 
-Route::prefix('lowongan')->group(function (){
-  Route::get('', 'VacanciesController@lowongan');
-  Route::get('detail/{ticket}', 'VacanciesController@detail');
-  Route::get('detail/apply/{ticket}', 'VacanciesController@apply');
-  Route::post('apply', 'VacanciesController@StoreApply');
-  Route::post('search', 'VacanciesController@search');
-  Route::get('company/{id}', 'VacanciesController@company');
-  Route::get('/apply/success', function(){
-    return view('vacancies.success');
-  });
+Route::prefix('lowongan')->group(function () {
+    Route::get('', 'VacanciesController@lowongan');
+    Route::get('detail/{ticket}', 'VacanciesController@detail');
+    Route::get('detail/apply/{ticket}', 'VacanciesController@apply');
+    Route::post('apply', 'VacanciesController@StoreApply');
+    Route::post('search', 'VacanciesController@search');
+    Route::get('company/{id}', 'VacanciesController@company');
+    Route::get('/apply/success', function () {
+        return view('vacancies.success');
+    });
+});
+
+// HRTime\PerformanceCounter
+Route::prefix('account')->group(function () {
+    Route::get('security', function () {
+        return view('account.security');
+    });
 });
 
 // Vacancy
@@ -54,28 +61,52 @@ Route::post('vacancy/store', 'VacanciesController@store');
 / User Section
 */
 Route::prefix('user')->group(function () {
-  Route::get('dashboard', 'SearcherController@index');
-  Route::get('profil', 'SearcherController@profil');
-  Route::get('profil/form', 'SearcherController@editprofil');
-  Route::post('profil/store', 'SearcherController@StoreProfil');
-  Route::get('pengalaman/form', 'SearcherController@EditPengalaman');
-  Route::post('pengalaman/store', 'SearcherController@StorePengalaman');
-  Route::get('sertifikat/form', 'SearcherController@EditSertifikat');
-  Route::post('sertifikat/store', 'SearcherController@StoreSertifikat');
-  Route::get('pendidikan/form', 'SearcherController@EditPendidikan');
-  Route::post('pendidikan/store', 'SearcherController@StorePendidikan');
-  Route::get('skill/form', 'SearcherController@EditSkill');
-  Route::post('skill/store', 'SearcherController@StoreSkill');
-  Route::get('/lamaran', 'SearcherController@lamaran');
-  Route::get('/bookmark', 'BookmarksController@index');
-  Route::post('/bookmark/store', 'BookmarksController@store');
-  Route::get('/invite', 'SearcherController@inviter');
-  Route::get('/invite/{id}', 'SearcherController@ShowInviter');
+    // Dashboard
+    Route::get('dashboard', 'SearcherController@index');
+    Route::get('dashboard/{ticket}', 'SearcherController@indexSingle');
+    Route::get('profil', 'SearcherController@profil');
+    Route::get('profil/form', 'SearcherController@editprofil');
+    Route::post('profil/store', 'SearcherController@StoreProfil');
+    Route::patch('profil/foto/{id}', 'SearcherController@UpdateFoto');
+    Route::match(['put', 'patch'], 'profil/store/{id}', 'SearcherController@UpdateProfil');
+    // Pengalaman
+    Route::get('pengalaman/form', 'SearcherController@EditPengalaman');
+    Route::get('pengalaman/update/{id}', 'SearcherController@UpdatePengalaman');
+    Route::post('pengalaman/store', 'SearcherController@StorePengalaman');
+    Route::match(['put', 'patch'], 'pengalaman/store/{id}', 'SearcherController@UpdatePengalamanData');
+    Route::match(['post', 'delete'], '/pengalaman/destroy/{id}', 'SearcherController@DestroyPengalaman');
+    // Sertifikat
+    Route::get('sertifikat/form', 'SearcherController@EditSertifikat');
+    Route::get('sertifikat/update/{id}', 'SearcherController@UpdateSertifikat');
+    Route::post('sertifikat/store', 'SearcherController@StoreSertifikat');
+    Route::patch('sertifikat/update/store/{id}', 'SearcherController@UpdateSertifikatData');
+    // Pendidikan
+    Route::get('pendidikan/form', 'SearcherController@EditPendidikan');
+    Route::post('pendidikan/store', 'SearcherController@StorePendidikan');
+    Route::get('pendidikan/update/{id}', 'SearcherController@UpdatePendidikan');
+    Route::match(['put', 'patch'], 'pendidikan/store/{id}', 'SearcherController@UpdatePendidikanData');
+    Route::match(['post', 'delete'], '/pendidikan/destroy/{id}', 'SearcherController@DestroyPendidikan');
+    // Skill
+    Route::get('skill/form', 'SearcherController@EditSkill');
+    Route::post('skill/store', 'SearcherController@StoreSkill');
+
+    Route::delete('skill/destroy/{id}', 'SearcherController@DestroySkill');
+    // Bookmark
+    Route::get('/bookmark', 'BookmarksController@index');
+    Route::post('/bookmark/store', 'BookmarksController@store');
+    Route::match(['put', 'patch'], '/bookmark/destroy/{id}', 'BookmarksController@destroy');
+    // Invite
+    Route::get('/invite', 'SearcherController@inviter');
+    Route::get('/invite/{id}', 'SearcherController@ShowInviter');
+
+    // Account setting
+    Route::get('account', 'SearcherController@security');
+    Route::get('/lamaran', 'SearcherController@lamaran');
 });
 
 
-Route::get('login', function() {
-  return view('auth.login');
+Route::get('login', function () {
+    return view('auth.login');
 });
 
 

@@ -9,7 +9,7 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-header">
-                    Search with your custom
+                    Kotak pencarian
                 </div>
                 <div class="card-body">
                     <form action="{{ url('lowongan/search') }}" method="post">

@@ -71,11 +71,11 @@ nav-user-active
                                     <dd class="col-sm-9">{{ $profil->telp }}</dd>
                                     <dt class="col-sm-3">Facebook</dt>
                                     <dd class="col-sm-9">
-                                        <a href="#">{{ $profil->social1 }}</a>
+                                        <a href="https://facebook.com/{{ $profil->social1 }}" target="_blank">https://facebook.com/{{ $profil->social1 }}</a>
                                     </dd>
                                     <dt class="col-sm-3">Linkedin</dt>
                                     <dd class="col-sm-9">
-                                        <a href="#">{{ $profil->social2 }}</a>
+                                        <a href="https://linkedin.com/{{ $profil->social1 }}{{ $profil->social2 }}" target="_blank">https://linkedin.com/{{ $profil->social2 }}</a>
                                     </dd>
                                 </dl>
                                 @endif
@@ -93,12 +93,19 @@ nav-user-active
                                         <dt class="col-sm-3">{{ $pendidikan->instansi }}</dt>
                                         <dd class="col-sm-9">{{ $pendidikan->pendidikan }} &bull; {{ $pendidikan->angkatan }}
                                             <span class="mt-n5">
-                                                <a class="btn btn-sm btn-outline-link text-warning">
+                                              <form action="{{ url('user/pendidikan/destroy', [$pendidikan->id]) }}" class="d-flex" method="POST">
+                                                <a href="{{ url('user/pendidikan/update', [$pendidikan->id]) }}" class="btn btn-sm btn-outline-link text-warning">
                                                     <small><i class="fa fa-pencil"></i></small>
                                                 </a>
-                                                <a class="btn btn-sm btn-outline-link text-danger">
-                                                    <small><i class="fa fa-trash"></i></small>
-                                                </a>
+
+                                                  @csrf
+                                                  @method('DELETE')
+                                                  <input type="hidden" name="_method" value="DELETE">
+
+                                                  <button class="btn btn-sm text-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">
+                                                      <small><i class="fa fa-trash"></i></small>
+                                                  </button>
+                                              </form>
                                             </span>
                                         </dd>
                                         @endforeach
@@ -119,7 +126,18 @@ nav-user-active
                                     @else
                                     <ul>
                                         @foreach ($skill as $skill)
-                                        <li>{{ $skill->skill }} <small>{{ $skill->level }}</small> </li>
+                                        <li><form action="{{ url('user/skill/destroy', [$skill->id]) }}" class="d-flex" method="POST">
+                                          {{ $skill->skill }} <small class="mt-1 mx-2">{{ $skill->level }}</small> &mdash;
+
+                                              @csrf
+                                              @method('DELETE')
+                                              <input type="hidden" name="_method" value="DELETE">
+
+                                              <button class="btn btn-sm text-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">
+                                                  <small><i class="fa fa-trash"></i></small>
+                                              </button>
+                                          </form>
+                                        </li>
                                         @endforeach
                                     </ul>
                                     @endif
@@ -147,7 +165,7 @@ nav-user-active
                                     @endphp
                                     <dl class="row mt-2">
                                         <dt class="col-sm-4">
-                                            {{ $pengalaman->dari }} - {{ $pengalaman->sampai }}
+                                            {{ $pengalaman->dari }}  &mdash; {{ $pengalaman->sampai }}
                                             <br>
                                             <div class="text-muted">
                                                 @php(printf("%d Tahun, %d bulan", $years, $months))
@@ -157,14 +175,20 @@ nav-user-active
                                             <div class="">
                                                 <h4>{{ $pengalaman->title }}
                                                     <div class="float-right">
-                                                        <a class="btn btn-sm btn-outline-link text-primary">
-                                                            <i class="fa fa-pencil"></i>
-                                                            Sunting</a>
-                                                        <a class="btn btn-sm btn-outline-link text-danger">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
+                                                      <form action="{{ url('user/pengalaman/destroy', [$pengalaman->id]) }}" class="d-flex" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+
+                                                          <a href="{{ url('user/pengalaman/update', [$pengalaman->id]) }}" class="btn btn-sm btn-outline-link text-primary">
+                                                              <i class="fa fa-pencil"></i>
+                                                              Sunting</a>
+                                                          <button type="submit" class="btn btn-sm btn-outline-link text-danger"  onclick="return confirm('Anda yakin ingin menghapus data ini?')">
+                                                              <i class="fa fa-trash"></i>
+                                                          </button>
+                                                        </form>
                                                     </div>
                                                 </h4>
+
                                                 <h6>{{ $pengalaman->intansi }} | {{ $pengalaman->daerah }}</h6>
                                                 <hr>
                                                 <dl class="row">
@@ -177,7 +201,7 @@ nav-user-active
                                                     <dt class="col-sm-4">Jabatan</dt>
                                                     <dd class="col-sm-8">{{ $pengalaman->jabatan }}</dd>
                                                     <dt class="col-sm-4">Gaji bulanan</dt>
-                                                    <dd class="col-sm-8"> IDR {{ $pengalaman->gaji }}</dd>
+                                                    <dd class="col-sm-8"> IDR {{ number_format($pengalaman->gaji) }}</dd>
                                                 </dl>
                                             </div>
                                         </dd>
@@ -201,21 +225,18 @@ nav-user-active
                                     <dl class="row mt-2">
                                         <dt class="col-sm-4">
                                             {{ $certificate->dari }} &mdash; {{ $certificate->sampai }}
-                                            <br>
-                                            <div class="text-muted">
 
-                                            </div>
 
                                         </dt>
                                         <dd class="col-sm-8">
                                             <div class="">
                                                 <h4>{{ $certificate->title }}
                                                     <div class="float-right">
-                                                        <a class="btn btn-sm btn-outline-link text-primary">
+                                                        <a href="{{ url('user/sertifikat/update', [$certificate->id]) }}" class="btn btn-sm btn-outline-link text-primary">
                                                             <i class="fa fa-pencil"></i>
                                                             Sunting</a>
                                                         <a class="btn btn-sm btn-outline-link text-danger">
-                                                            <i class="fa fa-trash"></i>
+                                                            <i class="fa fa-trash">D/i>
                                                         </a>
                                                     </div>
                                                 </h4>
@@ -239,8 +260,6 @@ nav-user-active
                                     @endforeach
                                 @endif
                             </div>
-                        </div>
-                        <div class="col-auto d-none d-lg-block">
                         </div>
                     </div>
                 </div>

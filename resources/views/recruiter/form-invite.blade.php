@@ -26,12 +26,12 @@
                         <div class="form-group row">
                             <label for="subjek" class="col-sm-2 col-form-label">Subjek:</label>
                             <div class="col-sm-10">
-                                <input type="text" name="subjek" class="form-control" id="subjek" placeholder="Perihal">
+                                <input type="text" name="subjek" class="form-control" id="subjek" placeholder="Perihal" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="message">Pesan</label>
-                            <textarea name="message" rows="3"></textarea>
+                            <textarea name="message" rows="3" required></textarea>
                             <script>
                                 CKEDITOR.replace('message');
                             </script>

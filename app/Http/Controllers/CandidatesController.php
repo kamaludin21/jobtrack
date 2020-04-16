@@ -23,7 +23,6 @@ class CandidatesController extends Controller
       ->where('users.level', '1')
       ->groupBy('users.id', 'profils.id',)
       ->get();
-      // return $candidates;
       return view('recruiter.candidate', ['candidates' => $candidates]);
 
     }

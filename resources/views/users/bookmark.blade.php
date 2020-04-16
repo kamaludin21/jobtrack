@@ -28,17 +28,25 @@ nav-user-active
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title">
-                                              <a href="{{ url('lowongan/detail', [$bookmark->ticket]) }}">{{ Str::limit($bookmark->title, 35, '...') }}</a>
+                                              <a href="{{ url('lowongan/detail', [$bookmark->ticket]) }}">{{ Str::limit($bookmark->title, 25, '...') }}</a>
                                             </h5>
                                             <h6 class="card-subtitle mb-2 text-muted">Rp. {{ number_format($bookmark->gajimin) }} - {{ number_format($bookmark->gajimax) }}</h6>
                                             <div class="card-text">
                                               {{ strip_tags(Str::limit($bookmark->description, 100, '...')) }}
 
                                             </div>
-                                            <div class="float-right">
-                                              <a href="#" class="card-link">
-                                                <i class="fa fa-trash"></i> Hapus
-                                              </a>
+                                            <div class="mt-2 float-right">
+                                              <form action="{{ url('user/bookmark/destroy', [$bookmark->id]) }}" class="d-flex" method="POST">
+                                                  @csrf
+                                                  @method('PATCH')
+                                                  <button href="#" class="btn btn-sm btn-light text-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">
+                                                    <i class="fa fa-trash"></i> Hapus
+                                                  </button>
+                                                  {{-- <button class="btn btn-sm text-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">
+                                                      <small><i class="fa fa-trash"></i></small>
+                                                  </button> --}}
+                                              </form>
+
                                             </div>
                                         </div>
                                     </div>

@@ -4,18 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Perusahaan;
-use App\Vacancy;
-use App\Lamaran;
-use App\Profil;
-use App\Experience;
-use App\Certificate;
-use App\Educations;
-use App\Skill;
-use App\User;
-use App\Agenda;
 use Auth;
 use Image;
+use App\{Perusahaan, Vacancy, Lamaran, Profil, Experience, Certificate, Educations, Skill, User, Agenda};
+// use App\Perusahaan;
+// use App\Vacancy;
+// use App\Lamaran;
+// use App\Profil;
+// use App\Experience;
+// use App\Certificate;
+// use App\Educations;
+// use App\Skill;
+// use App\User;
+// use App\Agenda;
+
 
 class RecruitersController extends Controller
 {
@@ -86,7 +88,6 @@ class RecruitersController extends Controller
             $sampul = $request->file('sampul');
             $extension_sampul = $sampul->getClientOriginalExtension();
             $filename_sampul = rand().'.'.$extension_sampul;
-            // $sampul->move('img/recruiter/sampul', $filename_sampul);
             $sampuls = Image::make($sampul->getRealPath())
                 ->resize(160, 90)
                 ->save('img/recruiter/sampul/' . $filename_sampul);
