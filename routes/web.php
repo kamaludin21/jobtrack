@@ -98,10 +98,13 @@ Route::prefix('user')->group(function () {
     // Invite
     Route::get('/invite', 'SearcherController@inviter');
     Route::get('/invite/{id}', 'SearcherController@ShowInviter');
+    Route::get('/lamaran', 'SearcherController@lamaran');
 
     // Account setting
     Route::get('account', 'SearcherController@security');
-    Route::get('/lamaran', 'SearcherController@lamaran');
+    Route::patch('account/umum/{id}', 'SearcherController@umum');
+    Route::post('account/password', 'SearcherController@password');
+
 });
 
 

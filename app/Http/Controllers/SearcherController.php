@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Image;
 use App\{Profil, Experience, Certificate, Educations, Skill, Lamaran, Inviter, Agenda, User};
+use App\Rules\MatchOldPassword;
+use Hash;
 
 class SearcherController extends Controller
 {
@@ -126,14 +128,6 @@ class SearcherController extends Controller
     {
       $profiles = Profil::findOrFail($id);
 
-      // if ($request->hasfile('profil')) {
-      //     $profil = $request->file('profil');
-      //     $extension_profil = $profil->getClientOriginalExtension();
-      //     $filename_profil = rand().'.'.$extension_profil;
-      //     $profil->move('img/profil', $filename_profil);
-      //     $profil = $filename_profil;
-      // }
-
       $profil = $request->file('profil');
       $extension_profil = $profil->getClientOriginalExtension();
       $filename_profil = rand().'.'.$extension_profil;
@@ -143,10 +137,6 @@ class SearcherController extends Controller
 
       $profiles->profil = $filename_profil;
       $profiles->save();
-
-
-
-
       return redirect('user/profil')->with('success', 'data berhasil diubah');
     }
 
@@ -233,8 +223,6 @@ class SearcherController extends Controller
     public function UpdatePengalamanData(Request $request, $id)
     {
         $tanggal = explode("-", $request->dari);
-
-
 
         $pengalaman = Experience::findOrFail($id);
         $pengalaman->title = $request->title;
@@ -496,5 +484,27 @@ class SearcherController extends Controller
       $profil = Profil::where('idUser', $idUser)->first();
       $user = User::findOrFail($idUser);
       return view('account.security', ['profil' => $profil, 'user' => $user]);
+    }
+
+    public function umum(Request $request, $id)
+    {
+
+      $user = User::findOrFail($id);
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->save();
+      return redirect('user/account')->with('success', 'data berhasil diubah');
+    }
+
+    public function password(Request $request)
+    {
+        $request->validate([
+          'current_password' => ['required', new MatchOldPassword],
+          'new_password' => ['required'],
+          'new_confirm_password' => ['same:new_password'],
+        ]);
+
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        return redirect('user/account')->with('success', 'Password diubah');
     }
 }
