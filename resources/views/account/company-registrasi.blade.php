@@ -11,7 +11,7 @@
     <div class="row register-form">
         <div class="col-sm-4 col-sm-offset-1">
             <form method="POST" action="{{ route('register') }}" role="form" class="r-form">
-              <input type="hidden" name="level" value="2">
+                <input type="hidden" name="level" value="2">
                 @csrf
                 <div class="form-group">
                     <label class="sr-only" for="name">First name</label>
@@ -25,7 +25,8 @@
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="email">Email</label>
-                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="your.email@valid.com" required autocomplete="email">
+                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="your.email
+                    @valid.com" required autocomplete="email">
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">

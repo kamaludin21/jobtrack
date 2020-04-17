@@ -27,7 +27,8 @@
                 </div>
                 <div class="form-group">
                     <label class="sr-only" for="email">Email</label>
-                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="your.email@valid.com" required autocomplete="email">
+                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="your.email
+                    @valid.com" required autocomplete="email">
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">
