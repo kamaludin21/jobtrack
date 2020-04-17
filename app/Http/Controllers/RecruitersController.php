@@ -7,16 +7,6 @@ use Illuminate\Http\Request;
 use Auth;
 use Image;
 use App\{Perusahaan, Vacancy, Lamaran, Profil, Experience, Certificate, Educations, Skill, User, Agenda};
-// use App\Perusahaan;
-// use App\Vacancy;
-// use App\Lamaran;
-// use App\Profil;
-// use App\Experience;
-// use App\Certificate;
-// use App\Educations;
-// use App\Skill;
-// use App\User;
-// use App\Agenda;
 
 
 class RecruitersController extends Controller
@@ -53,10 +43,19 @@ class RecruitersController extends Controller
     public function vacancy()
     {
         $idPerusahaan = Auth::user()->id;
-        $vacancy = Vacancy::where('idPerusahaan', $idPerusahaan)
-      ->orderBy('created_at', 'desc')
-      ->paginate(3);
-        return view('recruiter.vacancy', ['vacancies' => $vacancy]);
+        $vacancy = Vacancy::where([
+                      ['idPerusahaan', '=', $idPerusahaan],
+                      ['status', '=', 'active']
+                    ])
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(3);
+        $vacancyClosed = Vacancy::where([
+                      ['idPerusahaan', '=', $idPerusahaan],
+                      ['status', '=', 'closed']
+                    ])
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(3);
+        return view('recruiter.vacancy', ['vacancies' => $vacancy, 'vacancyClosed' => $vacancyClosed]);
     }
 
     public function create()
@@ -132,6 +131,7 @@ class RecruitersController extends Controller
             ->where('lamarans.ticket', $vacancy->ticket)
             ->groupBy('users.id', 'lamarans.id')
             ->get();
+
         return view('recruiter.manage-vacancies', ['vacancy' => $vacancy, 'lamaran' => $lamaran, 'agenda' => $agenda]);
     }
 
@@ -140,11 +140,30 @@ class RecruitersController extends Controller
         $id = $idLamar;
         $lamaran = Lamaran::findOrFail($id);
 
-        $lamaran->status = $request->status;
-        $lamaran->save();
+        if($request->status == 4) {
+          $lowongan = Vacancy::where('ticket', '=', $lamaran->ticket)->first();
+          $lamaran = Lamaran::where([
+            ['status', '=', '4'],
+            ['ticket', '=', $lamaran->ticket],
+            ])->count();
+          if($lamaran < $lowongan->slot ) {
+            $lamaran = Lamaran::findOrFail($id);
+            $lamaran->status = $request->status;
+            $lamaran->save();
+            $pageId = $request->pageId;
+            return redirect('recruiter/vacancy/manage/'.$pageId)->with('success', 'Data berhasil diubah');
+          } else {
+            $pageId = $request->pageId;
+            return redirect('recruiter/vacancy/manage/'.$pageId)->with('danger', 'Slot lowongan sudah penuh');
+          }
 
-        $pageId = $request->pageId;
-        return redirect('recruiter/vacancy/manage/'.$pageId)->with('success', 'Data berhasil diubah');
+        } else {
+          $lamaran = Lamaran::findOrFail($id);
+          $lamaran->status = $request->status;
+          $lamaran->save();
+          $pageId = $request->pageId;
+          return redirect('recruiter/vacancy/manage/'.$pageId)->with('success', 'Data berhasil diubah');
+        }
     }
 
     public function ProfilApplicants($id)
@@ -173,4 +192,14 @@ class RecruitersController extends Controller
       $candidate = User::findOrFail($id);
       return view('recruiter.form-invite', ['candidate' => $candidate]);
     }
+
+    public function account()
+    {
+      $idUser = Auth::user()->id;
+      $company = Perusahaan::where('idUser', $idUser)->first();
+      $user = User::findOrFail($idUser);
+      return view('recruiter.security', ['company' => $company, 'user' => $user]);
+    }
+
+
 }

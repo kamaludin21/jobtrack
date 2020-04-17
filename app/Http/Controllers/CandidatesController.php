@@ -20,10 +20,35 @@ class CandidatesController extends Controller
         profils.*,
         group_concat(DISTINCT educations.instansi, ' | ', educations.pendidikan  SEPARATOR', ') as pendidikan,
         group_concat(DISTINCT skills.skill) as skill"))
-      ->where('users.level', '1')
+      ->where('users.level', '=', '1')
       ->groupBy('users.id', 'profils.id',)
       ->get();
       return view('recruiter.candidate', ['candidates' => $candidates]);
-
     }
+
+    public function search(Request $request)
+    {
+      $candidates = DB::table('users')
+      ->join('profils', 'users.id', '=', 'profils.idUser')
+      ->join('educations', 'users.id', '=', 'educations.idUser')
+      ->join('skills', 'users.id', '=', 'skills.idUser')
+      ->select(DB::raw("
+        users.id as IdUser,
+        users.name,
+        profils.*,
+        group_concat(DISTINCT educations.instansi, ' | ', educations.pendidikan  SEPARATOR', ') as pendidikan,
+        group_concat(DISTINCT skills.skill) as skill"))
+      ->where([
+        ['users.level', '=', '1'],
+        ['skill', 'like', '%'.$request->skill.'%'],
+        ['instansi', 'like', '%'.$request->pendidikan.'%'],
+        ['ttl', 'like', '%'.$request->daerah.'%'],
+        ['gaji', 'like', '%'.$request->gaji.'%']
+      ])
+      ->groupBy('users.id', 'profils.id',)
+      ->get();
+
+      return view('recruiter.candidate', ['candidates' => $candidates]);
+    }
+
 }

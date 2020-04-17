@@ -431,6 +431,10 @@
     color: #ffffff !important;
 }
 
+.nav-user-active p {
+    color: #ffffff !important;
+}
+
 .thead-small th {
     text-align: center;
     padding: 2px !important;

@@ -11,13 +11,13 @@
             <div class="card">
                 <div class="pr-4 pt-4 pl-4">
                   <div class="float-right">
-                      <a href="{{ url('recruiter/vacancy') }}" class="btn btn-sm btn-info">
+                      <a href="{{ url('recruiter/vacancy/manage', [$lowongan->id]) }}" class="btn btn-sm btn-info">
                           <i class="fa fa-chevron-left"></i>
                           Kembali
                       </a>
                   </div>
 
-                    <h5>Kelola lowongan</h5>
+                    <h5>Agenda lowongan</h5>
                     <hr>
                 </div>
                 <div class="px-4">
@@ -25,36 +25,30 @@
                     </p>
                     <div class="row">
                         <div class="col">
-                            <p>Tiket : {{ $vacancy->ticket }}
-                                <p>
-                                    Jabatan : {{ $vacancy->title }}
-                                </p>
+                            <address>
+                              <strong>Jabatan:</strong> {{ $lowongan->title }} <br>
+                              <strong>Level:</strong> {{ $lowongan->subbidang }} <br>
+                              <strong>Expired:</strong> {{ $lowongan->expired }} <br>
+                              <strong>Slot:</strong> {{ $lowongan->slot }}
+
+                            </address>
                         </div>
                         <div class="col">
-                            <p>Lokasi Penempatan : {{ $vacancy->daerah }}</p>
-                            <p>
-                                Expired : {{ $vacancy->expired }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p>Slot : {{ $vacancy->slot }}
-                            <p>
-                                Level : {{ $vacancy->subbidang }}
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p>Rentang gaji : Rp. {{ number_format($vacancy->gajimin) }}&mdash;{{ number_format($vacancy->gajimax) }}
-                            <p>
-                                Tipe : {{ $vacancy->type }}
-                            </p>
+                          <address>
+                            <strong>Agenda:</strong> {{ $agendaFirst->title }} <br>
+                            <strong>Jadwal:</strong> {{ $agendaFirst->tanggal }} &bull; {{ $agendaFirst->mulai }} - {{ $agendaFirst->sampai }} WIB<br>
+                            <strong>Status: </strong> {{ $agendaFirst->status == '2' ? 'Administrasi' : 'Interview' }} <br>
+
+                            <strong>Deskripsi: </strong> {{ $agendaFirst->deskripsi }}
+
+                          </address>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="font-weight-bold">Pelamar</p>
-                    @if(count($lamaran) == 0)
+                    <p class="font-weight-bold">Peserta</p>
+                    @if(count($pelamar) == 0)
+                    {{-- @if(empty($pelamar)) --}}
                     <p>Belum ada pelamar</p>
                     @else
                     <table class="table table-sm">
@@ -64,54 +58,35 @@
                                 <th scope="col">Nama</th>
                                 <th scope="col">Keahlian</th>
                                 <th scope="col">Pendidikan Terakhir</th>
-                                <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @php($i = 1)
-                            @foreach ($lamaran as $lamaran)
-                            <tr>
-                                <td scope="col">{{ $i }}.</td>
-                                <td scope="col">
-                                    <a href="{{ url('recruiter/applicants', [$lamaran->id]) }}" class="text-decoration-none" target="_blank">
-                                        {{ $lamaran->name }}
-                                    </a>
-                                </td>
-                                <td scope="col">
-                                    @php($skil = explode(',', $lamaran->skill))
-                                    @foreach ($skil as $key)
-                                    <span class="badge badge-pill badge-dark">{{ $key }}</span><br>
-                                    @endforeach
-                                </td>
-                                <td scope="col">
-                                    @php($echo = explode(',', $lamaran->pendidikan))
-                                    @foreach ($echo as $key)
-                                    &bull; {{ Str::limit($key, 20, '...') }}
-                                    <br>
-                                    @endforeach
-                                </td>
-                                <td scope="col">
-                                    <form action="{{ url('recruiter/updatestatus', [$lamaran->idLamar]) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="_method" value="PATCH">
-                                        <input type="hidden" name="pageId" value="{{ $vacancy->id }}">
-                                        <div class="input-group input-group-sm">
-                                            <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="status">
-                                                <option value="1" @if($lamaran->status == '1') selected @endif>Belum proses</option>
-                                                <option value="2" @if($lamaran->status == '2') selected @endif>Administrasi</option>
-                                                <option value="3" @if($lamaran->status == '3') selected @endif>Interview</option>
-                                                <option value="4" @if($lamaran->status == '4') selected @endif>Terima</option>
-                                                <option value="5" @if($lamaran->status == '5') selected @endif>Tolak</option>
-                                            </select>
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-primary" type="submit">
-                                                    <i class="fa fa-send"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
+                            @foreach ($pelamar as $lamaran)
+                              @if($lamaran->status >= $agendaFirst->status)
+                              <tr>
+                                  <td scope="col">{{ $i }}.</td>
+                                  <td scope="col">
+                                      <a href="{{ url('recruiter/applicants', [$lamaran->id]) }}" class="text-decoration-none" target="_blank">
+                                          {{ $lamaran->name }}
+                                          {{ $lamaran->status }}
+                                      </a>
+                                  </td>
+                                  <td scope="col">
+                                      @php($skil = explode(',', $lamaran->skill))
+                                      @foreach ($skil as $key)
+                                      <span class="badge badge-pill badge-dark">{{ $key }}</span><br>
+                                      @endforeach
+                                  </td>
+                                  <td scope="col">
+                                      @php($echo = explode(',', $lamaran->pendidikan))
+                                      @foreach ($echo as $key)
+                                      &bull; {{ Str::limit($key, 20, '...') }}
+                                      <br>
+                                      @endforeach
+                                  </td>
+                              </tr>
+                              @endif
                             @php($i++)
                             @endforeach
 
@@ -132,18 +107,23 @@
                     <div class="pt-3">
                         @if(!empty($agenda))
                         @foreach ($agenda as $key)
-                        <a href="{{ url('recruiter/agenda/detail', [$key->id]) }}" class="text-decoration-none">
-                            <p class="p-1 pl-2 border">
+                        {{-- <a href="{{ url('recruiter/agenda/detail', [$key->id]) }}">
+                            <p class="p-1 pl-2 border {{ $key->id == $agendaFirst->id ? 'nav-user-active' : '' }}">
                                 <i class="fa fa-info-circle pr-1">i</i> {{ $key->title }}
                             </p>
-                        </a>
+                        </a> --}}
+                        <p class="p-1 pl-2 border {{ $key->id == $agendaFirst->id ? 'nav-user-active' : '' }}">
+                            <a href="{{ url('recruiter/agenda/detail', [$key->id]) }}" class="link-nav">
+                                {{ $key->title }}
+                            </a>
+                        </p>
                         @endforeach
                         @endif
                     </div>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -201,7 +181,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 

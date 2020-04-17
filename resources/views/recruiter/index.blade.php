@@ -31,14 +31,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-9">
-                            {{-- <h4 class="mb-n1">{{ $company->name }}</h4> --}}
+
                             @if(empty($company))
                             <h4 class="mb-n1">{{ Auth::user()->name }}</h4>
                             <small class="text-danger">Lengkapi profil anda, tekan tombol edit profil!</small>
                             @else
                             @if($company->status == 'verify')
+                              <h4 class="mb-n1">{{ $company->name }}</h4>
                               <small class="text-muted">
-                                  <em>This account is verified</em>
+                                  <em>Akun ini terverifikasi</em>
                                   <i class="fa fa-check-circle fa-lg text-primary" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
                               </small>
                             @endif

@@ -169,7 +169,7 @@
                                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                                         <div class="dropdown-menu" aria-labelledby="dropdown01" style="right: 0; left: auto;">
                                             <a class="dropdown-item" href="{{ url('recruiter') }}">Profil</a>
-                                            <a class="dropdown-item" href="#">Pengaturan Akun</a>
+                                            <a class="dropdown-item" href="{{ url('recruite/account') }}">Pengaturan Akun</a>
                                             <hr>
                                             <a class="dropdown-item" href="#" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                document.getElementById('logout-form').submit();">Logout</a>

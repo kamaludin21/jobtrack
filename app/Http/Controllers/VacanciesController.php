@@ -17,11 +17,11 @@ class VacanciesController extends Controller
     public function lowongan()
     {
         $lowongan = DB::table('vacancies')
-      ->join('perusahaans', 'vacancies.idPerusahaan', '=', 'perusahaans.id')
-      ->select('perusahaans.name', 'perusahaans.profil', 'vacancies.*')
-      ->where('vacancies.status', 'active')
-      ->orderByRaw('vacancies.created_at DESC')
-      ->paginate(3);
+        ->join('perusahaans', 'vacancies.idPerusahaan', '=', 'perusahaans.id')
+        ->select('perusahaans.name', 'perusahaans.profil', 'vacancies.*')
+        ->where('vacancies.status', 'active')
+        ->orderByRaw('vacancies.created_at DESC')
+        ->paginate(3);
 
         return view('vacancies.index', ['lowongans' => $lowongan]);
     }

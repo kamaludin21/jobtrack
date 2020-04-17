@@ -29,10 +29,18 @@ Route::prefix('recruiter')->group(function () {
     Route::get('/inviter/{id}', 'RecruitersController@invite');
     Route::post('/inviter/store', 'InvitersController@store');
     Route::post('/agenda/store', 'AgendaController@store');
+    Route::get('/agenda/detail/{ticket}', 'AgendaController@detail');
+    // Selesaikan
+    Route::get('agenda/detail', function () {
+      return view('recruiter.agenda-detail');
+    });
+
+    Route::get('account', 'RecruitersController@account');
 });
 
 Route::prefix('candidate')->group(function () {
     Route::get('', 'CandidatesController@index');
+    Route::post('search', 'CandidatesController@search');
 });
 
 Route::prefix('lowongan')->group(function () {
