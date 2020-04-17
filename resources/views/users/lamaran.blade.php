@@ -23,9 +23,9 @@ nav-user-active
                                     <table class="table rounded-pill">
                                         <thead class="thead-small bg-c-donker text-white">
                                             <tr class="font-weight-light">
-                                                <th scope="col">Job Site</th>
-                                                <th scope="col">Location</th>
-                                                <th scope="col">Salary</th>
+                                                <th scope="col">Lowongan</th>
+                                                <th scope="col">Lokasi</th>
+                                                <th scope="col">Gaji</th>
                                                 <th scope="col"></th>
                                             </tr>
                                         </thead>

@@ -41,10 +41,10 @@
                             <a class="nav-link" href="{{ route('login') }}">Masuk</a>
                         </li>
                         <li class="nav-item pr-3">
-                            <a class="nav-link" href="#">Daftar</a>
+                            <a class="nav-link" href="{{ url('daftar') }}">Daftar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-sm btn-outline-link" href="{{ url('employer/home') }}">Perusahaan</a>
+                            <a class="nav-link btn btn-sm btn-outline-link" href="{{ url('perusahaan/registrasi') }}">Perusahaan</a>
                         </li>
                     </ul>
                 </div>
@@ -53,7 +53,7 @@
                     <div class="collapse navbar-collapse" id="navbars">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item @yield('home-status')">
-                                <a class="nav-link" href="{{ url('home') }}">Home</a>
+                                <a class="nav-link" href="{{ url('home') }}">Beranda</a>
                             </li>
                             <li class="nav-item @yield('lowongan-status')">
                                 <a class="nav-link" href="{{ url('lowongan') }}">Lowongan</a>
@@ -72,7 +72,7 @@
                                 <div class="dropdown-menu ml-notification" aria-labelledby="mess" style="width: 250px !important">
                                     <div class="card m-n3">
                                         <div class="card-header bg-c-blue text-center text-white">
-                                            Notifications
+                                            Notifikasi
                                         </div>
                                         <div class="card-body">
                                             <div class="text-center">
@@ -99,7 +99,7 @@
                                     <a class="dropdown-item" href="{{ url('user/account') }}">Pengaturan Akun</a>
                                     <hr>
                                     <a class="dropdown-item" href="#" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                       document.getElementById('logout-form').submit();">Logout</a>
+                                                       document.getElementById('logout-form').submit();">Keluar</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -193,34 +193,13 @@
         <div class="row">
             <div class="col-12 col-md">
                 <img class="mb-2" src="{{ asset('img/Jobtrack.png') }}">
-                <small class="d-block mb-3 text-muted">&copy; 2017-2019</small>
-            </div>
-            <div class="col-6 col-md text-right">
-                <h5>Features</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Cool stuff</a></li>
-                    <li><a class="text-muted" href="#">Random feature</a></li>
-                    <li><a class="text-muted" href="#">Team feature</a></li>
-                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                    <li><a class="text-muted" href="#">Another one</a></li>
-                    <li><a class="text-muted" href="#">Last time</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md text-right">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Resource</a></li>
-                    <li><a class="text-muted" href="#">Resource name</a></li>
-                    <li><a class="text-muted" href="#">Another resource</a></li>
-                    <li><a class="text-muted" href="#">Final resource</a></li>
-                </ul>
+                <small class="d-block mb-3 text-muted">Copyright &copy; 2020</small>
             </div>
             <div class="col-6 col-md text-right">
                 <h5>About</h5>
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
+                    <li><a class="text-muted" href="#">Credits</a></li>
                     <li><a class="text-muted" href="#">Terms</a></li>
                 </ul>
             </div>

@@ -111,6 +111,12 @@ Route::prefix('user')->group(function () {
 Route::get('login', function () {
     return view('auth.login');
 });
+Route::get('perusahaan/registrasi', function () {
+  return view('account.company-registrasi');
+});
+Route::get('daftar', function () {
+  return view('account.registrasi');
+});
 
 
 Auth::routes();

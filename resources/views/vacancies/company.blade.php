@@ -32,7 +32,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <strong>Industry</strong>
+                                    <strong>Industri</strong>
                                     <br>
                                     Information Technology / IT
                                 </div>
@@ -111,10 +111,14 @@
                                           {{ strip_tags(Str::limit($lowongan->description, 300, '...')) }}
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
+                                          <div class="btn-group">
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">{{ $lowongan->slot }} Posisi</button>
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">Di posting {{ Str::limit($lowongan->created_at , 10, '') }} &bull; Lamar sebelum {{ $lowongan->expired }}</button>
+                                          </div>
+                                            {{-- <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">{{ $lowongan->slot }} Posisi</button>
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">Posted {{ Str::limit($lowongan->created_at , 10, '') }} &bull; Apply before {{ $lowongan->expired }}</button>
-                                            </div>
+                                            </div> --}}
                                             <a href="{{ url('lowongan/detail', [$lowongan->ticket]) }}" class="btn btn-sm btn-primary">
                                                 Selengkapnya
                                             </a>

@@ -30,7 +30,7 @@ nav-user-active
                                 <div class="col-md-4 col-xl-3">
                                     <div class="card bg-c-green order-card">
                                         <div class="card-block">
-                                            <h6 class="m-b-20">Certificate</h6>
+                                            <h6 class="m-b-20">Sertifikat</h6>
                                             <h2 class="text-right"><i class="fa fa-certificate f-left"></i><span>{{ $certificate }}</span></h2>
                                         </div>
                                     </div>
@@ -39,7 +39,7 @@ nav-user-active
                                 <div class="col-md-4 col-xl-3">
                                     <div class="card bg-c-yellow order-card">
                                         <div class="card-block">
-                                            <h6 class="m-b-20">Experience</h6>
+                                            <h6 class="m-b-20">Pengalaman</h6>
                                             <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>{{ $experience }}</span></h2>
                                         </div>
                                     </div>

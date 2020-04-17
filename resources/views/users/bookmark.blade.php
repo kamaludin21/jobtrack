@@ -16,7 +16,7 @@ nav-user-active
                         <div class="col p-4 d-flex flex-column position-static">
                             <div class="card-header bg-c-donker">
                                 <div class="lead">
-                                  Bookmark
+                                  Lowonan tersimpan
                                 </div>
                             </div>
                             <div class="row mt-4">
