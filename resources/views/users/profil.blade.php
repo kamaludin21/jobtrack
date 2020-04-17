@@ -236,7 +236,7 @@ nav-user-active
                                                             <i class="fa fa-pencil"></i>
                                                             Sunting</a>
                                                         <a class="btn btn-sm btn-outline-link text-danger">
-                                                            <i class="fa fa-trash">D/i>
+                                                            <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
                                                 </h4>

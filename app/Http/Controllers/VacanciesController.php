@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\{Vacancy, Lamaran, Perusahaan};
-// use App\Vacancy;
-// use App\Lamaran;
-// use App\Perusahaan;
+use App\{Vacancy, Lamaran, Perusahaan, Daerah};
 use Auth;
 
 class VacanciesController extends Controller
@@ -22,8 +19,9 @@ class VacanciesController extends Controller
         ->where('vacancies.status', 'active')
         ->orderByRaw('vacancies.created_at DESC')
         ->paginate(3);
+        $daerah = Daerah::all();
 
-        return view('vacancies.index', ['lowongans' => $lowongan]);
+        return view('vacancies.index', ['lowongans' => $lowongan, 'daerah' => $daerah]);
     }
 
     public function search(Request $request)
@@ -39,7 +37,8 @@ class VacanciesController extends Controller
       ])
       ->orderBy('vacancies.created_at', 'desc')
       ->get();
-        return view('vacancies.result', ['lowongans' => $lowongan]);
+      $daerah = Daerah::all();
+        return view('vacancies.result', ['lowongans' => $lowongan, 'daerah' => $daerah]);
     }
 
     public function detail($ticket)

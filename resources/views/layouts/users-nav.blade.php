@@ -10,7 +10,7 @@
             <img src="{{ url('img/profil',[$profil->profil]) }}" class="img-fluid" alt="">
             <div class="text-right" style="margin-top: -35px; margin-right: 5px;">
                 <button type="button" class="btn btn-sm btn-primary rounded-pill" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fa fa-camera">F</i>
+                    <i class="fa fa-camera"></i>
                 </button>
             </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

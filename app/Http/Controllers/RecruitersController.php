@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
+use Hash;
 use Auth;
 use Image;
-use App\{Perusahaan, Vacancy, Lamaran, Profil, Experience, Certificate, Educations, Skill, User, Agenda};
+use App\{Perusahaan, Vacancy, Lamaran, Profil, Experience, Certificate, Educations, Skill, User, Agenda, Daerah};
 
 
 class RecruitersController extends Controller
@@ -60,7 +62,8 @@ class RecruitersController extends Controller
 
     public function create()
     {
-      return view('recruiter.form');
+      $daerah = Daerah::all();
+      return view('recruiter.form', ['daerah' => $daerah]);
     }
 
     public function StoreProfil(Request $request)
@@ -199,6 +202,28 @@ class RecruitersController extends Controller
       $company = Perusahaan::where('idUser', $idUser)->first();
       $user = User::findOrFail($idUser);
       return view('recruiter.security', ['company' => $company, 'user' => $user]);
+    }
+
+    public function umum(Request $request, $id)
+    {
+
+      $user = User::findOrFail($id);
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->save();
+      return redirect('recruiter/account')->with('success', 'data berhasil diubah');
+    }
+
+    public function password(Request $request)
+    {
+        $request->validate([
+          'current_password' => ['required', new MatchOldPassword],
+          'new_password' => ['required'],
+          'new_confirm_password' => ['same:new_password'],
+        ]);
+
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        return redirect('recruiter/account')->with('success', 'Password diubah');
     }
 
 

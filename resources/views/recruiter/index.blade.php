@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container pt-4">
-    <div class="row mb-2">
+    <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="">
@@ -88,7 +88,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <h5>Tentang Perusahaan</h5>
@@ -100,44 +100,6 @@
                         {!! $company->description !!}
                     </div>
                     @endif
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="px-4 pt-4">
-                    <h5>Dashboard</h5>
-                    <hr>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card p-3">
-                                <small>Applications</small>
-                                <p>
-                                    5
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card p-3">
-                                <small>Approve </small>
-                                <p>
-                                    5
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card p-3">
-                                <small>Rejected Candidate </small>
-                                <p>
-                                    5
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
             </div>
         </div>

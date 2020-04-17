@@ -134,7 +134,7 @@
                         @foreach ($agenda as $key)
                         <a href="{{ url('recruiter/agenda/detail', [$key->id]) }}" class="text-decoration-none">
                             <p class="p-1 pl-2 border">
-                                <i class="fa fa-info-circle pr-1">i</i> {{ $key->title }}
+                                <i class="fa fa-info-circle pr-1"></i> {{ $key->title }}
                             </p>
                         </a>
                         @endforeach

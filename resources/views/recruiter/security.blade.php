@@ -8,6 +8,7 @@
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <div class="row">
         <div class="col-md-12">
+          @include('layouts.alert')
             <div class="card">
                 <div class="">
                     @if(empty($company))
@@ -58,7 +59,9 @@
                       <p>
                           <strong>Informasi Umum</strong>
                       </p>
-                      <form class="" action="index.html" method="post">
+                      <form method="POST" action="{{ url('recruiter/account/umum', [$user->id]) }}" class="px-1">
+                          <input type="hidden" name="_method" value="PATCH">
+                        @csrf
                           <div class="form-group">
                               <label for="">Nama</label>
                               <input type="text" class="form-control form-control-sm" name="name" placeholder="Nama akun" value="{{ $user->name }}" autocomplete="off" required>
@@ -80,7 +83,7 @@
                       <p class="text-danger"><small>{{ $error }}</small></p>
                       @endforeach
 
-                      <form class="" action="{{ url('user/account/password') }}" method="post">
+                      <form class="" action="{{ url('recruiter/account/password') }}" method="post">
                           @csrf
                           <div class="form-group">
                               <label for="">Kata sandi lama</label>

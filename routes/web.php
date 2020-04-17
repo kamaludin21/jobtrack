@@ -36,6 +36,8 @@ Route::prefix('recruiter')->group(function () {
     });
 
     Route::get('account', 'RecruitersController@account');
+    Route::patch('account/umum/{id}', 'RecruitersController@umum');
+    Route::post('account/password', 'RecruitersController@password');
 });
 
 Route::prefix('candidate')->group(function () {

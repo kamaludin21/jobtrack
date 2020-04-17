@@ -62,12 +62,12 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('user/bookmark') }}">
-                                    <i class="fa fa-bookmark">B</i>
+                                    <i class="fa fa-bookmark"></i>
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropleft" id="mess" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-bell">N</i>
+                                    <i class="fa fa-bell"></i>
                                 </a>
                                 <div class="dropdown-menu ml-notification" aria-labelledby="mess" style="width: 250px !important">
                                     <div class="card m-n3">
@@ -130,7 +130,24 @@
                                         </a>
                                         <div class="dropdown-menu ml-notification" aria-labelledby="dropdown02" style="width: 250px !important">
                                             <div class="card m-n3">
-                                                <div class="card-header bg-c-blue text-center text-white">
+                                              <div class="card-header bg-c-blue text-center text-white">
+                                                  Notifikasi
+                                              </div>
+                                              <div class="card-body">
+                                                  <div class="text-center">
+                                                      <img src="{{ asset('img/notify.png') }}" class="img-fluid" alt="Empty notification">
+                                                      <small>
+                                                          You don't have any notifications
+                                                      </small>
+                                                  </div>
+                                              </div>
+                                              <div class="card-footer text-center">
+                                                  <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">
+                                                      Selengkapnya
+                                                      <i class="fa fa-chevron-right mt-n3 "></i>
+                                                  </a>
+                                              </div>
+                                                {{-- <div class="card-header bg-c-blue text-center text-white">
                                                     Notifications
                                                     <br>
                                                     <small class="mt-n5">
@@ -162,14 +179,14 @@
                                                         <i class="fa fa-chevron-right mt-n3 "></i>
                                                     </a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                                         <div class="dropdown-menu" aria-labelledby="dropdown01" style="right: 0; left: auto;">
                                             <a class="dropdown-item" href="{{ url('recruiter') }}">Profil</a>
-                                            <a class="dropdown-item" href="{{ url('recruite/account') }}">Pengaturan Akun</a>
+                                            <a class="dropdown-item" href="{{ url('recruiter/account') }}">Pengaturan Akun</a>
                                             <hr>
                                             <a class="dropdown-item" href="#" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                document.getElementById('logout-form').submit();">Logout</a>
