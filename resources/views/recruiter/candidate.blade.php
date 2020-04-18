@@ -7,32 +7,33 @@
     <div class="row mb-2">
         <div class="col-12" id="myDIV" style="display: none;">
           <div class="card p-4">
-              <form>
+              <form action="{{ url('candidate/search') }}" method="post">
+                @csrf
               <div class="form-row">
                 <div class="col">
-                  <input type="text" class="form-control" placeholder="Keahlian">
+                  <input type="text" name="skill" class="form-control" placeholder="Keahlian">
                 </div>
                 <div class="col">
-                  <select class="custom-select">
-                    <option selected>Pendidikan</option>
+                  <select class="custom-select" name="pendidikan">
+                    <option value="" disabled selected>Pendidikan</option>
                     <option value="1">S1</option>
                     <option value="2">S2</option>
                     <option value="3">S3</option>
                   </select>
                 </div>
                 <div class="col">
-                  <select class="custom-select">
-                    <option selected>Domisili</option>
+                  <select class="custom-select" name="daerah">
+                    <option value="" disabled selected>Daerah</option>
                     <option value="1">Pekanbaru</option>
                     <option value="2">Jakarta</option>
                     <option value="3">Palembang</option>
                   </select>
                 </div>
                 <div class="col">
-                  <input type="text" class="form-control" placeholder="Nominal gaji">
+                  <input type="text" name="gaji" class="form-control" placeholder="Nominal gaji">
                 </div>
                 <div class="col-auto">
-                  <button class="btn btn-primary">Search now</button>
+                  <button type="submit" class="btn btn-primary">Cari</button>
                 </div>
               </div>
             </form>
@@ -43,7 +44,7 @@
                 <div class="px-4 pt-4">
                   <div class="float-right">
                       <button type="button" onclick="myFunction()" class="btn btn-sm btn-secondary py-1">
-                          Filters
+                          Filter
                           <i class="fa fa-chevron-up"></i>
                       </button>
                       <button class="btn btn-sm btn-primary">
@@ -53,7 +54,7 @@
                           <i class="fa fa-th-list"></i>
                       </button>
                   </div>
-                  <h5>Your Candidate</h5>
+                  <h5>Persona yang tersedia</h5>
                   <hr>
                 </div>
                 <div class="card-body">
@@ -80,28 +81,24 @@
                                           <p>
                                             <small>{{ Str::limit($candidate->ttl, 23, '') }}</small>
                                             @if($candidate->status == 'YES')
-                                              <span class="badge badge-pill badge-success">Available</span>
+                                              <span class="badge badge-pill badge-success">Tersedia</span>
                                             @else
-                                              <span class="badge badge-pill badge-danger">not available</span>
+                                              <span class="badge badge-pill badge-danger">Tidak tersedia</span>
                                             @endif
                                           </p>
                                         </div>
                                       </div>
                                     </div>
                                     <div class="">
-                                      <span class="text-muted">Education</span>
+                                      <span class="text-muted">Pendidikan</span>
                                       <div class="font-weight-light mb-2">
-                                        {{-- {{ $candidate->pendidikan }} --}}
                                         @php($echo = explode(',', $candidate->pendidikan))
                                         @foreach ($echo as $key)
                                           &bull; {{ $key }}
                                           <br>
                                         @endforeach
-
-                                        {{-- <br>
-                                        &bull; S1 | Teknik Geologi UGM --}}
                                       </div>
-                                      <span class="text-muted">Skill</span>
+                                      <span class="text-muted">Keahlian</span>
                                       <div class="">
                                         @php($skil = explode(',', $candidate->skill))
                                         @foreach ($skil as $key)
@@ -120,7 +117,7 @@
                                       </div>
                                     </div>
                                     <div class="mt-2">
-                                      <a href="{{ url('recruiter/inviter', [$candidate->IdUser]) }}" class="btn btn-primary btn-block">Invite a Jobs</a>
+                                      <a href="{{ url('recruiter/inviter', [$candidate->IdUser]) }}" class="btn btn-primary btn-block">Undang persona</a>
                                     </div>
                                   </div>
                               </div>
@@ -128,8 +125,7 @@
                         @endforeach
                       @endif
                   </div>
-                  <hr>
-                  <nav aria-label="Page navigation example">
+                  {{-- <nav aria-label="Page navigation example">
                       <ul class="pagination justify-content-end">
                           <li class="page-item disabled">
                               <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -141,7 +137,7 @@
                               <a class="page-link" href="#">Next</a>
                           </li>
                       </ul>
-                  </nav>
+                  </nav> --}}
                 </div>
             </div>
         </div>

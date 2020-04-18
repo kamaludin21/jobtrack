@@ -10,9 +10,9 @@ active
     <div class="row">
         <div class="col-md-6">
             <div class="pl-5 pt-6 text-center">
-                <h2 class="font-weight-center text-white pb-2">
-                    Search now, and track it
-                </h2>
+              <h2 class="font-weight-center text-white pb-2">
+                  Jelajah dan cari sekarang <br> <small class="font-weight-lighter">pekerjaan idaman anda</small>
+              </h2>
                 <div class="row">
                     <div class="col-lg-12">
                         {{-- <div class="input-group">

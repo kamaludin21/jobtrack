@@ -5,14 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Auth;
-use App\Profil;
-use App\Experience;
-use App\Certificate;
-use App\Educations;
-use App\Skill;
-use App\Lamaran;
-use App\Inviter;
-use App\Agenda;
+use Image;
+use App\{Profil, Experience, Certificate, Educations, Skill, Lamaran, Inviter, Agenda, User};
+use App\Rules\MatchOldPassword;
+use Hash;
 
 class SearcherController extends Controller
 {
@@ -27,15 +23,6 @@ class SearcherController extends Controller
     }
     public function index()
     {
-        // Rule agenda:
-        // 1. Agenda ditampilkan jika status lamaran, sama dengan status agenda, (administrasi, dan interview)
-//     1-a. jika status lamaran user administrasi, maka tidak bisa melihat agenda dengan status Interview
-        // Way:
-        // 1. Cari lamaran dengan status 2 & 3,
-        // 2. cari agenda dengan ticket lamaran yang tersedia
-        // 3. jika agenda berstatus 3, dan lamaran berstatus 2, maka user tidak bisa melihat
-        // 4. jika agenda berstatus 2, dan lamaran berstatus 2, maka user bisa melihat
-
         $idUser = Auth::user()->id;
         $profil = Profil::where('idUser', $idUser)->first();
         // For counting
@@ -72,6 +59,47 @@ class SearcherController extends Controller
         ]);
     }
 
+    public function indexSingle($ticket)
+    {
+        $idUser = Auth::user()->id;
+        $profil = Profil::where('idUser', $idUser)->first();
+        // For counting
+        $lamar = Lamaran::where('idUser', $idUser)->count();
+        $certificate = Certificate::where('idUser', $idUser)->count();
+        $experience = Experience::where('idUser', $idUser)->count();
+        $agendaCount = DB::table('lamarans')
+            ->join('vacancies', 'lamarans.ticket', '=', 'vacancies.ticket')
+            ->where([
+              ['lamarans.idUser', '=', $idUser],
+              ['lamarans.status', '=', '3'],
+            ])->count();
+
+
+        $lamaran = DB::table('lamarans')
+            ->join('vacancies', 'lamarans.ticket', '=', 'vacancies.ticket')
+            ->join('perusahaans', 'lamarans.idPerusahaan', '=', 'perusahaans.id')
+            ->where([
+              ['lamarans.idUser', '=', $idUser],
+            ])
+            ->whereIn('lamarans.status', [2, 3])
+            ->select('lamarans.ticket', 'lamarans.status', 'vacancies.title', 'perusahaans.name')
+            ->get();
+
+        $agenda = Agenda::where('ticket', $ticket)->get();
+        $sendTicket = $ticket;
+
+        return view('users.dashboard-single', [
+          'profil' => $profil,
+          'lamaran' => $lamaran,
+          'agenda' => $agenda,
+          'lamar' => $lamar,
+          'certificate' => $certificate,
+          'experience' => $experience,
+          'agendaCount' => $agendaCount,
+          'ticket' => $sendTicket
+        ]);
+    }
+
     public function profil()
     {
         $idUser = Auth::user()->id;
@@ -94,6 +122,22 @@ class SearcherController extends Controller
         $idUser = Auth::user()->id;
         $profil = Profil::where('idUser', $idUser)->first();
         return view('users.form-profil', ['profil' => $profil]);
+    }
+
+    public function UpdateFoto(Request $request, $id)
+    {
+      $profiles = Profil::findOrFail($id);
+
+      $profil = $request->file('profil');
+      $extension_profil = $profil->getClientOriginalExtension();
+      $filename_profil = rand().'.'.$extension_profil;
+      $profils = Image::make($profil->getRealPath())
+          ->resize(216, 216)
+          ->save('img/profil/' . $filename_profil);
+
+      $profiles->profil = $filename_profil;
+      $profiles->save();
+      return redirect('user/profil')->with('success', 'data berhasil diubah');
     }
 
     public function StoreProfil(Request $request)
@@ -136,12 +180,74 @@ class SearcherController extends Controller
         }
     }
 
+    public function UpdateProfil(Request $request, $id)
+    {
+        $idProfil = Auth::user()->id;
+        $tempat = $request->tempat;
+        $tgl = $request->tgl;
+        $ttl = $tempat.', '.$tgl;
+
+
+        $profil = Profil::findOrFail($id);
+        $profil->description = $request->description;
+        $profil->ttl = $ttl;
+        $profil->alamat = $request->alamat;
+        $profil->agama = $request->agama;
+        $profil->kelamin = $request->kelamin;
+        $profil->email = $request->email;
+        $profil->telp = $request->telp;
+        $profil->social1 = $request->social1;
+        $profil->social2 = $request->social2;
+        $profil->status = $request->status;
+        $profil->gaji = $request->gaji;
+        $profil->save();
+
+        return redirect('user/profil')->with('success', 'data berhasil diubah');
+    }
+
     public function EditPengalaman()
     {
         $idUser = Auth::user()->id;
-        $pengalaman = Experience::where('idUser', $idUser)->first();
-        return view('users.form-pengalaman', ['pengalaman' => $pengalaman]);
+        $profil = Profil::where('idUser', $idUser)->first();
+        return view('users.form-pengalaman', ['profil' => $profil]);
     }
+
+    public function UpdatePengalaman($id)
+    {
+        $idUser = Auth::user()->id;
+        $profil = Profil::where('idUser', $idUser)->first();
+        $pengalaman = Experience::findOrFail($id);
+        return view('users.form-pengalaman-edit', ['profil' => $profil, 'pengalaman' => $pengalaman]);
+    }
+
+    public function UpdatePengalamanData(Request $request, $id)
+    {
+        $tanggal = explode("-", $request->dari);
+
+        $pengalaman = Experience::findOrFail($id);
+        $pengalaman->title = $request->title;
+        $pengalaman->intansi= $request->instansi;
+        $pengalaman->dari = $tanggal[0];
+        $pengalaman->sampai = $tanggal[1];
+        $pengalaman->daerah = $request->daerah;
+        $pengalaman->industri = $request->industri;
+        $pengalaman->spesialisasi = $request->spesialisasi;
+        $pengalaman->bidang = $request->bidang;
+        $pengalaman->jabatan = $request->jabatan;
+        $pengalaman->gaji = $request->gaji;
+
+        $pengalaman->save();
+
+        return redirect('user/profil')->with('success', 'data berhasil diubah');
+    }
+
+    public function DestroyPengalaman($id)
+    {
+        $pengalaman = Experience::findOrFail($id);
+        $pengalaman->delete();
+        return redirect('user/profil')->with('delete', 'Data berhasil dihapus');
+    }
+
 
     public function StorePengalaman(Request $request)
     {
@@ -172,7 +278,53 @@ class SearcherController extends Controller
 
     public function EditSertifikat()
     {
-        return view('users.form-certificate');
+        $idUser = Auth::user()->id;
+        $profil = Profil::where('idUser', $idUser)->first();
+        return view('users.form-certificate', ['profil' => $profil]);
+    }
+
+    public function UpdateSertifikat($id)
+    {
+        $idUser = Auth::user()->id;
+        $profil = Profil::where('idUser', $idUser)->first();
+        $sertifikat = Certificate::findOrFail($id);
+        return view('users.form-certificate-edit', ['profil' => $profil, 'sertifikat' => $sertifikat]);
+    }
+
+    public function UpdateSertifikatData(Request $request, $id)
+    {
+        $idUser = Auth::user()->id;
+        $profil = Profil::where('idUser', $idUser)->first();
+
+        $sertifikat = Certificate::findOrFail($id);
+
+        $tanggal= explode("-", $request->dari);
+
+        $sertifikat->idUser = Auth::user()->id;
+        $sertifikat->title = $request->title;
+        $sertifikat->instansi = $request->instansi;
+        $sertifikat->description = $request->description;
+        $sertifikat->dari = $tanggal[0];
+        $sertifikat->sampai = $tanggal[1];
+
+        if ($request->hasfile('image1')) {
+            $image1 = $request->file('image1');
+            $extension_image1 = $image1->getClientOriginalExtension();
+            $filename_image1 = rand().'.'.$extension_image1;
+            $image1->move('sertifikat', $filename_image1);
+            $sertifikat->image1 = $filename_image1;
+        }
+
+        if ($request->hasfile('image2')) {
+            $image2 = $request->file('image2');
+            $extension_image2 = $image2->getClientOriginalExtension();
+            $filename_image2 = rand().'.'.$extension_image2;
+            $image2->move('sertifikat', $filename_image2);
+            $sertifikat->image2 = $filename_image2;
+        }
+
+        $sertifikat->save();
+        return redirect('user/profil')->with('success', 'Data berhasil ditambah');
     }
 
     public function StoreSertifikat(Request $request)
@@ -213,7 +365,26 @@ class SearcherController extends Controller
 
     public function EditPendidikan()
     {
-        return view('users.form-pendidikan');
+        $idUser = Auth::user()->id;
+        $profil = Profil::where('idUser', $idUser)->first();
+        return view('users.form-pendidikan', ['profil' => $profil]);
+    }
+
+    public function UpdatePendidikan($id)
+    {
+        $pendidikan = Educations::findOrFail($id);
+        return view('users.form-pendidikan-edit', ['pendidikan' => $pendidikan]);
+    }
+
+    public function UpdatePendidikanData(Request $request, $id)
+    {
+        $pendidikan = Educations::findOrFail($id);
+        $pendidikan->pendidikan = $request->pendidikan;
+        $pendidikan->instansi = $request->instansi;
+        $pendidikan->angkatan = $request->angkatan;
+        $pendidikan->save();
+
+        return redirect('user/profil')->with('success', 'Data pendidikan berhasil diubah');
     }
 
     public function StorePendidikan(Request $request)
@@ -233,9 +404,18 @@ class SearcherController extends Controller
         }
     }
 
+    public function DestroyPendidikan($id)
+    {
+        $pendidikan = Educations::findOrFail($id);
+        $pendidikan->delete();
+        return redirect('user/profil')->with('delete', 'Data berhasil dihapus');
+    }
+
     public function EditSkill()
     {
-        return view('users.form-skill');
+        $idUser = Auth::user()->id;
+        $profil = Profil::where('idUser', $idUser)->first();
+        return view('users.form-skill', ['profil' => $profil]);
     }
 
     public function StoreSkill(Request $request)
@@ -252,6 +432,13 @@ class SearcherController extends Controller
         } else {
             return redirect('user/profil')->with('warning', 'Upps, Tampaknya ada yang salah, ulangi sekali lagi');
         }
+    }
+
+    public function DestroySkill($id)
+    {
+      $skill = Skill::findOrFail($id);
+      $skill->delete();
+      return redirect('user/profil')->with('success', 'data berhasil dihapus');
     }
 
     public function lamaran()
@@ -289,5 +476,35 @@ class SearcherController extends Controller
         $inviter = Inviter::find($id);
         $profil = Profil::where('idUser', $idUser)->first();
         return view('users..inviter-detail', ['inviter' => $inviter, 'profil' => $profil]);
+    }
+
+    public function security()
+    {
+      $idUser = Auth::user()->id;
+      $profil = Profil::where('idUser', $idUser)->first();
+      $user = User::findOrFail($idUser);
+      return view('account.security', ['profil' => $profil, 'user' => $user]);
+    }
+
+    public function umum(Request $request, $id)
+    {
+
+      $user = User::findOrFail($id);
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->save();
+      return redirect('user/account')->with('success', 'data berhasil diubah');
+    }
+
+    public function password(Request $request)
+    {
+        $request->validate([
+          'current_password' => ['required', new MatchOldPassword],
+          'new_password' => ['required'],
+          'new_confirm_password' => ['same:new_password'],
+        ]);
+
+        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        return redirect('user/account')->with('success', 'Password diubah');
     }
 }

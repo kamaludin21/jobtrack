@@ -30,7 +30,7 @@ nav-user-active
                                 <div class="col-md-4 col-xl-3">
                                     <div class="card bg-c-green order-card">
                                         <div class="card-block">
-                                            <h6 class="m-b-20">Sertifikat</h6>
+                                            <h6 class="m-b-20">Certificate</h6>
                                             <h2 class="text-right"><i class="fa fa-certificate f-left"></i><span>{{ $certificate }}</span></h2>
                                         </div>
                                     </div>
@@ -39,7 +39,7 @@ nav-user-active
                                 <div class="col-md-4 col-xl-3">
                                     <div class="card bg-c-yellow order-card">
                                         <div class="card-block">
-                                            <h6 class="m-b-20">Pengalaman</h6>
+                                            <h6 class="m-b-20">Experience</h6>
                                             <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>{{ $experience }}</span></h2>
                                         </div>
                                     </div>
@@ -68,21 +68,21 @@ nav-user-active
                             </div>
                             <div class="row py-2 pt-2">
                                 <div class="container">
-                                    @if(count($lamaran) == 0)
+                                    @if(count($agenda) == 0)
                                       <div class="p-4 text-center">
                                         <img src="{{ asset('img/searching.png') }}" alt="Kosong" class="img-fluid">
                                         <p>Belum ada agenda</p>
                                       </div>
 
                                     @else
-                                    @php($view = $lamaran[0]->ticket)
-                                    @php($statusLamaran = $lamaran[0]->status)
+                                    @php($view = $agenda[0]->ticket)
+                                    @php($statusLamaran = $agenda[0]->status)
 
                                     <div class="page-header">
                                         <h4 id="timeline">
-                                          <a href="{{ url('lowongan/detail', [$lamaran[0]->ticket]) }}" class="text-none-decoration" target="_blank">{{ $lamaran[0]->title }}</a>
+                                          <a href="{{ url('lowongan/detail', [$agenda[0]->ticket]) }}" class="text-none-decoration" target="_blank">{{ $agenda[0]->namalowongan }}</a>
                                           <br>
-                                          <small>{{ $lamaran[0]->name }}</small>
+                                          <small>{{ $agenda[0]->namaperusahaan }}</small>
                                         </h4>
                                     </div>
 
@@ -113,9 +113,9 @@ nav-user-active
                                           <ul class="nav nav-pills">
                                             @foreach ($lamaran as $key )
                                               <li class="nav-item pr-2">
-                                                  <a href="{{ url('user/dashboard', [$key->ticket]) }}" class="nav-link {{ $key->ticket == $lamaran[0]->ticket  ? 'active' : '' }}">{{ Str::limit($key->title, 10, '...') }}</a>
+                                                  <a href="{{ url('user/dashboard', [$key->ticket]) }}" class="nav-link {{ $key->ticket == $ticket  ? 'active' : '' }}">{{ Str::limit($key->title, 10, '...') }}</a>
                                               </li>
-                                              @endforeach
+                                            @endforeach
                                           </ul>
                                       </div>
                                   </div>

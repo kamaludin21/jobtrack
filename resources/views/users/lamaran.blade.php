@@ -23,9 +23,9 @@ nav-user-active
                                     <table class="table rounded-pill">
                                         <thead class="thead-small bg-c-donker text-white">
                                             <tr class="font-weight-light">
-                                                <th scope="col">Job Site</th>
-                                                <th scope="col">Location</th>
-                                                <th scope="col">Salary</th>
+                                                <th scope="col">Lowongan</th>
+                                                <th scope="col">Lokasi</th>
+                                                <th scope="col">Gaji</th>
                                                 <th scope="col"></th>
                                             </tr>
                                         </thead>
@@ -43,8 +43,8 @@ nav-user-active
                                                     </a>
                                                     <br>
                                                     <a href="#" class="text-muted">
-                                                      <small>{{ $lamaran->name }}
-                                                          <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i></small>
+                                                        <small>{{ $lamaran->name }}
+                                                            <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i></small>
                                                     </a>
                                                 </td>
                                                 <td>{{ $lamaran->daerah }}</td>
@@ -57,33 +57,29 @@ nav-user-active
                                                 <td>
                                                   @switch($lamaran->status)
                                                     @case(1)
-                                                        <span class="badge badge-success">PROSES</span>
-                                                        @break
+                                                    <span class="badge badge-secondary">Proses</span>
+                                                    @break
 
                                                     @case(2)
-                                                        <span class="badge badge-success">Administrasi</span>
-                                                        @break
+                                                    <span class="badge badge-secondary">Administrasi</span>
+                                                    @break
                                                     @case(3)
-                                                        <span class="badge badge-success">Interview</span>
-                                                        @break
+                                                    <span class="badge badge-warning">Interview</span>
+                                                    @break
                                                     @case(4)
-                                                        <span class="badge badge-success">Terima</span>
-                                                        @break
+                                                    <span class="badge badge-success">Terima</span>
+                                                    @break
                                                     @case(5)
-                                                        <span class="badge badge-danger">Tolak</span>
+                                                        <span class="badge badge-success">Terima</span>
                                                         @break
 
                                                     @default
-                                                        <span class="badge badge-success">PROSES</span>
-                                                  @endswitch
-
+                                                    <span class="badge badge-success">PROSES</span>
+                                                    @endswitch
                                                 </td>
                                             </tr>
                                             @endforeach
-
                                             @endif
-
-
                                         </tbody>
                                     </table>
                                 </div>

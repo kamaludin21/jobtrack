@@ -15,10 +15,9 @@
     {{-- Icon CDN --}}
     <script src="https://use.fontawesome.com/1d5fe44475.js"></script>
     <script type="text/javascript">
-    var maxDate = year + '-' + month + '-' + day;
-    // alert(maxDate);
-    $('#txtDate').attr('min', maxDate);
-
+        var maxDate = year + '-' + month + '-' + day;
+        // alert(maxDate);
+        $('#txtDate').attr('min', maxDate);
     </script>
 </head>
 
@@ -42,10 +41,10 @@
                             <a class="nav-link" href="{{ route('login') }}">Masuk</a>
                         </li>
                         <li class="nav-item pr-3">
-                            <a class="nav-link" href="#">Daftar</a>
+                            <a class="nav-link" href="{{ url('daftar') }}">Daftar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-sm btn-outline-link" href="{{ url('employer/home') }}">Perusahaan</a>
+                            <a class="nav-link btn btn-sm btn-outline-link" href="{{ url('perusahaan/registrasi') }}">Perusahaan</a>
                         </li>
                     </ul>
                 </div>
@@ -54,7 +53,7 @@
                     <div class="collapse navbar-collapse" id="navbars">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item @yield('home-status')">
-                                <a class="nav-link" href="{{ url('home') }}">Home</a>
+                                <a class="nav-link" href="{{ url('home') }}">Beranda</a>
                             </li>
                             <li class="nav-item @yield('lowongan-status')">
                                 <a class="nav-link" href="{{ url('lowongan') }}">Lowongan</a>
@@ -62,18 +61,18 @@
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ url('user/bookmark') }}">
                                     <i class="fa fa-bookmark"></i>
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropleft" href="#" id="mess" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropleft" id="mess" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-bell"></i>
                                 </a>
                                 <div class="dropdown-menu ml-notification" aria-labelledby="mess" style="width: 250px !important">
                                     <div class="card m-n3">
                                         <div class="card-header bg-c-blue text-center text-white">
-                                            Notifications
+                                            Notifikasi
                                         </div>
                                         <div class="card-body">
                                             <div class="text-center">
@@ -97,10 +96,10 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                                 <div class="dropdown-menu" aria-labelledby="dropdown01" style="right: 0; left: auto;">
                                     <a class="dropdown-item" href="{{ url('user/dashboard') }}">Profil</a>
-                                    <a class="dropdown-item" href="#">Pengaturan Akun</a>
+                                    <a class="dropdown-item" href="{{ url('user/account') }}">Pengaturan Akun</a>
                                     <hr>
                                     <a class="dropdown-item" href="#" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                       document.getElementById('logout-form').submit();">Logout</a>
+                                                       document.getElementById('logout-form').submit();">Keluar</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -131,7 +130,24 @@
                                         </a>
                                         <div class="dropdown-menu ml-notification" aria-labelledby="dropdown02" style="width: 250px !important">
                                             <div class="card m-n3">
-                                                <div class="card-header bg-c-blue text-center text-white">
+                                              <div class="card-header bg-c-blue text-center text-white">
+                                                  Notifikasi
+                                              </div>
+                                              <div class="card-body">
+                                                  <div class="text-center">
+                                                      <img src="{{ asset('img/notify.png') }}" class="img-fluid" alt="Empty notification">
+                                                      <small>
+                                                          You don't have any notifications
+                                                      </small>
+                                                  </div>
+                                              </div>
+                                              <div class="card-footer text-center">
+                                                  <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">
+                                                      Selengkapnya
+                                                      <i class="fa fa-chevron-right mt-n3 "></i>
+                                                  </a>
+                                              </div>
+                                                {{-- <div class="card-header bg-c-blue text-center text-white">
                                                     Notifications
                                                     <br>
                                                     <small class="mt-n5">
@@ -163,14 +179,14 @@
                                                         <i class="fa fa-chevron-right mt-n3 "></i>
                                                     </a>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
                                         <div class="dropdown-menu" aria-labelledby="dropdown01" style="right: 0; left: auto;">
                                             <a class="dropdown-item" href="{{ url('recruiter') }}">Profil</a>
-                                            <a class="dropdown-item" href="#">Pengaturan Akun</a>
+                                            <a class="dropdown-item" href="{{ url('recruiter/account') }}">Pengaturan Akun</a>
                                             <hr>
                                             <a class="dropdown-item" href="#" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                                document.getElementById('logout-form').submit();">Logout</a>
@@ -194,34 +210,13 @@
         <div class="row">
             <div class="col-12 col-md">
                 <img class="mb-2" src="{{ asset('img/Jobtrack.png') }}">
-                <small class="d-block mb-3 text-muted">&copy; 2017-2019</small>
-            </div>
-            <div class="col-6 col-md text-right">
-                <h5>Features</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Cool stuff</a></li>
-                    <li><a class="text-muted" href="#">Random feature</a></li>
-                    <li><a class="text-muted" href="#">Team feature</a></li>
-                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                    <li><a class="text-muted" href="#">Another one</a></li>
-                    <li><a class="text-muted" href="#">Last time</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md text-right">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Resource</a></li>
-                    <li><a class="text-muted" href="#">Resource name</a></li>
-                    <li><a class="text-muted" href="#">Another resource</a></li>
-                    <li><a class="text-muted" href="#">Final resource</a></li>
-                </ul>
+                <small class="d-block mb-3 text-muted">Copyright &copy; 2020</small>
             </div>
             <div class="col-6 col-md text-right">
                 <h5>About</h5>
                 <ul class="list-unstyled text-small">
                     <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
+                    <li><a class="text-muted" href="#">Credits</a></li>
                     <li><a class="text-muted" href="#">Terms</a></li>
                 </ul>
             </div>
@@ -242,15 +237,22 @@
     <script src="{{ asset('js/activate.js') }}" charset="utf-8"></script>
     <script src="{{ asset('js/tools.js') }}" charset="utf-8"></script>
     <script type="text/javascript">
+        $(function() {
+            $('input[name="dari"]').daterangepicker({
+                opens: 'left'
+            }, function(start, end, label) {
+                // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                // $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+            });
+        });
 
-    $(function() {
-  $('input[name="dari"]').daterangepicker({
-    opens: 'left'
-  }, function(start, end, label) {
-    // console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-    // $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-  });
-});
+        function numberFilter(evt) {
+            let charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+                return false;
+            return true;
+        }
 
 
         $(function() {

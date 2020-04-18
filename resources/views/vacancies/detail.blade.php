@@ -42,15 +42,15 @@
                         </div>
                         <div class="col-md-3 mr-auto text-right">
                             <p><small>Apply before {{ $lowongan->expired }}</small></p>
-                            <p class="mt-n3"><small>{{ $lowongan->slot }} Slots Available</small></p>
+                            <p class="mt-n3"><small>{{ $lowongan->slot }} Slot tersedia</small></p>
                             <div class="text-justify" style="border-top: 1px solid rgba(0, 0, 0, 0.125);">
                                 <p class="pt-2" style="line-height: 1.0;">
                                     <small>
                                         Feel secure when applying: look for the verified icon <i class="fa fa-check-circle text-primary"></i> and always do your research on a company. avoid and report if the content is suspicious
                                 </p>
-                                <a href="#" class="text-danger">
+                                {{-- <a href="#" class="text-danger">
                                     <i class="fa fa-clipboard"></i> Report this job
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
         <div class="col-8 pr-sm-0">
             <div class="card">
                 <div class="card-body">
-                    <h5>Job Descriptions</h5>
+                    <h5>Deskripsi pekerjaan</h5>
                     <hr>
                     <div class="font-weight-lighter">
                     {!! $lowongan->description !!}
@@ -114,16 +114,16 @@
                     <hr>
                     <div class="row font-weight-lighter">
                       <div class="col-6 mb-3">
-                        <p class="font-weight-bold mb-n1">Job Level</p>
+                        <p class="font-weight-bold mb-n1">Level</p>
                         {{ $lowongan->subbidang }}
                       </div>
                       <div class="col-6">
-                        <p class="font-weight-bold mb-n1">Industry</p>
+                        <p class="font-weight-bold mb-n1">Industri</p>
                         {{ $lowongan->bidangperusahaan }}
                       </div>
 
                       <div class="col-6">
-                        <p class="font-weight-bold mb-n1">Job Category</p>
+                        <p class="font-weight-bold mb-n1">Kategori</p>
                         {{ $lowongan->bidang }}
                       </div>
                       <div class="col-6">
@@ -173,11 +173,11 @@
                                           <a href="{{ url('lowongan/company', [$key->idPerusahaan]) }}" class="text-muted">{{ Str::limit($key->name, 23, '') }}</a>
                                       </strong>
                                       <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
-                                      <h5 class="card-title text-muted mb-n1">
+                                      <h6 class="card-title text-muted mb-n1">
                                           <a href="#" style="text-decoration: none;">
-                                              {{ $key->title }}
+                                              {{ Str::limit($key->title, 20, '...') }}
                                           </a>
-                                      </h5>
+                                      </h6>
                                       <small class="text-muted">
                                           Rp. {{ number_format($key->gajimin) }} - {{ number_format($key->gajimax) }}
                                       </small >
@@ -187,7 +187,7 @@
                                           <i class="fa fa-briefcase"></i>&nbsp;&nbsp;{{ $key->type }}
                                       </p>
                                       <div class="mt-n2">
-                                          <strong style="text-decoration: underline;">Desc</strong>
+                                          <strong style="text-decoration: underline;">Deskripsi</strong>
                                           <br>
                                           <div style="line-height: 90%;">
                                             <small>

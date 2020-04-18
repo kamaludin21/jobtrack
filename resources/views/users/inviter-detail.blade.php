@@ -18,6 +18,10 @@
                                   Invitation
                                 </div>
                             </div>
+                            <div class="mt-2">
+                              <a href="{{ url('user/invite') }}" class="btn btn-sm btn-light"><i class="fa fa-chevron-left"></i>
+                                Kembali</a>
+                            </div>
                             <dl class="row mt-3">
                                 <dt class="col-sm-2">Pengirim</dt>
                                 <dd class="col-sm-10">
@@ -27,12 +31,13 @@
                                 <dd class="col-sm-10">
                                   <small>{{ $inviter->subjek }}</small>
                                 </dd>
-                                <dt class="col-12">Pesan</dt>
+                                <dt class="col-12">&mdash;&mdash;</dt>
 
                                 <div class="col">
                                   {!! $inviter->message !!}
                                 </div>
                             </dl>
+
                         </div>
                         <div class="col-auto d-none d-lg-block">
                         </div>

@@ -13,7 +13,7 @@
                     <div class="float-right">
                         <a href="{{ url('recruiter/vacancy/form') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
-                            Add
+                            Tambah
                         </a>
                         <a href="{{ url('recruiter/vacancy/form') }}" class="btn btn-sm btn-secondary">
                             <i class="fa fa-chevron-right"></i>
@@ -50,26 +50,19 @@
                                                       </small>
                                                   </div>
                                               </div>
-                                              {{-- <div class="col-md-3 mr-auto">
-                                                  <div class="text-right">
-                                                      <small>8 Pelamar</small>
-                                                      <br>
-                                                      <small>{{ $vacancy->slot }} Slot</small>
-                                                  </div>
-                                              </div> --}}
                                           </div>
                                           <div class="card-text mb-auto text-justify">
                                               {{ strip_tags(Str::limit($vacancy->description, 260)) }}
                                           </div>
                                           <div class="d-flex justify-content-between align-items-center pt-2">
                                               <div class="btn-group btn-group-sm">
-                                                  <button type="button" class="btn btn-outline-secondary">Open
+                                                  <button type="button" class="btn btn-outline-secondary">Buka
                                                   {{ Str::limit($vacancy->created_at, 10, '') }}</button>
-                                                  <button type="button" class="btn btn-outline-secondary">Closed {{ $vacancy->expired }}</button>
+                                                  <button type="button" class="btn btn-outline-secondary">Tutup {{ $vacancy->expired }}</button>
                                               </div>
                                               <a href="{{ url('recruiter/vacancy/manage', [$vacancy->id]) }}" class="btn btn-sm btn-warning">
                                                   <i class="fa fa-pencil pr-1"></i>
-                                                  Manage
+                                                  Kelola
                                               </a>
                                           </div>
                                       </div>
@@ -79,6 +72,7 @@
                               @endforeach
                               {{ $vacancies->links() }}
                             @else
+
                               <div class="row text-center">
                                   <div class="col">
                                   </div>
@@ -110,6 +104,45 @@
                             </nav> --}}
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                          @if(count($vacancyClosed) > 0)
+                            @foreach ($vacancyClosed as $vacancy)
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="p-1 d-flex flex-column position-static">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <h4 class="mb-0">{{ Str::limit($vacancy->title, 31, '...') }}</h4>
+                                                <div class="mb-1 text-muted">
+                                                    <small> <i class="fa fa-dollar"></i>&nbsp;&nbsp;Rp. {{ number_format($vacancy->gajimin) }} - {{ number_format($vacancy->gajimax) }} / Month
+                                                        <br>
+                                                        <i class="fa fa-map-marker"></i>&nbsp;&nbsp; {{ $vacancy->daerah }}
+                                                        &nbsp;&nbsp; &nbsp;&nbsp;
+                                                        <i class="fa fa-briefcase"></i>&nbsp;&nbsp;{{ $vacancy->type }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-text mb-auto text-justify">
+                                            {{ strip_tags(Str::limit($vacancy->description, 260)) }}
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center pt-2">
+                                            <div class="btn-group btn-group-sm">
+                                                <button type="button" class="btn btn-outline-secondary">Buka
+                                                {{ Str::limit($vacancy->created_at, 10, '') }}</button>
+                                                <button type="button" class="btn btn-outline-secondary">Tutup {{ $vacancy->expired }}</button>
+                                            </div>
+                                            <a href="{{ url('recruiter/vacancy/manage', [$vacancy->id]) }}" class="btn btn-sm btn-warning">
+                                                <i class="fa fa-pencil pr-1"></i>
+                                                Kelola
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            @endforeach
+                            {{ $vacancyClosed->links() }}
+                          @else
                             <div class="row text-center">
                                 <div class="col">
                                 </div>
@@ -125,6 +158,8 @@
                                 <div class="col">
                                 </div>
                             </div>
+                          @endif
+
                         </div>
                     </div>
                 </div>

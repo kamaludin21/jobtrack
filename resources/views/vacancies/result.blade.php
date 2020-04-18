@@ -31,10 +31,9 @@
                         <div class="form-group">
                             <select class="form-control form-control-sm" name="daerah">
                                 <option value="" disabled selected>Daerah</option>
-                                <option value="Banda Aceh">Banda Aceh</option>
-                                <option value="Denpasar">Denpasar</option>
-                                <option value="Bengkulu">Bengkulu</option>
-                                <option value="Jambi">Jambi</option>
+                                @foreach ($daerah as $data)
+                                  <option value="{{ $data->daerah }}">{{ $data->daerah }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">

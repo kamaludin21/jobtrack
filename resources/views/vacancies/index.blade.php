@@ -9,7 +9,7 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-header">
-                    Search with your custom
+                    Kotak pencarian
                 </div>
                 <div class="card-body">
                     <form action="{{ url('lowongan/search') }}" method="post">
@@ -31,10 +31,13 @@
                         <div class="form-group">
                           <select class="form-control form-control-sm" name="daerah">
                               <option value="" disabled selected>Daerah</option>
-                              <option value="Banda Aceh">Banda Aceh</option>
+                              @foreach ($daerah as $data)
+                                <option value="{{ $data->daerah }}">{{ $data->daerah }}</option>
+                              @endforeach
+                              {{-- <option value="Banda Aceh">Banda Aceh</option>
                               <option value="Denpasar">Denpasar</option>
                               <option value="Bengkulu">Bengkulu</option>
-                              <option value="Jambi">Jambi</option>
+                              <option value="Jambi">Jambi</option> --}}
                           </select>
                         </div>
                         <div class="form-group">
@@ -89,7 +92,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-secondary">{{ $lowongan->slot }} Posisi</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Posted {{ Str::limit($lowongan->created_at , 10, '') }} &bull; Apply before {{ $lowongan->expired }}</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Di posting {{ Str::limit($lowongan->created_at , 10, '') }} &bull; Lamar sebelum {{ $lowongan->expired }}</button>
                                         </div>
                                         <a href="{{ url('lowongan/detail', [$lowongan->ticket]) }}" class="btn btn-sm btn-primary">
                                             Selengkapnya

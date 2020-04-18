@@ -37,6 +37,12 @@ class BookmarksController extends Controller
       } else {
           return redirect('user/bookmark')->with('warning', 'Upps, Tampaknya ada yang salah, ulangi sekali lagi');
       }
+    }
 
+    public function destroy($id)
+    {
+      $bookmark = Bookmarks::findOrFail($id);
+      $bookmark->delete();
+      return redirect('user/bookmark')->with('delete', 'Data berhasil dihapus');
     }
 }
