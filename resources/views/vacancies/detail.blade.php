@@ -118,7 +118,7 @@
                         {{ $lowongan->subbidang }}
                       </div>
                       <div class="col-6">
-                        <p class="font-weight-bold mb-n1">Industri</p>
+                        <p class="font-weight-bold mb-n1">Industri Perusahaan</p>
                         {{ $lowongan->bidangperusahaan }}
                       </div>
 

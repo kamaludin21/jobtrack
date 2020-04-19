@@ -49,10 +49,6 @@
                               @foreach ($daerah as $data)
                                 <option value="{{ $data->daerah }}">{{ $data->daerah }}</option>
                               @endforeach
-                              {{-- <option value="Banda Aceh">Banda Aceh</option>
-                              <option value="Denpasar">Denpasar</option>
-                              <option value="Bengkulu">Bengkulu</option>
-                              <option value="Jambi">Jambi</option> --}}
                           </select>
                         </div>
                         <div class="form-group">

@@ -94,12 +94,7 @@
                                         <option value="null">Pilih kota</option>
                                         @foreach ($daerah as $data)
                                           <option value="{{ $data->daerah }}">{{ $data->daerah }}</option>
-
                                         @endforeach
-                                        {{-- <option value="Banda Aceh">Banda Aceh</option>
-                                        <option value="Denpasar">Denpasar</option>
-                                        <option value="Bengkulu">Bengkulu</option>
-                                        <option value="Jambi">Jambi</option> --}}
                                     </select>
                                 </div>
                             </div>
@@ -127,7 +122,10 @@
                         </div>
 
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="float-right">
+                          <a href="{{ url('recruiter/vacancy') }}" class="btn btn-light">Kembali</a>
+                          <button type="submit" class="btn btn-primary ml-2">Simpan</button>
+                        </div>
                     </form>
                 </div>
             </div>

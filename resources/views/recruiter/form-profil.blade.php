@@ -24,11 +24,16 @@
                         <img src="{{ url('img/recruiter/profil', [$company->profil]) }}" alt="..." class="img-thumbnail" alt="Foto profil">
                         @endif
 
-                        <button class="btn btn-primary float-right rounded-pill">
-                            <i class="fa fa-camera"></i>&nbsp;
-                            Ubah Photo</button>
+                        {{-- @if(!empty($company))
+                          <button type="button" class="btn btn-primary float-right rounded-pill" data-toggle="modal" data-target="#profil">
+                              <i class="fa fa-camera"></i>&nbsp;
+                              Ubah Photo
+                          </button>
+                        @endif --}}
+                        
                         <br>
                     </div>
+
                     <div class="row">
                         <div class="col-md-9">
 
@@ -128,7 +133,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div class="float-right">
+                          <a href="{{ url('recruiter') }}" class="btn btn-light">Kembali</a>
+                          <button type="submit" class="btn btn-primary ml-2">Simpan</button>
+                        </div>
                     </form>
                     @else
                     {{-- Update --}}

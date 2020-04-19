@@ -42,6 +42,35 @@ class RecruitersController extends Controller
         return view('recruiter.form-profil', ['company' => $company]);
     }
 
+    public function profilPicture(Request $request, $id)
+    {
+      $perusahaan = Perusahaan::findOrFail($id);
+      // Poto profil
+      if ($request->hasfile('profil')) {
+          $profil = $request->file('profil');
+          $extension_profil = $profil->getClientOriginalExtension();
+          $filename_profil = rand().'.'.$extension_profil;
+          $profils = Image::make($profil->getRealPath())
+              ->resize(160, 90)
+              ->save('img/recruiter/profil/' . $filename_profil);
+          $perusahaan->profil = $filename_profil;
+      }
+
+      // Poto sampul
+      if ($request->hasfile('sampul')) {
+          $sampul = $request->file('sampul');
+          $extension_sampul = $sampul->getClientOriginalExtension();
+          $filename_sampul = rand().'.'.$extension_sampul;
+          $sampuls = Image::make($sampul->getRealPath())
+              ->resize(1110, 340)
+              ->save('img/recruiter/sampul/' . $filename_sampul);
+          $perusahaan->sampul = $filename_sampul;
+      }
+
+      $perusahaan->save();
+      return redirect('recruiter')->with('success', 'Gambar berhasil diubah');
+    }
+
     public function vacancy()
     {
         $idPerusahaan = Auth::user()->id;
@@ -91,7 +120,7 @@ class RecruitersController extends Controller
             $extension_sampul = $sampul->getClientOriginalExtension();
             $filename_sampul = rand().'.'.$extension_sampul;
             $sampuls = Image::make($sampul->getRealPath())
-                ->resize(160, 90)
+                ->resize(1110, 340)
                 ->save('img/recruiter/sampul/' . $filename_sampul);
             $sampul = $filename_sampul;
         } else {

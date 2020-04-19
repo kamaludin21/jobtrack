@@ -20,9 +20,44 @@
                         <img src="{{ url('img/recruiter/profil', [$company->profil]) }}" alt="..." class="img-thumbnail" alt="Foto profil">
                         @endif
 
-                        <button class="btn btn-primary float-right rounded-pill">
-                            <i class="fa fa-camera"></i>&nbsp;
-                            Ubah Photo</button>
+                        @if(!empty($company))
+                          <button type="button" class="btn btn-primary float-right rounded-pill" data-toggle="modal" data-target="#profil">
+                              <i class="fa fa-camera"></i>&nbsp;
+                              Ubah Photo
+                          </button>
+                        <div class="modal fade" id="profil" tabindex="-1" role="dialog" aria-labelledby="profil" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Ubah gambar profil</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ url('recruiter/profil', [$company->id]) }}" method="post" enctype="multipart/form-data">
+                                          @csrf
+                                          @method('patch')
+                                          <div class="form-group">
+                                              <label for="">Foto profil</label>
+                                              {{-- <input type="file" class="form-control-file"> --}}
+                                              <input type="file" name="profil" class="form-control-file">
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="">Foto sampul</label>
+                                              <input type="file" name="sampul" class="form-control-file">
+                                          </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                         <br>
                         <a href="{{ url('recruiter/edit/profil') }}" class="btn float-right btn-outline-primary rounded-pill" style="margin-top: -40px;">
                             <i class="fa fa-cog"></i>

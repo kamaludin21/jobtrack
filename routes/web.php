@@ -30,11 +30,7 @@ Route::prefix('recruiter')->group(function () {
     Route::post('/inviter/store', 'InvitersController@store');
     Route::post('/agenda/store', 'AgendaController@store');
     Route::get('/agenda/detail/{ticket}', 'AgendaController@detail');
-    // Selesaikan
-    Route::get('agenda/detail', function () {
-      return view('recruiter.agenda-detail');
-    });
-
+    Route::patch('profil/{id}', 'RecruitersController@profilPicture');
     Route::get('account', 'RecruitersController@account');
     Route::patch('account/umum/{id}', 'RecruitersController@umum');
     Route::post('account/password', 'RecruitersController@password');
