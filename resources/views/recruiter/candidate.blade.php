@@ -16,17 +16,36 @@
                 <div class="col">
                   <select class="custom-select" name="pendidikan">
                     <option value="" disabled selected>Pendidikan</option>
-                    <option value="1">S1</option>
-                    <option value="2">S2</option>
-                    <option value="3">S3</option>
+                    <option value="1">D3</option>
+                    <option value="2">S1</option>
+                    <option value="3">S2</option>
+                    <option value="4">S3</option>
                   </select>
                 </div>
                 <div class="col">
                   <select class="custom-select" name="daerah">
                     <option value="" disabled selected>Daerah</option>
-                    <option value="1">Pekanbaru</option>
-                    <option value="2">Jakarta</option>
-                    <option value="3">Palembang</option>
+                    <option value="1">Lhoksemawe</option>
+                    <option value="2">Medan</option>
+                    <option value="3">Sibolga</option>
+                    <option value="4">Langkat</option>
+                    <option value="5">Pekanbaru</option>
+                    <option value="6">Bengkalis</option>
+                    <option value="7">Dumai</option>
+                    <option value="8">Padang</option>
+                    <option value="9">Bukit Tinggi</option>
+                    <option value="10">Payakumbuh</option>
+                    <option value="11">Tanjung Pinang</option>
+                    <option value="12">Tanjung Balai Karimun</option>
+                    <option value="13">Batam</option>
+                    <option value="14">Pangkal Pinang</option>
+                    <option value="15">Bandar Lampung</option>
+                    <option value="16">Metro</option>
+                    <option value="17">Jambi</option>
+                    <option value="18">Bangko</option>
+                    <option value="19">Bengkulu</option>
+                    <option value="20">Palembang</option>
+                    <option value="21">Lubuk Linggau</option>
                   </select>
                 </div>
                 <div class="col">

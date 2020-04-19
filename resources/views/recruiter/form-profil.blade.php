@@ -72,10 +72,23 @@
                                 <div class="form-group">
                                     <label for="">Bergerak dibidang</label>
                                     <select class="form-control form-control-sm" name="bidang">
-                                        <option value="Banda Aceh">Konstruksi bangunan</option>
-                                        <option value="Denpasar">IT Software</option>
-                                        <option value="Bengkulu">Firma Hukum</option>
+                                        <option value="Agribusiness">Agribusiness</option>
+                                        <option value="Automotive">Automotive</option>
+                                        <option value="Banking">Banking</option>
+                                        <option value="Banking / Mortgage">Banking / Mortgage</option>
+                                        <option value="Computer Software / Engineering">Computer Software / Engineering</option>
+                                        <option value="Consumer Goods">Consumer Goods</option>
+                                        <option value="Education Management">Education Management</option>
+                                        <option value="E-Commerce">E-Commerce</option>
+                                        <option value="Financial Services">Financial Services</option>
+                                        <option value="HiTech Financial Services">HiTech Financial Services</option>
                                         <option value="Information Technology / IT">Information Technology / IT</option>
+                                        <option value="Internet">Internet</option>
+                                        <option value="Management and Technology Consulting">Management and Technology Consulting</option>
+                                        <option value="Media Production">Media Production</option>
+                                        <option value="Online Retail">Online Retail</option>
+                                        <option value="Real Estate / Mortgage">RealEstate / Mortgage</option>
+                                        <option value="Retail Industry">Retail Industry</option>
                                     </select>
                                 </div>
                             </div>
@@ -132,9 +145,23 @@
                                 <div class="form-group">
                                     <label for="">Bergerak dibidang</label>
                                     <select class="form-control form-control-sm" name="bidang">
-                                        <option value="Banda Aceh">Konstruksi bangunan</option>
-                                        <option value="Denpasar">IT Software</option>
-                                        <option value="Bengkulu">Firma Hukum</option>
+                                        <option value="Agribusiness">Agribusiness</option>
+                                        <option value="Automotive">Automotive</option>
+                                        <option value="Banking">Banking</option>
+                                        <option value="Banking / Mortgage">Banking / Mortgage</option>
+                                        <option value="Computer Software / Engineering">Computer Software / Engineering</option>
+                                        <option value="Consumer Goods">Consumer Goods</option>
+                                        <option value="Education Management">Education Management</option>
+                                        <option value="E-Commerce">E-Commerce</option>
+                                        <option value="Financial Services">Financial Services</option>
+                                        <option value="HiTech Financial Services">HiTech Financial Services</option>
+                                        <option value="Information Technology / IT">Information Technology / IT</option>
+                                        <option value="Internet">Internet</option>
+                                        <option value="Management and Technology Consulting">Management and Technology Consulting</option>
+                                        <option value="Media Production">Media Production</option>
+                                        <option value="Online Retail">Online Retail</option>
+                                        <option value="Real Estate / Mortgage">RealEstate / Mortgage</option>
+                                        <option value="Retail Industry">Retail Industry</option>
                                     </select>
                                 </div>
                             </div>
