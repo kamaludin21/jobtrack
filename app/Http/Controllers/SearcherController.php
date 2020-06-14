@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Auth;
 use Image;
-use App\{Profil, Experience, Certificate, Educations, Skill, Lamaran, Inviter, Agenda, User};
+use App\{Profil, Experience, Certificate, Educations, Skill, Lamaran, Inviter, Agenda, User, Keilmuan, Notifikasi};
 use App\Rules\MatchOldPassword;
 use Hash;
 
@@ -49,12 +49,12 @@ class SearcherController extends Controller
         $agenda = Agenda::all();
 
         return view('users.dashboard', [
-          'profil' => $profil,
-          'lamaran' => $lamaran,
-          'agenda' => $agenda,
-          'lamar' => $lamar,
+          'profil'      => $profil,
+          'lamaran'     => $lamaran,
+          'agenda'      => $agenda,
+          'lamar'       => $lamar,
           'certificate' => $certificate,
-          'experience' => $experience,
+          'experience'  => $experience,
           'agendaCount' => $agendaCount
         ]);
     }
@@ -89,14 +89,14 @@ class SearcherController extends Controller
         $sendTicket = $ticket;
 
         return view('users.dashboard-single', [
-          'profil' => $profil,
-          'lamaran' => $lamaran,
-          'agenda' => $agenda,
-          'lamar' => $lamar,
+          'profil'      => $profil,
+          'lamaran'     => $lamaran,
+          'agenda'      => $agenda,
+          'lamar'       => $lamar,
           'certificate' => $certificate,
-          'experience' => $experience,
+          'experience'  => $experience,
           'agendaCount' => $agendaCount,
-          'ticket' => $sendTicket
+          'ticket'      => $sendTicket
         ]);
     }
 
@@ -109,11 +109,11 @@ class SearcherController extends Controller
         $pendidikan = Educations::where('idUser', $idUser)->get();
         $skill = Skill::where('idUser', $idUser)->get();
         return view('users.profil', [
-        'profil' => $profil,
-        'pengalaman' => $pengalaman,
+        'profil'      => $profil,
+        'pengalaman'  => $pengalaman,
         'certificate' => $certificate,
-        'pendidikan' => $pendidikan,
-        'skill' => $skill
+        'pendidikan'  => $pendidikan,
+        'skill'       => $skill
       ]);
     }
 
@@ -158,19 +158,19 @@ class SearcherController extends Controller
         }
 
         $profil = Profil::create([
-        'idUser' => $idProfil,
+        'idUser'      => $idProfil,
         'description' => $request->description,
-        'ttl' => $ttl,
-        'alamat' => $request->alamat,
-        'agama' => $request->agama,
-        'kelamin' => $request->kelamin,
-        'email' => $request->email,
-        'telp' => $request->telp,
-        'social1' => $request->social1,
-        'social2' => $request->social2,
-        'status' => $request->status,
-        'profil' => $profil,
-        'gaji' => $request->gaji
+        'ttl'         => $ttl,
+        'alamat'      => $request->alamat,
+        'agama'       => $request->agama,
+        'kelamin'     => $request->kelamin,
+        'email'       => $request->email,
+        'telp'        => $request->telp,
+        'social1'     => $request->social1,
+        'social2'     => $request->social2,
+        'status'      => $request->status,
+        'profil'      => $profil,
+        'gaji'        => $request->gaji
       ]);
 
         if ($profil->wasRecentlyCreated) {
@@ -187,19 +187,18 @@ class SearcherController extends Controller
         $tgl = $request->tgl;
         $ttl = $tempat.', '.$tgl;
 
-
-        $profil = Profil::findOrFail($id);
+        $profil              = Profil::findOrFail($id);
         $profil->description = $request->description;
-        $profil->ttl = $ttl;
-        $profil->alamat = $request->alamat;
-        $profil->agama = $request->agama;
-        $profil->kelamin = $request->kelamin;
-        $profil->email = $request->email;
-        $profil->telp = $request->telp;
-        $profil->social1 = $request->social1;
-        $profil->social2 = $request->social2;
-        $profil->status = $request->status;
-        $profil->gaji = $request->gaji;
+        $profil->ttl         = $ttl;
+        $profil->alamat      = $request->alamat;
+        $profil->agama       = $request->agama;
+        $profil->kelamin     = $request->kelamin;
+        $profil->email       = $request->email;
+        $profil->telp        = $request->telp;
+        $profil->social1     = $request->social1;
+        $profil->social2     = $request->social2;
+        $profil->status      = $request->status;
+        $profil->gaji        = $request->gaji;
         $profil->save();
 
         return redirect('user/profil')->with('success', 'data berhasil diubah');
@@ -224,17 +223,17 @@ class SearcherController extends Controller
     {
         $tanggal = explode("-", $request->dari);
 
-        $pengalaman = Experience::findOrFail($id);
-        $pengalaman->title = $request->title;
-        $pengalaman->intansi= $request->instansi;
-        $pengalaman->dari = $tanggal[0];
-        $pengalaman->sampai = $tanggal[1];
-        $pengalaman->daerah = $request->daerah;
-        $pengalaman->industri = $request->industri;
+        $pengalaman               = Experience::findOrFail($id);
+        $pengalaman->title        = $request->title;
+        $pengalaman->intansi      = $request->instansi;
+        $pengalaman->dari         = $tanggal[0];
+        $pengalaman->sampai       = $tanggal[1];
+        $pengalaman->daerah       = $request->daerah;
+        $pengalaman->industri     = $request->industri;
         $pengalaman->spesialisasi = $request->spesialisasi;
-        $pengalaman->bidang = $request->bidang;
-        $pengalaman->jabatan = $request->jabatan;
-        $pengalaman->gaji = $request->gaji;
+        $pengalaman->bidang       = $request->bidang;
+        $pengalaman->jabatan      = $request->jabatan;
+        $pengalaman->gaji         = $request->gaji;
 
         $pengalaman->save();
 
@@ -256,17 +255,17 @@ class SearcherController extends Controller
         $tanggal= explode("-", $request->dari);
 
         $experience = Experience::create([
-        'idUser' => $idUser,
-        'title' => $request->title,
-        'intansi' => $request->instansi,
-        'dari' => $tanggal[0],
-        'sampai' => $tanggal[1],
-        'daerah' => $request->daerah,
-        'industri' => $request->industri,
+        'idUser'       => $idUser,
+        'title'        => $request->title,
+        'intansi'      => $request->instansi,
+        'dari'         => $tanggal[0],
+        'sampai'       => $tanggal[1],
+        'daerah'       => $request->daerah,
+        'industri'     => $request->industri,
         'spesialisasi' => $request->spesialisasi,
-        'bidang' => $request->bidang,
-        'jabatan' => $request->jabatan,
-        'gaji' => $request->gaji
+        'bidang'       => $request->bidang,
+        'jabatan'      => $request->jabatan,
+        'gaji'         => $request->gaji
       ]);
 
         if ($experience->wasRecentlyCreated) {
@@ -300,12 +299,12 @@ class SearcherController extends Controller
 
         $tanggal= explode("-", $request->dari);
 
-        $sertifikat->idUser = Auth::user()->id;
-        $sertifikat->title = $request->title;
-        $sertifikat->instansi = $request->instansi;
+        $sertifikat->idUser      = Auth::user()->id;
+        $sertifikat->title       = $request->title;
+        $sertifikat->instansi    = $request->instansi;
         $sertifikat->description = $request->description;
-        $sertifikat->dari = $tanggal[0];
-        $sertifikat->sampai = $tanggal[1];
+        $sertifikat->dari        = $tanggal[0];
+        $sertifikat->sampai      = $tanggal[1];
 
         if ($request->hasfile('image1')) {
             $image1 = $request->file('image1');
@@ -332,12 +331,12 @@ class SearcherController extends Controller
         $sertifikat = new Certificate();
         $tanggal= explode("-", $request->dari);
 
-        $sertifikat->idUser = Auth::user()->id;
-        $sertifikat->title = $request->title;
-        $sertifikat->instansi = $request->instansi;
+        $sertifikat->idUser      = Auth::user()->id;
+        $sertifikat->title       = $request->title;
+        $sertifikat->instansi    = $request->instansi;
         $sertifikat->description = $request->description;
-        $sertifikat->dari = $tanggal[0];
-        $sertifikat->sampai = $tanggal[1];
+        $sertifikat->dari        = $tanggal[0];
+        $sertifikat->sampai      = $tanggal[1];
 
         if ($request->hasfile('image1')) {
             $image1 = $request->file('image1');
@@ -366,8 +365,9 @@ class SearcherController extends Controller
     public function EditPendidikan()
     {
         $idUser = Auth::user()->id;
+        $keilmuan = Keilmuan::all();
         $profil = Profil::where('idUser', $idUser)->first();
-        return view('users.form-pendidikan', ['profil' => $profil]);
+        return view('users.form-pendidikan', ['profil' => $profil, 'keilmuan' => $keilmuan]);
     }
 
     public function UpdatePendidikan($id)
@@ -378,10 +378,10 @@ class SearcherController extends Controller
 
     public function UpdatePendidikanData(Request $request, $id)
     {
-        $pendidikan = Educations::findOrFail($id);
+        $pendidikan             = Educations::findOrFail($id);
         $pendidikan->pendidikan = $request->pendidikan;
-        $pendidikan->instansi = $request->instansi;
-        $pendidikan->angkatan = $request->angkatan;
+        $pendidikan->instansi   = $request->instansi;
+        $pendidikan->angkatan   = $request->angkatan;
         $pendidikan->save();
 
         return redirect('user/profil')->with('success', 'Data pendidikan berhasil diubah');
@@ -391,10 +391,12 @@ class SearcherController extends Controller
     {
         $idUser = Auth::user()->id;
         $pendidikan = Educations::create([
-        'idUser' => $idUser,
-        'pendidikan' => $request->pendidikan,
-        'instansi' => $request->instansi,
-        'angkatan' => $request->angkatan
+        'idUser'      => $idUser,
+        'keilmuan'    => $request->keilmuan,
+        'subkeilmuan' => $request->subkeilmuan,
+        'pendidikan'  => $request->pendidikan,
+        'instansi'    => $request->instansi,
+        'angkatan'    => $request->angkatan
       ]);
 
         if ($pendidikan->wasRecentlyCreated) {
@@ -423,8 +425,8 @@ class SearcherController extends Controller
         $idUser = Auth::user()->id;
         $skill = Skill::create([
         'idUser' => $idUser,
-        'skill' => $request->skill,
-        'level' => $request->level
+        'skill'  => $request->skill,
+        'level'  => $request->level
       ]);
 
         if ($skill->wasRecentlyCreated) {
@@ -448,17 +450,22 @@ class SearcherController extends Controller
         $lamaran = DB::table('lamarans')
             ->join('vacancies', 'lamarans.ticket', '=', 'vacancies.ticket')
             ->join('perusahaans', 'lamarans.idPerusahaan', '=', 'perusahaans.id')
+            ->join('daerahs', 'vacancies.daerah', '=', 'daerahs.id')
             ->select(
                 'lamarans.ticket',
                 'lamarans.status',
                 'vacancies.title',
-                'vacancies.daerah',
+                'daerahs.daerah',
+                'vacancies.gaji',
                 'vacancies.gajimin',
                 'vacancies.gajimax',
                 'perusahaans.name'
             )
             ->where('lamarans.idUser', '=', Auth::user()->id)
             ->get();
+        // Change all status notif
+        Notifikasi::where('idStakeholder', '=', $idUser)->update(['status' => 'read']);
+
         return view('users.lamaran', ['profil' => $profil, 'lamaran' => $lamaran]);
     }
 

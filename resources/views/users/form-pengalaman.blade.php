@@ -71,9 +71,16 @@ nav-user-active
                                             </select>
                                         </div>
                                     </div>
+                                    
                                     <div class="form-group">
                                         <label for="">Gaji</label>
                                         <input type="text" name="gaji" class="form-control form-control-sm" placeholder="Gaji">
+                                    </div>
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" id="agreements" name="agreements" required>
+                                        <label class="form-check-label" for="agreements">
+                                            <small>Saya bertanggung jawab penuh atas kebenaran data yang tertera</small>
+                                        </label>
                                     </div>
 
                                     <div class="float-right">

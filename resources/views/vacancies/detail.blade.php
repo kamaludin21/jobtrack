@@ -31,7 +31,12 @@
                             </div>
                             <h3 class="">{{ $lowongan->title }}</h3>
                             <h6 class="mt-3">
-                                <i class="fa fa-dollar"></i>&nbsp;&nbsp;Rp. {{ number_format($lowongan->gajimin) }} - {{ number_format($lowongan->gajimax) }} / Month
+                                <i class="fa fa-dollar"></i>&nbsp;&nbsp;
+                                @if(!empty($lowongan->gaji))
+                                {{ $lowongan->gaji }}
+                                @else
+                                Rp. {{ number_format($lowongan->gajimin) }} - {{ number_format($lowongan->gajimax) }} / Month <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Gaji maksimal {{ CountUMR($lowongan->gajimax, $lowongan->umr) }} dari standar UMR daerah {{ $lowongan->daerah }}"></i>
+                                @endif
                             </h6>
                             <h6 class="mt-2">
                                 <i class="fa fa-map-marker"></i>&nbsp;&nbsp;{{ $lowongan->daerah }}
@@ -121,7 +126,14 @@
                         <p class="font-weight-bold mb-n1">Industri Perusahaan</p>
                         {{ $lowongan->bidangperusahaan }}
                       </div>
-
+                      <div class="col-6 mb-2">
+                        <p class="font-weight-bold mb-n1">Keilmuan</p>
+                        {{ $lowongan->keilmuan }}
+                      </div>
+                      <div class="col-6">
+                        <p class="font-weight-bold mb-n1">Sub Keilmuan</p>
+                        {{ $lowongan->subkeilmuan }}
+                      </div>
                       <div class="col-6">
                         <p class="font-weight-bold mb-n1">Kategori</p>
                         {{ $lowongan->bidang }}
@@ -174,12 +186,16 @@
                                       </strong>
                                       <i class="fa fa-check-circle fa-lg text-primary pt-2" data-toggle="tooltip" data-placement="right" title="Akun resmi terverifikasi"></i>
                                       <h6 class="card-title text-muted mb-n1">
-                                          <a href="#" style="text-decoration: none;">
+                                          <a href="{{ url('lowongan/detail', [$key->ticket]) }}" style="text-decoration: none;">
                                               {{ Str::limit($key->title, 20, '...') }}
                                           </a>
                                       </h6>
                                       <small class="text-muted">
-                                          Rp. {{ number_format($key->gajimin) }} - {{ number_format($key->gajimax) }}
+                                        @if(!empty($key->gaji))
+                                        {{ $key->gaji }}
+                                        @else
+                                        Rp. {{ number_format($key->gajimin) }} - {{ number_format($key->gajimax) }} / Month <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Gaji maksimal {{ CountUMR($key->gajimax, $key->umr) }} dari standar UMR daerah {{ $key->daerah }}"></i>
+                                        @endif
                                       </small >
                                       <p class="mt-2">
                                           <i class="fa fa-map-marker"></i>&nbsp;&nbsp;{{ $key->daerah }}

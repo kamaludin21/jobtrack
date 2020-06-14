@@ -14,11 +14,11 @@ class InvitersController extends Controller
       $perusahaan = Perusahaan::where('idUser', Auth::user()->id)->first();
       $invite = Inviter::create([
         'idPerusahaan' => $perusahaan->id,
-        'idUser' => $request->idUser,
-        'perusahaan' => $perusahaan->name,
-        'name' => $request->name,
-        'subjek' => $request->subjek,
-        'message' => $request->message
+        'idUser'       => $request->idUser,
+        'perusahaan'   => $perusahaan->name,
+        'name'         => $request->name,
+        'subjek'       => $request->subjek,
+        'message'      => $request->message
       ]);
 
       if ($invite->wasRecentlyCreated) {

@@ -22,14 +22,14 @@ class BookmarksController extends Controller
 
       $idUser = Auth::user()->id;
       $bookmark = Bookmarks::create([
-        'idUser' => $idUser,
-        'ticket' => $request->ticket,
+        'idUser'       => $idUser,
+        'ticket'       => $request->ticket,
         'idPerusahaan' => $request->idPerusahaan,
-        'idVacancies' => $request->idVacancies,
-        'title' => $request->title,
-        'gajimin' => $request->gajimin,
-        'gajimax' => $request->gajimax,
-        'description' => $request->description
+        'idVacancies'  => $request->idVacancies,
+        'title'        => $request->title,
+        'gajimin'      => $request->gajimin,
+        'gajimax'      => $request->gajimax,
+        'description'  => $request->description
       ]);
 
       if ($bookmark->wasRecentlyCreated) {

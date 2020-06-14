@@ -49,10 +49,15 @@ nav-user-active
                                                 </td>
                                                 <td>{{ $lamaran->daerah }}</td>
                                                 <td>
-                                                    Rp. {{ number_format($lamaran->gajimin) }} - {{ number_format($lamaran->gajimax) }}
+                                                    @if(!empty($lamaran->gaji))
+                                                    {{ $lamaran->gaji }}
+                                                    @else
+                                                    Rp. {{ number_format($lamaran->gajimin) }} - {{ number_format($lamaran->gajimax) }} / Month 
                                                     <p>
                                                         <small>IDR/Month</small>
                                                     </p>
+                                                    @endif
+                                                    
                                                 </td>
                                                 <td>
                                                   @switch($lamaran->status)

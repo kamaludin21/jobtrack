@@ -24,31 +24,28 @@
                     <p class="font-weight-bold">Deskripsi
                     </p>
                     <div class="row">
-                        <div class="col">
-                            <p>Tiket : {{ $vacancy->ticket }}
-                                <p>
-                                    Jabatan : {{ $vacancy->title }}
-                                </p>
+                        <div class="col-6">
+                            <address>
+                                Ticket : <kbd>{{ $vacancy[0]->ticket }}</kbd> <br>
+                                Jabatan : <strong>{{ $vacancy[0]->title }} </strong> <br>
+                                Slot : <strong>{{ $vacancy[0]->slot }}</strong> <br>
+                                Level : <strong>{{ $vacancy[0]->subbidang }}</strong> <br>
+                                Keilmuan : <strong>{{ $vacancy[0]->keilmuan }}</strong>
+                            </address>
                         </div>
-                        <div class="col">
-                            <p>Lokasi Penempatan : {{ $vacancy->daerah }}</p>
-                            <p>
-                                Expired : {{ $vacancy->expired }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p>Slot : {{ $vacancy->slot }}
-                            <p>
-                                Level : {{ $vacancy->subbidang }}
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p>Rentang gaji : Rp. {{ number_format($vacancy->gajimin) }}&mdash;{{ number_format($vacancy->gajimax) }}
-                            <p>
-                                Tipe : {{ $vacancy->type }}
-                            </p>
+                        <div class="row">
+                            <address>
+                                Lokasi penempatan : <strong>{{ $vacancy[0]->daerah }}</strong> <br>
+                                Expired : <strong>{{ TanggalIndonesia($vacancy[0]->expired)  }}</strong> <br>
+                                Salary : 
+                                @if(!empty($vacancy[0]->gaji))
+                                                        <strong>{{ $vacancy[0]->gaji }}</strong>
+                                                        @else
+                                                        Rp. <strong>{{ number_format($vacancy[0]->gajimin) }} - {{ number_format($vacancy[0]->gajimax) }}</strong>
+                                                        @endif <br>
+                                Tipe : <strong>{{ $vacancy[0]->type }}</strong> <br>
+                                Sub Keilmuan : <strong>{{ $vacancy[0]->subkeilmuan }}</strong>
+                            </address>
                         </div>
                     </div>
                 </div>
@@ -94,7 +91,7 @@
                                     <form action="{{ url('recruiter/updatestatus', [$lamaran->idLamar]) }}" method="post">
                                         @csrf
                                         <input type="hidden" name="_method" value="PATCH">
-                                        <input type="hidden" name="pageId" value="{{ $vacancy->id }}">
+                                        <input type="hidden" name="pageId" value="{{ $vacancy[0]->id }}">
                                         <div class="input-group input-group-sm">
                                             <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon" name="status">
                                                 <option value="1" @if($lamaran->status == '1') selected @endif>Belum proses</option>
@@ -149,7 +146,7 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Buat Agenda
                             <br>
-                            <small>{{ $vacancy->title }}</small>
+                            <small>{{ $vacancy[0]->title }}</small>
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -158,10 +155,10 @@
                     <div class="modal-body">
                         <form class="" action="{{ url('recruiter/agenda/store') }}" method="post">
                           @csrf
-                          <input type="hidden" name="idPage" value="{{ $vacancy->id }}">
-                          <input type="hidden" name="ticket" value="{{ $vacancy->ticket }}">
-                          <input type="hidden" name="idPerusahaan" value="{{ $vacancy->idPerusahaan }}">
-                          <input type="hidden" name="namalowongan" value="{{ $vacancy->title }}">
+                          <input type="hidden" name="idPage" value="{{ $vacancy[0]->id }}">
+                          <input type="hidden" name="ticket" value="{{ $vacancy[0]->ticket }}">
+                          <input type="hidden" name="idPerusahaan" value="{{ $vacancy[0]->idPerusahaan }}">
+                          <input type="hidden" name="namalowongan" value="{{ $vacancy[0]->title }}">
                           <div class="form-group">
                               <label for="">Judul agenda</label>
                               <input type="text" name="title" class="form-control form-control-sm" placeholder="Agenda" autofocus autocomplete="off">

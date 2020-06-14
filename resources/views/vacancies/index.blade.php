@@ -85,7 +85,12 @@
                                           @endif
                                           <h4>{{ Str::limit($lowongan->title, 31, '...') }}</h4>
                                           <div class="text-muted">
-                                              <small> <i class="fa fa-dollar"></i>&nbsp;&nbsp;Rp. {{ number_format($lowongan->gajimin) }} - {{ number_format($lowongan->gajimax) }} / Month
+                                              <small> <i class="fa fa-dollar"></i>&nbsp;&nbsp;
+                                                  @if(!empty($lowongan->gaji))
+                                                  {{ $lowongan->gaji }}
+                                                  @else
+                                                  Rp. {{ number_format($lowongan->gajimin) }} - {{ number_format($lowongan->gajimax) }} / Month <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Gaji maksimal {{ CountUMR($lowongan->gajimax, $lowongan->umr) }} dari standar UMR daerah {{ $lowongan->daerah }}"></i>
+                                                  @endif
                                                   <br>
                                                   <i class="fa fa-map-marker"></i>&nbsp;&nbsp; {{ $lowongan->daerah }}
                                                   &nbsp;&nbsp; &nbsp;&nbsp;
@@ -103,7 +108,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-secondary">{{ $lowongan->slot }} Posisi</button>
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Di posting {{ Str::limit($lowongan->created_at , 10, '') }} &bull; Lamar sebelum {{ $lowongan->expired }}</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Di posting {{ TanggalIndonesia($lowongan->created_at, false) }} &bull; Lamar sebelum {{ TanggalIndonesia($lowongan->expired, false) }}</button>
                                         </div>
                                         <a href="{{ url('lowongan/detail', [$lowongan->ticket]) }}" class="btn btn-sm btn-primary">
                                             Selengkapnya

@@ -38,6 +38,12 @@
         "psr-4": {
             "App\\": "app/"
         },
+        "files": [
+            "app/Helpers/TanggalIndonesia.php",
+            "app/Helpers/CountUMR.php",
+            "app/Helpers/DotNotify.php",
+            "app/Helpers/UserNotifications.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"

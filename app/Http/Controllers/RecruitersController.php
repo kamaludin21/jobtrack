@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 use Hash;
 use Auth;
 use Image;
-use App\{Perusahaan, Vacancy, Lamaran, Profil, Experience, Certificate, Educations, Skill, User, Agenda, Daerah};
-
+use App\{Perusahaan, Vacancy, Lamaran, Profil, Experience, Certificate, Educations, Skill, User, Agenda, Daerah, Keilmuan, Notifikasi};
 
 class RecruitersController extends Controller
 {
@@ -73,26 +72,38 @@ class RecruitersController extends Controller
 
     public function vacancy()
     {
+        // Search all vacancies where
         $idPerusahaan = Auth::user()->id;
-        $vacancy = Vacancy::where([
-                      ['idPerusahaan', '=', $idPerusahaan],
-                      ['status', '=', 'active']
-                    ])
-                    ->orderBy('created_at', 'desc')
-                    ->paginate(3);
+        $vacancy = DB::table('vacancies')
+        ->join('daerahs', 'vacancies.daerah', '=', 'daerahs.id')
+        ->where([
+          ['idPerusahaan', '=', $idPerusahaan],
+          ['status', '=', 'active']
+        ])
+        ->select(
+            'vacancies.*',
+            'daerahs.id as idDaerah',
+            'daerahs.daerah',
+            'daerahs.umr'
+        )
+        ->orderBy('created_at', 'desc')
+        ->paginate(3);
+        
         $vacancyClosed = Vacancy::where([
                       ['idPerusahaan', '=', $idPerusahaan],
                       ['status', '=', 'closed']
                     ])
                     ->orderBy('created_at', 'desc')
                     ->paginate(3);
+
         return view('recruiter.vacancy', ['vacancies' => $vacancy, 'vacancyClosed' => $vacancyClosed]);
     }
 
     public function create()
     {
       $daerah = Daerah::all();
-      return view('recruiter.form', ['daerah' => $daerah]);
+      $keilmuan = Keilmuan::all();
+      return view('recruiter.form', ['daerah' => $daerah, 'keilmuan' => $keilmuan]);
     }
 
     public function StoreProfil(Request $request)
@@ -128,15 +139,15 @@ class RecruitersController extends Controller
         }
 
         $company = Perusahaan::create([
-          'idUser' => $idUser,
-          'name' => $request->name,
-          'status' => $status,
-          'alamat' => $request->alamat,
-          'website' => $website,
-          'profil' => $profil,
-          'sampul' => $sampul,
+          'idUser'      => $idUser,
+          'name'        => $request->name,
+          'status'      => $status,
+          'alamat'      => $request->alamat,
+          'website'     => $website,
+          'profil'      => $profil,
+          'sampul'      => $sampul,
           'description' => $request->description,
-          'bidang' => $request->bidang
+          'bidang'      => $request->bidang
         ]);
 
         if ($company->wasRecentlyCreated) {
@@ -148,8 +159,22 @@ class RecruitersController extends Controller
 
     public function manage($id)
     {
-        $vacancy = Vacancy::findOrFail($id);
-        $agenda = Agenda::where('ticket', $vacancy->ticket)->get();
+        // $vacancy = Vacancy::findOrFail($id);
+        
+        $vacancy = DB::table('vacancies')
+        ->join('daerahs', 'vacancies.daerah', '=', 'daerahs.id')
+        ->join('keilmuans', 'vacancies.keilmuan', '=', 'keilmuans.id')
+        ->where('vacancies.id', '=', $id)
+        ->select(
+            'vacancies.*',
+            'daerahs.id as idDaerah',
+            'daerahs.daerah',
+            'daerahs.umr',
+            'keilmuans.title as keilmuan'
+        )
+        ->get();
+
+        $agenda = Agenda::where('ticket', $vacancy[0]->ticket)->get();
 
         $lamaran = DB::table('lamarans')
             ->join('users', 'lamarans.idUser', '=', 'users.id')
@@ -160,10 +185,10 @@ class RecruitersController extends Controller
               lamarans.id as idLamar, lamarans.ticket, lamarans.status,
               group_concat(DISTINCT educations.instansi, ' | ', educations.pendidikan  SEPARATOR', ') as pendidikan,
               group_concat(DISTINCT skills.skill) as skill"))
-            ->where('lamarans.ticket', $vacancy->ticket)
+            ->where('lamarans.ticket', $vacancy[0]->ticket)
             ->groupBy('users.id', 'lamarans.id')
             ->get();
-
+            
         return view('recruiter.manage-vacancies', ['vacancy' => $vacancy, 'lamaran' => $lamaran, 'agenda' => $agenda]);
     }
 
@@ -183,6 +208,13 @@ class RecruitersController extends Controller
             $lamaran->status = $request->status;
             $lamaran->save();
             $pageId = $request->pageId;
+            // Hantar notif keuser
+            Notifikasi::create([
+              'idStakeholder' => $lamaran->idUser,
+              'ticket' => $lamaran->ticket,
+              'content' => 'Selamat, lamaran anda dengan nomor ticket '.$lamaran->ticket.' telah diterima',
+              'status' => 'unread'
+            ]);
             return redirect('recruiter/vacancy/manage/'.$pageId)->with('success', 'Data berhasil diubah');
           } else {
             $pageId = $request->pageId;
@@ -191,6 +223,12 @@ class RecruitersController extends Controller
 
         } else {
           $lamaran = Lamaran::findOrFail($id);
+          Notifikasi::create([
+            'idStakeholder' => $lamaran->idUser,
+            'ticket' => $lamaran->ticket,
+            'content' => 'Status lamaran anda dengan nomor ticket <strong>'.$lamaran->ticket.'</strong> telah berubah',
+            'status' => 'unread'
+          ]);
           $lamaran->status = $request->status;
           $lamaran->save();
           $pageId = $request->pageId;
@@ -210,12 +248,12 @@ class RecruitersController extends Controller
         $skill = Skill::where('idUser', $idUser)->get();
 
         return view('vacancies.profil', [
-        'user' => $user,
-        'profil' => $profil,
-        'pengalaman' => $pengalaman,
+        'user'        => $user,
+        'profil'      => $profil,
+        'pengalaman'  => $pengalaman,
         'certificate' => $certificate,
-        'pendidikan' => $pendidikan,
-        'skill' => $skill
+        'pendidikan'  => $pendidikan,
+        'skill'       => $skill
       ]);
     }
 

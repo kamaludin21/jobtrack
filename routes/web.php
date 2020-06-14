@@ -63,9 +63,7 @@ Route::prefix('account')->group(function () {
 // Vacancy
 Route::post('vacancy/store', 'VacanciesController@store');
 
-/*
-/ User Section
-*/
+/* User Section */
 Route::prefix('user')->group(function () {
     // Dashboard
     Route::get('dashboard', 'SearcherController@index');
@@ -95,7 +93,6 @@ Route::prefix('user')->group(function () {
     // Skill
     Route::get('skill/form', 'SearcherController@EditSkill');
     Route::post('skill/store', 'SearcherController@StoreSkill');
-
     Route::delete('skill/destroy/{id}', 'SearcherController@DestroySkill');
     // Bookmark
     Route::get('/bookmark', 'BookmarksController@index');
@@ -105,14 +102,11 @@ Route::prefix('user')->group(function () {
     Route::get('/invite', 'SearcherController@inviter');
     Route::get('/invite/{id}', 'SearcherController@ShowInviter');
     Route::get('/lamaran', 'SearcherController@lamaran');
-
     // Account setting
     Route::get('account', 'SearcherController@security');
     Route::patch('account/umum/{id}', 'SearcherController@umum');
     Route::post('account/password', 'SearcherController@password');
-
 });
-
 
 Route::get('login', function () {
     return view('auth.login');
@@ -124,5 +118,6 @@ Route::get('daftar', function () {
   return view('account.registrasi');
 });
 
-
 Auth::routes();
+
+Route::get('read/notification/{id}', 'NotifikasiController@readNotify');

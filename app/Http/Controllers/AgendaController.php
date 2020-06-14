@@ -12,16 +12,16 @@ class AgendaController extends Controller
     {
       $perusahaan = Perusahaan::where('id', $request->idPerusahaan)->first();
       $agenda = Agenda::firstOrCreate([
-        'ticket' => $request->ticket,
-        'idPerusahaan' => $request->idPerusahaan,
+        'ticket'         => $request->ticket,
+        'idPerusahaan'   => $request->idPerusahaan,
         'namaperusahaan' => $perusahaan->name,
-        'namalowongan' => $request->namalowongan,
-        'title' => $request->title,
-        'status' => $request->status,
-        'tanggal' => $request->tanggal,
-        'mulai' => $request->mulai,
-        'sampai' => $request->sampai,
-        'deskripsi' => $request->deskripsi
+        'namalowongan'   => $request->namalowongan,
+        'title'          => $request->title,
+        'status'         => $request->status,
+        'tanggal'        => $request->tanggal,
+        'mulai'          => $request->mulai,
+        'sampai'         => $request->sampai,
+        'deskripsi'      => $request->deskripsi
       ]);
 
       if ($agenda->wasRecentlyCreated) {

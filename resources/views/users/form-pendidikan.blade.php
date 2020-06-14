@@ -21,9 +21,28 @@ nav-user-active
                             <div class="mt-2">
                                 <form method="POST" action="{{ url('user/pendidikan/store') }}" class="px-1">
                                   @csrf
-                                    <div class="form-group">
-                                        <label for="desc">Pendidikan</label>
-                                        <input type="text" name="pendidikan" class="form-control form-control-sm" placeholder="Ex: Teknik Informatik">
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="">Keilmuwan</label>
+                                            <select class="form-control form-control-sm" name="keilmuan">
+                                                <option value="" class="pilih_keilmuan">Pilih Bidang Keilmuan</option>
+                                                @foreach ($keilmuan as $item)
+                                                <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="">Sub keilmuwan</label>
+                                            <select class="form-control form-control-sm" name="subkeilmuan">
+                                                <option value="" class="pilih_subkeilmuan">Pilih Sub Bidang Keilmuan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="form-group">
+                                            <label for="">Instansi - Jurusan</label>
+                                            <input type="text" class="form-control form-control-sm" name="pendidikan">
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
@@ -47,6 +66,12 @@ nav-user-active
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" id="agreements" name="agreements" required>
+                                        <label class="form-check-label" for="agreements">
+                                            <small>Saya bertanggung jawab penuh atas kebenaran data yang tertera</small>
+                                        </label>
+                                    </div>
                                     <div class="float-right">
                                       <a href="{{ url('user/profil') }}" class="btn btn-light">Kembali</a>
                                       <button type="submit" class="btn btn-primary ml-2">Simpan</button>
@@ -60,10 +85,9 @@ nav-user-active
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
-
 @endsection
+
+

@@ -50,6 +50,7 @@ nav-user-active
                                             </div>
                                         </div> --}}
                                     </div>
+                                    
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
@@ -64,7 +65,16 @@ nav-user-active
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <div class="form-group form-check">
+                                        <input type="checkbox" class="form-check-input" id="agreements" name="agreements" required>
+                                        <label class="form-check-label" for="agreements">
+                                            <small>Saya bertanggung jawab penuh atas kebenaran data yang tertera</small>
+                                        </label>
+                                    </div>
+                                    <div class="float-right">
+                                        <a href="{{ url('user/profil') }}" class="btn btn-light">Kembali</a>
+                                        <button type="submit" class="btn btn-primary ml-2">Simpan</button>
+                                    </div>
                                 </form>
 
                             </div>

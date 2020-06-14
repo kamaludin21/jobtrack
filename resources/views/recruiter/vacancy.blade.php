@@ -42,7 +42,13 @@
                                               <div class="col-md-9">
                                                   <h4 class="mb-0">{{ Str::limit($vacancy->title, 31, '...') }}</h4>
                                                   <div class="mb-1 text-muted">
-                                                      <small> <i class="fa fa-dollar"></i>&nbsp;&nbsp;Rp. {{ number_format($vacancy->gajimin) }} - {{ number_format($vacancy->gajimax) }} / Month
+                                                      <small>
+                                                        <i class="fa fa-dollar"></i>&nbsp;&nbsp;
+                                                        @if(!empty($vacancy->gaji))
+                                                        {{ $vacancy->gaji }}
+                                                        @else
+                                                        Rp. {{ number_format($vacancy->gajimin) }} - {{ number_format($vacancy->gajimax) }} / Month <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Gaji maksimal {{ CountUMR($vacancy->gajimax, $vacancy->umr) }} dari standar UMR daerah {{ $vacancy->daerah }}"></i>
+                                                        @endif
                                                           <br>
                                                           <i class="fa fa-map-marker"></i>&nbsp;&nbsp; {{ $vacancy->daerah }}
                                                           &nbsp;&nbsp; &nbsp;&nbsp;
