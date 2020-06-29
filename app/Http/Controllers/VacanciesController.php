@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\{Vacancy, Lamaran, Perusahaan, Daerah, Educations};
+use App\{Vacancy, Lamaran, Perusahaan, Daerah, Educations, Keilmuan};
 use Auth;
 
 class VacanciesController extends Controller
@@ -16,30 +16,37 @@ class VacanciesController extends Controller
         $lowongan = DB::table('vacancies')
         ->join('perusahaans', 'vacancies.idPerusahaan', '=', 'perusahaans.id')
         ->join('daerahs', 'vacancies.daerah', '=', 'daerahs.id')
-        ->select('perusahaans.name', 'perusahaans.profil', 'vacancies.*', 'daerahs.*')
+        ->join('keilmuans', 'vacancies.keilmuan', '=', 'keilmuans.id')
+        ->select('perusahaans.name', 'perusahaans.profil', 'vacancies.*', 'daerahs.*', 'keilmuans.title as bidang')
         ->where('vacancies.status', 'active')
         ->orderByRaw('vacancies.created_at DESC')
         ->paginate(3);
         $daerah = Daerah::all();
-        return view('vacancies.index', ['lowongans' => $lowongan, 'daerah' => $daerah]);
+        $keilmuan = Keilmuan::all();
+        return view('vacancies.index', ['lowongans' => $lowongan, 'daerah' => $daerah, 'keilmuan' => $keilmuan]);
     }
 
     public function search(Request $request)
     {
+
       $lowongan = DB::table('vacancies')
       ->join('perusahaans', 'vacancies.idPerusahaan', '=', 'perusahaans.id')
       ->join('daerahs', 'vacancies.daerah', '=', 'daerahs.id')
+      ->join('keilmuans', 'vacancies.keilmuan', '=', 'keilmuans.id')
       ->where([
         ['vacancies.status', '=', 'active'],
         ['vacancies.title', 'like', '%'.$request->title.'%'],
         ['vacancies.bidang', 'like', '%'.$request->bidang.'%'],
+        ['vacancies.keilmuan', 'like', '%'.$request->keilmuan.'%'],
+        ['vacancies.subkeilmuan', 'like', '%'.$request->subkeilmuan.'%'],
         ['daerahs.daerah', 'like', '%'.$request->daerah.'%'],
         ['vacancies.type', 'like', '%'.$request->type.'%']
       ])
       ->orderBy('vacancies.created_at', 'desc')
       ->get();
       $daerah = Daerah::all();
-        return view('vacancies.result', ['lowongans' => $lowongan, 'daerah' => $daerah]);
+      $keilmuan = Keilmuan::all();
+        return view('vacancies.result', ['lowongans' => $lowongan, 'daerah' => $daerah, 'keilmuan' => $keilmuan]);
     }
 
     public function detail($ticket)
@@ -124,7 +131,7 @@ class VacanciesController extends Controller
             ['keilmuan', '=', $lowongan->keilmuan]
           ])->get();
         }
-        
+
         return view('vacancies.apply', ['lowongan' => $lowongan, 'educations' => $educations]);
     }
 

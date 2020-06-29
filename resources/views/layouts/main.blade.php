@@ -287,6 +287,30 @@
             }
         }
 
+        $(document).ready(function() {
+            $('select[name="keilmuan"]').on('change', function() {
+                let idkeilmuan = $(this).val();
+                if(idkeilmuan) {
+                    jQuery.ajax({
+                        url: 'api/getSubkeilmuan/'+idkeilmuan,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="subkeilmuan"]').empty();
+                            $('select[name="subkeilmuan"]').append('<option value="" disabled selected>Subkeilmuan</option>');
+                            $('select[name="subkeilmuan"]').append('<option value="">Keseluruhan</option>');
+                            $.each(data, function(key, value){
+                                $('select[name="subkeilmuan"]').append('<option value="'+value+'">'+value+'</option>');
+                            });
+                        },
+                    });
+                } else {
+                    $('select[name="subkeilmuan"]').empty();
+                            $('select[name="subkeilmuan"]').append('<option value="" disabled selected>Subkeilmuan</option>');
+                }
+            });
+        });
+
     </script>
 
 </body>

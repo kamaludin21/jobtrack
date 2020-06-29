@@ -19,29 +19,42 @@
                         </div>
                         <div class="form-group">
                           <select class="form-control form-control-sm" name="bidang">
-                              <option value="" disabled selected>Kategori</option>
-                              <option value="IT Software">Accounting and Finance</option>
-                                        <option value="Administration and Coordination">Administration and Coordination</option>
-                                        <option value="Architecture and Engineering">Architecture and Engineering</option>
-                                        <option value="Arts and Sports">Arts and Sports</option>
-                                        <option value="Customer Service">Customer Service</option>
-                                        <option value="Education and Training">Education and Training</option
-                                        <option value="General Services">General Services</option>
-                                        <option value="Health and Medical">Health and Medical</option>
-                                        <option value="Hospitality and Tourism">Hospitality and Tourism</option>
-                                        <option value="Human Resources">Human Resources</option>
-                                        <option value="IT and Software">IT and Software</option>
-                                        <option value="Legal">Legal</option>
-                                        <option value="Management and Consultancy">Management and Consultancy</option>
-                                        <option value="Manufacturing and Production">Manufacturing and Production</option>
-                                        <option value="Media and Creatives">Media and Creatives</option>
-                                        <option value="Public Service">PublicService</option>
-                                        <option value="Safety and Security">Safety and Security</option>
-                                        <option value="Sales and Marketing">Sales and Marketing</option>
-                                        <option value="Sciences">Sciences</option>
-                                        <option value="Supply Chain">Supply Chain</option>
-                                        <option value="Writing and Content">Writing and Content</option>
+                            <option value="" disabled selected>Kategori</option>
+                            <option value="IT Software">Accounting and Finance</option>
+                            <option value="Administration and Coordination">Administration and Coordination</option>
+                            <option value="Architecture and Engineering">Architecture and Engineering</option>
+                            <option value="Arts and Sports">Arts and Sports</option>
+                            <option value="Customer Service">Customer Service</option>
+                            <option value="Education and Training">Education and Training</option>
+                            <option value="General Services">General Services</option>
+                            <option value="Health and Medical">Health and Medical</option>
+                            <option value="Hospitality and Tourism">Hospitality and Tourism</option>
+                            <option value="Human Resources">Human Resources</option>
+                            <option value="IT and Software">IT and Software</option>
+                            <option value="Legal">Legal</option>
+                            <option value="Management and Consultancy">Management and Consultancy</option>
+                            <option value="Manufacturing and Production">Manufacturing and Production</option>
+                            <option value="Media and Creatives">Media and Creatives</option>
+                            <option value="Public Service">PublicService</option>
+                            <option value="Safety and Security">Safety and Security</option>
+                            <option value="Sales and Marketing">Sales and Marketing</option>
+                            <option value="Sciences">Sciences</option>
+                            <option value="Supply Chain">Supply Chain</option>
+                            <option value="Writing and Content">Writing and Content</option>
                           </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control form-control-sm" name="keilmuan">
+                              <option value="">Pendidikan/Keilmuan</option>
+                              @foreach($keilmuan as $keilmuan)
+                              <option value="{{ $keilmuan->id }}">{{ $keilmuan->title }}</option>
+                              @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control form-control-sm" name="subkeilmuan">
+                                <option value="" disabled selected>Subkeilmuan</option>
+                            </select>
                         </div>
                         <div class="form-group">
                           <select class="form-control form-control-sm" name="daerah">
